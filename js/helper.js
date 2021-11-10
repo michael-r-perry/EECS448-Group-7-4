@@ -1,3 +1,50 @@
+function getUNIXMidnightTonight() {
+    let t = new Date();
+    t.setHours(24,0,0,0);
+    return t.getTime(); // UNIX Format for Finnhub
+}
+
+function getUNIXMidnightMorning() {
+    let t = new Date();
+    t.setHours(0,0,0,0);
+    return t.getTime(); // UNIX Format for Finnhub
+}
+
+function getUNIXFiveDaysAgo() {
+    let t = new Date();
+    t.setHours(0,0,0,0);
+    t.setDate(t.getDate() - 7);
+    return t.getTime() / 1000; // UNIX Format for Finnhub
+}
+
+function getUNIXOneMonthAgo() {
+    let t = new Date();
+    t.setHours(0,0,0,0);
+    t.setMonth(t.getMonth() - 1);
+    return t.getTime() / 1000; // UNIX Format for Finnhub
+}
+
+function getUNIXThreeMonthsAgo() {
+    let t = new Date();
+    t.setHours(0,0,0,0);
+    t.setMonth(t.getMonth() - 3);
+    return t.getTime() / 1000;
+}
+
+function getUNIXSixMonthsAgo() {
+    let t = new Date();
+    t.setHours(0,0,0,0);
+    t.setMonth(t.getMonth() - 6);
+    return t.getTime() / 1000;
+}
+
+function getUNIXOneYearAgo() {
+    let t = new Date();
+    t.setHours(0,0,0,0);
+    t.setFullYear(t.getFullYear() - 1);
+    return t.getTime() / 1000;
+}
+
 function UNIXtoISOConversion(unix) {
     return new Date(unix * 1000).toISOString();
 }
