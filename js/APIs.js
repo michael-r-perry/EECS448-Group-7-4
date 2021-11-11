@@ -78,33 +78,75 @@ function APIOneYearStockData(ticker, callback) {
 // Stocks Section END
 
 // Crypto Section START
-
+https://finnhub.io/api/v1/crypto/candle?symbol=BINANCE:BTCUSDT&resolution=D&from=1572651390&to=1575243390&token=c5tho52ad3ifck7dg8fg
 function APITodayQuoteCryptoData(ticker, callback) {
 
 }
 
 function APIIntradayCryptoData(ticker, callback) {
-
+    let tonight = getUNIXMidnightTonight();
+    let morning = getUNIXMidnightMorning();
+    axios.get('https://finnhub.io/api/v1/crypto/candle?symbol=' + ticker + '&resolution=5&from=' + morning + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
+        .then(response => {
+            console.log(response.data);
+            callback(response.data);
+        })
+        .catch(error => console.error(error));
 }
 
 function APIFiveDayCryptoData(ticker, callback) {
-
+    let tonight = getUNIXMidnightTonight();
+    let weekAgo = getUNIXFiveDaysAgo();
+    axios.get('https://finnhub.io/api/v1/crypto/candle?symbol=' + ticker + '&resolution=30&from=' + weekAgo + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
+        .then(response => {
+            console.log(response.data);
+            callback(response.data);
+        })
+        .catch(error => console.error(error));
 }
 
 function APIOneMonthCryptoData(ticker, callback) {
-
+    let tonight = getUNIXMidnightTonight();
+    let month = getUNIXOneMonthAgo();
+    axios.get('https://finnhub.io/api/v1/crypto/candle?symbol=' + ticker + '&resolution=D&from=' + month + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
+        .then(response => {
+            console.log(response.data);
+            callback(response.data);
+        })
+        .catch(error => console.error(error));
 }
 
 function APIThreeMonthCryptoData(ticker, callback) {
-
+    let tonight = getUNIXMidnightTonight();
+    let months = getUNIXThreeMonthsAgo();
+    axios.get('https://finnhub.io/api/v1/crypto/candle?symbol=' + ticker + '&resolution=D&from=' + months + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
+        .then(response => {
+            console.log(response.data);
+            callback(response.data);
+        })
+        .catch(error => console.error(error));
 }
 
 function APISixMonthCryptoData(ticker, callback) {
-
+    let tonight = getUNIXMidnightTonight();
+    let months = getUNIXSixMonthsAgo();
+    axios.get('https://finnhub.io/api/v1/crypto/candle?symbol=' + ticker + '&resolution=D&from=' + months + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
+        .then(response => {
+            console.log(response.data);
+            callback(response.data);
+        })
+        .catch(error => console.error(error));
 }
 
 function APIOneYearCryptoData(ticker, callback) {
-
+    let tonight = getUNIXMidnightTonight();
+    let year = getUNIXOneYearAgo();
+    axios.get('https://finnhub.io/api/v1/crypto/candle?symbol=' + ticker + '&resolution=D&from=' + year + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
+        .then(response => {
+            console.log(response.data);
+            callback(response.data);
+        })
+        .catch(error => console.error(error));
 }
 
 // Crypto Section END
