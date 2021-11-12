@@ -7,3 +7,7 @@ Michael: 0.5 hours: Setting up API crypto calls
 11/11:
 Michael: 1 hour: Got Quote data for crypto set up using candles to create custom response,
                  added needed helper elements getIndexFromTicker, reformatted dynamic watchlist elements
+
+11/12:
+Michael: 4 hours: Setup watchlist functionalities (switch curHL by watchlist, add/remove
+                  watch list element, updating curHL tags and watch list tags) and graph buttons 
