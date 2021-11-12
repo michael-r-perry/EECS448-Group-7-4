@@ -11,7 +11,7 @@ let currencyWL2;
 let currencyWL3;
 let currencyWL4;
 let currencyWL5;
-let currencies;
+let currencies = [];
 let BASE_WATCH_LIST = ["AAPL", "AMZN", "TSLA", "TMUS", "TWTR"];
 let graphTimespan; // "1Day", "5Day", "1Month", "3Month", "6Month", "1Year"
 let graphChart;
@@ -46,8 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("graph-list-status").addEventListener("click", (e) => handleToggleWatchListClick(e));
 
     // Currency Objects
-    currencies = BASE_WATCH_LIST.map(ticker => new Currency(ticker));
-    currencies.map((c,i) => addToWatchList(i));
+    BASE_WATCH_LIST.map(ticker => addToWatchList(ticker));
     currencyHL = new Currency("AAPL");
     graphTimespan = "1Day";
     updateCurrencyHLElements();
@@ -169,7 +168,7 @@ function handleWatchListClick(e) {
  */
 function handleToggleWatchListClick(e) {
     console.log("Clicked graph-list-status element");
-
+    watchListToggle(currencyHL.getTicker());
 }
 
 /***************************************************
@@ -239,15 +238,16 @@ function updateColors() {
 function watchListToggle(ticker) {
     if (isTickerInWatchList(currencies, currencyHL.getTicker())) {
         console.log("This will remove ticker from watchlist");
+        removeFromWatchList(ticker);
     } else {
-        currencies.push(new Currency(currencyHL.getTicker()));
-        let index = getIndexOfTicker(currencies, currencyHL.getTicker());
-        addToWatchList(index);
+        addToWatchList(ticker);
     }
 }
 
 // AddToWatchList Function
-function addToWatchList(index) {
+function addToWatchList(ticker) {
+    currencies.push(new Currency(ticker));
+    let index = getIndexOfTicker(currencies, ticker);
     APITodayQuoteStockData(currencies[index].getTicker(), function(data) {
         currencies[index].setQuoteData(data);
         addWatchListElement(index);
@@ -255,9 +255,11 @@ function addToWatchList(index) {
 }
 
 function addWatchListElement(index) {
+    // Create HTML tag to add to watchList UL tag
+    let ticker = currencies[index].getTicker();
     let li = document.createElement("li");
     let a = document.createElement("a");
-    a.id = currencies[index].getTicker();
+    a.id = ticker;
     a.href = "#";
     let spans = [];
     for (let i = 0; i < 5; i++) {
@@ -272,20 +274,23 @@ function addWatchListElement(index) {
         spans.push(spanSpace);
     }
     let spanName = document.createElement("span");
-    let name = document.createTextNode(currencies[index].getTicker());
+    let name = document.createTextNode(ticker);
     spanName.className = "stock-name";
     spanName.appendChild(name);
     let spanPrice = document.createElement("span");
     let price = document.createTextNode(currencies[index].getCurrentQuote());
     spanPrice.className = "stock-price";
+    spanPrice.id = ticker + "-price";
     spanPrice.appendChild(price);
     let spanChangeUSD = document.createElement("span");
     let changeUSD = document.createTextNode(currencies[index].getDayChange());
     spanChangeUSD.className = "stock-change-usd";
+    spanChangeUSD.id = ticker + "-change-usd";
     spanChangeUSD.appendChild(changeUSD);
     let spanChangePercent = document.createElement("span");
     let changePercent = document.createTextNode(currencies[index].getDayPercentChange());
     spanChangePercent.className = "stock-change-percent";
+    spanChangePercent.id = ticker + "-change-percent";
     spanChangePercent.appendChild(changePercent);
     if (currencies[index].getDayChange() < 0) { // RED
         spanChangeUSD.style.color = "#FF0D2C";
@@ -311,64 +316,39 @@ function addWatchListElement(index) {
     li.appendChild(a);
     let watchlist = document.getElementById("watch-list");
     watchlist.appendChild(li);
-}
-
-function updateWatchList() {
-    APITodayBasicAMZNData( function(data) {
-        currencyWL1.setQuoteData(data);
-        updateColors();
-        updateWatchListElements();
-    });
-    APITodayBasicAPPLData( function(data) {
-        currencyWL2.setQuoteData(data);
-        updateColors();
-        updateWatchListElements();
-    });
-    APITodayBasicTSLAData( function(data) {
-        currencyWL3.setQuoteData(data);
-        updateColors();
-        updateWatchListElements();
-    });
-    APITodayBasicTMUSData( function(data) {
-        currencyWL4.setQuoteData(data);
-        updateColors();
-        updateWatchListElements();
-    });
-    APITodayBasicTWTRData( function(data) {
-        currencyWL5.setQuoteData(data);
-        updateColors();
-        updateWatchListElements();
-    });
-}
-
-function updateWatchListElements() {
-    document.getElementById("watch1-name").innerText = currencyWL1.getTicker();
-    document.getElementById("watch1-price").innerText = currencyWL1.getCurrentQuote();
-    document.getElementById("watch1-change-usd").innerText = currencyWL1.getDayChange();
-    document.getElementById("watch1-change-percent").innerText = currencyWL1.getDayPercentChange();
-
-    document.getElementById("watch2-name").innerText = currencyWL2.getTicker();
-    document.getElementById("watch2-price").innerText = currencyWL2.getCurrentQuote();
-    document.getElementById("watch2-change-usd").innerText = currencyWL2.getDayChange();
-    document.getElementById("watch2-change-percent").innerText = currencyWL2.getDayPercentChange();
-
-    document.getElementById("watch3-name").innerText = currencyWL3.getTicker();
-    document.getElementById("watch3-price").innerText = currencyWL3.getCurrentQuote();
-    document.getElementById("watch3-change-usd").innerText = currencyWL3.getDayChange();
-    document.getElementById("watch3-change-percent").innerText = currencyWL3.getDayPercentChange();
-
-    document.getElementById("watch4-name").innerText = currencyWL4.getTicker();
-    document.getElementById("watch4-price").innerText = currencyWL4.getCurrentQuote();
-    document.getElementById("watch4-change-usd").innerText = currencyWL4.getDayChange();
-    document.getElementById("watch4-change-percent").innerText = currencyWL4.getDayPercentChange();
-
-    document.getElementById("watch5-name").innerText = currencyWL5.getTicker();
-    document.getElementById("watch5-price").innerText = currencyWL5.getCurrentQuote();
-    document.getElementById("watch5-change-usd").innerText = currencyWL5.getDayChange();
-    document.getElementById("watch5-change-percent").innerText = currencyWL5.getDayPercentChange();
+    // Changes graph-list-status to remove currencyHL from list.
+    document.getElementById("graph-list-status").innerText = "\u2002REMOVE FROM LIST\u2002";
 }
 
 // RemoveWatchListElement Function
+function removeFromWatchList(ticker) {
+    let index = getIndexOfTicker(currencies, ticker);
+    currencies.splice(index, 1);
+    removeWatchListElement(ticker);
+}
+
+function removeWatchListElement(ticker) {
+    // Remove Watch List tag from HTML
+    document.getElementById(ticker).parentElement.remove();
+    // Changes graph-list-status to add currencyHL to list.
+    document.getElementById("graph-list-status").innerText = "\u2002ADD TO LIST\u2002";
+}
+
+function updateWatchList() {
+    for (let i = 0; i < currencies.length; i++) {
+        APITodayQuoteStockData(currencies[i].getTicker(), function(data) {
+            currencies[i].setQuoteData(data);
+            updateWatchListElement(i);
+        });
+    }
+}
+
+function updateWatchListElement(index) {
+    let ticker = currencies[index].getTicker();
+    document.getElementById(ticker + "-price").innerText = currencies[index].getCurrentQuote();
+    document.getElementById(ticker + "-change-usd").innerText = currencies[index].getDayChange();
+    document.getElementById(ticker + "-change-percent").innerText = currencies[index].getDayPercentChange();
+}
 
 /***************************************************
  * Graph Section Functions
