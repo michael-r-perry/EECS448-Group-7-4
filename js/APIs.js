@@ -78,9 +78,26 @@ function APIOneYearStockData(ticker, callback) {
 // Stocks Section END
 
 // Crypto Section START
-https://finnhub.io/api/v1/crypto/candle?symbol=BINANCE:BTCUSDT&resolution=D&from=1572651390&to=1575243390&token=c5tho52ad3ifck7dg8fg
-function APITodayQuoteCryptoData(ticker, callback) {
 
+function APITodayQuoteCryptoData(ticker, callback) {
+    let now = new Date.now();
+    let morning = getUNIXMidnightMorning();
+    axios.get('https://finnhub.io/api/v1/crypto/candle?symbol=' + ticker + '&resolution=1&from=' + morning + '&to=' + now + '&token=c5tho52ad3ifck7dg8fg')
+        .then(response => {
+            console.log(response.data);
+            // Current "c", DayChange "d", Percent Change "dp", open "o"
+            let current = response.data["c"].at(-1); // Last entry for closes
+            let open = response.data["o"][0]; // First entry for opens
+            let dayChange = current - open;
+            let percentChange = (dayChange / open) * 100;
+            callback({
+                "c": current,
+                "d": dayChange,
+                "dp": percentChange,
+                "o": open
+            });
+        })
+        .catch(error => console.error(error));
 }
 
 function APIIntradayCryptoData(ticker, callback) {

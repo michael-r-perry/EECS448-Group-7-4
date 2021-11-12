@@ -12,7 +12,7 @@ let currencyWL3;
 let currencyWL4;
 let currencyWL5;
 let currencies;
-let BASE_WATCH_LIST = ["APPL", "AMZN", "TSLA", "TMUS", "TWTR"];
+let BASE_WATCH_LIST = ["AAPL", "AMZN", "TSLA", "TMUS", "TWTR"];
 
 /***************************************************
  * Event Listener Functions
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     currencyWL5 = new Currency("TWTR");
     updateCurrencyHLElements();
     currencies = BASE_WATCH_LIST.map(ticker => new Currency(ticker));
-    //currencies.map(c => addToWatchList(c));
+    //currencies.map((c,i) => addToWatchList(i));
 
 });
 
@@ -142,8 +142,7 @@ function handleWatchListClick(e) {
  */
 function handleToggleWatchListClick(e) {
     console.log("Clicked graph-list-status element");
-    currencyHL.ticker = "FB"
-    addToWatchList(currencyHL);
+    addToWatchList(0);
 }
 
 /***************************************************
@@ -213,50 +212,61 @@ function updateColors() {
 // WatchListToggle Function
 
 // AddToWatchList Function
-function addToWatchList(currency) {
-    APITodayQuoteData(currency.getTicker(), function(data) {
-        currency.setQuoteData(data);
-        addWatchListElement(currency);
+function addToWatchList(index) {
+    console.log("Index: ", index);
+    console.log(currencies);
+    APITodayQuoteStockData(currencies[index].getTicker(), function(data) {
+        currencies[index].setQuoteData(data);
+        addWatchListElement(index);
     });
 }
 
-function addWatchListElement(currency) {
+function addWatchListElement(index) {
     let li = document.createElement("li");
     let a = document.createElement("a");
-    a.id = currency.getTicker();
+    a.id = currencies[index].getTicker();
     a.href = "#";
-    let spanSpace = document.createElement("span");
-    let space = document.createTextNode("&ensp;");
-    spanSpace.appendChild(space);
+    let spans = [];
+    for (let i = 0; i < 5; i++) {
+        let spanSpace = document.createElement("span");
+        let space
+        if (i == 1 || i == 2) {
+            space = document.createTextNode("\u2003");
+        } else {
+            space = document.createTextNode("\u2002");
+        }
+        spanSpace.appendChild(space);
+        spans.push(spanSpace);
+    }
     let spanName = document.createElement("span");
-    let name = document.createTextNode(currency.getTicker());
+    let name = document.createTextNode(currencies[index].getTicker());
     spanName.className = "stock-name";
     spanName.appendChild(name);
     let spanPrice = document.createElement("span");
-    let price = document.createTextNode(currency.getCurrentQuote());
+    let price = document.createTextNode(currencies[index].getCurrentQuote());
     spanPrice.className = "stock-price";
     spanPrice.appendChild(price);
     let spanChangeUSD = document.createElement("span");
-    let changeUSD = document.createTextNode(currency.getDayChange());
+    let changeUSD = document.createTextNode(currencies[index].getDayChange());
     spanChangeUSD.className = "stock-change-usd";
     spanChangeUSD.appendChild(changeUSD);
     let spanChangePercent = document.createElement("span");
-    let changePercent = document.createTextNode(currency.getDayPercentChange());
+    let changePercent = document.createTextNode(currencies[index].getDayPercentChange());
     spanChangePercent.className = "stock-change-percent";
     spanChangePercent.appendChild(changePercent);
     let spanTimescale = document.createElement("span");
     let timescale = document.createTextNode("today");
     spanTimescale.className = "stock-timescale";
     spanTimescale.appendChild(timescale);
-    a.appendChild(spanSpace);
+    a.appendChild(spans[0]);
     a.appendChild(spanName);
-    a.appendChild(spanSpace);
+    a.appendChild(spans[1]);
     a.appendChild(spanPrice);
-    a.appendChild(spanSpace);
+    a.appendChild(spans[2]);
     a.appendChild(spanChangeUSD);
-    a.appendChild(spanSpace);
+    a.appendChild(spans[3]);
     a.appendChild(spanChangePercent);
-    a.appendChild(spanSpace);
+    a.appendChild(spans[4]);
     a.appendChild(spanTimescale);
     li.appendChild(a);
     let watchlist = document.getElementById("watch-list");

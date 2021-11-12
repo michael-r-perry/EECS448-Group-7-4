@@ -86,3 +86,12 @@ function CreateBorderColors(num) {
     }
     return bc;
 }
+
+function getIndexOfTicker(currencies, ticker) {
+    for (let i = 0; i < currencies.length; i++) {
+        if (currencies[i].getTicker() == ticker) {
+            return i;
+        }
+    }
+    return 0;
+}
