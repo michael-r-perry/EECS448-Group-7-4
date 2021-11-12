@@ -13,6 +13,8 @@ let currencyWL4;
 let currencyWL5;
 let currencies;
 let BASE_WATCH_LIST = ["AAPL", "AMZN", "TSLA", "TMUS", "TWTR"];
+let graphTimespan; // "1Day", "5Day", "1Month", "3Month", "6Month", "1Year"
+let graphChart;
 
 /***************************************************
  * Event Listener Functions
@@ -44,11 +46,11 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("graph-list-status").addEventListener("click", (e) => handleToggleWatchListClick(e));
 
     // Currency Objects
-    currencyHL = new Currency("AAPL");
-    updateCurrencyHLElements();
     currencies = BASE_WATCH_LIST.map(ticker => new Currency(ticker));
     currencies.map((c,i) => addToWatchList(i));
-
+    currencyHL = new Currency("AAPL");
+    graphTimespan = "1Day";
+    updateCurrencyHLElements();
 });
 
 // Event Listener Function for 1 Day Button
@@ -58,6 +60,10 @@ document.addEventListener("DOMContentLoaded", () => {
  */
 function handle1DayBtnClick(e) {
     console.log("1Day btn clicked!");
+    if (graphTimespan != "1Day") {
+        graphTimespan = "1Day";
+        updateGraph();
+    }
 }
 
 // Event Listener Function for 5 Day Button
@@ -67,6 +73,10 @@ function handle1DayBtnClick(e) {
  */
 function handle5DayBtnClick(e) {
     console.log("5Day btn clicked!");
+    if (graphTimespan != "5Day") {
+        graphTimespan = "5Day";
+        updateGraph();
+    }
 }
 
 // Event Listener Function for 1 Month Button
@@ -76,6 +86,10 @@ function handle5DayBtnClick(e) {
  */
 function handle1MonthBtnClick(e) {
     console.log("1Month btn clicked!");
+    if (graphTimespan != "1Month") {
+        graphTimespan = "1Month";
+        updateGraph();
+    }
 }
 
 // Event Listener Function for 3 Month Button
@@ -85,6 +99,10 @@ function handle1MonthBtnClick(e) {
  */
 function handle3MonthBtnClick(e) {
     console.log("3Month btn clicked!");
+    if (graphTimespan != "3Month") {
+        graphTimespan = "3Month";
+        updateGraph();
+    }
 }
 
 // Event Listener Function for 6 Month Button
@@ -94,6 +112,10 @@ function handle3MonthBtnClick(e) {
  */
 function handle6MonthBtnClick(e) {
     console.log("6Month btn clicked!");
+    if (graphTimespan != "6Month") {
+        graphTimespan = "6Month";
+        updateGraph();
+    }
 }
 
 // Event Listener Function for 1 Year Button
@@ -103,6 +125,10 @@ function handle6MonthBtnClick(e) {
  */
 function handle1YearBtnClick(e) {
     console.log("1Year btn clicked!");
+    if (graphTimespan != "1Year") {
+        graphTimespan = "1Year";
+        updateGraph();
+    }
 }
 
 // Event Listener Handler Function for Search Bar Button
@@ -127,6 +153,12 @@ function handleWatchListClick(e) {
 
     if (id) {
         console.log("Clicked " + id + " element");
+        if (currencyHL.getTicker() != id) {
+            currencyHL = new Currency(id);
+            updateCurrencyHLElements();
+        } else {
+            console.log("No change, same ticker");
+        }
     }
 }
 
@@ -137,7 +169,7 @@ function handleWatchListClick(e) {
  */
 function handleToggleWatchListClick(e) {
     console.log("Clicked graph-list-status element");
-    addToWatchList(0);
+
 }
 
 /***************************************************
@@ -147,7 +179,6 @@ function handleToggleWatchListClick(e) {
 function updateCurrencyHLElements() {
     updateGraphHeader();
     updateGraph();
-    //updateWatchList();
 }
 
 function updateColors() {
@@ -205,11 +236,18 @@ function updateColors() {
  ***************************************************/
 
 // WatchListToggle Function
+function watchListToggle(ticker) {
+    if (isTickerInWatchList(currencies, currencyHL.getTicker())) {
+        console.log("This will remove ticker from watchlist");
+    } else {
+        currencies.push(new Currency(currencyHL.getTicker()));
+        let index = getIndexOfTicker(currencies, currencyHL.getTicker());
+        addToWatchList(index);
+    }
+}
 
 // AddToWatchList Function
 function addToWatchList(index) {
-    console.log("Index: ", index);
-    console.log(currencies);
     APITodayQuoteStockData(currencies[index].getTicker(), function(data) {
         currencies[index].setQuoteData(data);
         addWatchListElement(index);
@@ -349,29 +387,91 @@ function updateGraphHeaderElements() {
     document.getElementById("graph-price").innerText = currencyHL.getCurrentQuote();
     document.getElementById("graph-change-usd").innerText = currencyHL.getDayChange();
     document.getElementById("graph-change-percent").innerText = currencyHL.getDayPercentChange();
-    if (currencyHL.getCurrentQuote() < 0) {
+    if (currencyHL.getDayChange() < 0) {
         document.getElementById("graph-change-usd").style.color = "#FF0D2C";
         document.getElementById("graph-change-percent").style.color = "#FF0D2C";
     } else {
         document.getElementById("graph-change-usd").style.color = "#00CC3A";
         document.getElementById("graph-change-percent").style.color = "#00CC3A";
     }
+    if (isTickerInWatchList(currencies, currencyHL.getTicker())) {
+        document.getElementById("graph-list-status").innerText = "\u2002REMOVE FROM LIST\u2002";
+    } else {
+        document.getElementById("graph-list-status").innerText = "\u2002ADD TO LIST\u2002";
+    }
 }
 
 // Update Graph Function
 function updateGraph() {
-    APIIntradayStockData(currencyHL.getTicker(), function(data) {
-        currencyHL.setOneDayTimeSeriesData(data);
-        console.log("updateGraph function!");
-        console.log(currencyHL.getOneDayTimeSeriesData());
-        updateGraphElements();
-    })
+    if (graphTimespan == "1Day") {
+        APIIntradayStockData(currencyHL.getTicker(), function(data) {
+            currencyHL.setOneDayTimeSeriesData(data);
+            console.log("updateGraph 1Day function!");
+            console.log(currencyHL.getOneDayTimeSeriesData());
+            updateGraphElements();
+        });
+    } else if (graphTimespan == "5Day") {
+        APIFiveDayStockData(currencyHL.getTicker(), function(data) {
+            currencyHL.setFiveDayTimeSeriesData(data);
+            console.log("updateGraph 5Day function!");
+            console.log(currencyHL.getOneDayTimeSeriesData());
+            updateGraphElements();
+        });
+    } else if (graphTimespan == "1Month") {
+        APIOneMonthStockData(currencyHL.getTicker(), function(data) {
+            currencyHL.setOneMonthTimeSeriesData(data);
+            console.log("updateGraph 1Month function!");
+            console.log(currencyHL.getOneDayTimeSeriesData());
+            updateGraphElements();
+        });
+    } else if (graphTimespan == "3Month") {
+        APIThreeMonthStockData(currencyHL.getTicker(), function(data) {
+            currencyHL.setThreeMonthTimeSeriesData(data);
+            console.log("updateGraph 3Month function!");
+            console.log(currencyHL.getOneDayTimeSeriesData());
+            updateGraphElements();
+        });
+    } else if (graphTimespan == "6Month") {
+        APISixMonthStockData(currencyHL.getTicker(), function(data) {
+            currencyHL.setSixMonthTimeSeriesData(data);
+            console.log("updateGraph 6Month function!");
+            console.log(currencyHL.getOneDayTimeSeriesData());
+            updateGraphElements();
+        });
+    } else if (graphTimespan == "1Year") {
+        APIOneYearStockData(currencyHL.getTicker(), function(data) {
+            currencyHL.setOneYearTimeSeriesData(data);
+            console.log("updateGraph 1Year function!");
+            console.log(currencyHL.getOneDayTimeSeriesData());
+            updateGraphElements();
+        });
+    }
 }
 
 function updateGraphElements() {
-    var ctx = document.getElementById("graph-canvas").getContext("2d");
+    let ctx = document.getElementById("graph-canvas").getContext("2d");
 
-    var myChart = new Chart(ctx, {
+    // If the graph has been initialized, destroy previous graph before new data
+    if (graphChart) {
+        graphChart.destroy();
+    }
+
+    let data;
+    if (graphTimespan == "1Day") {
+        data = currencyHL.getOneDayTimeSeriesData();
+    } else if (graphTimespan == "5Day") {
+        data = currencyHL.getFiveDayTimeSeriesData();
+    } else if (graphTimespan == "1Month") {
+        data = currencyHL.getOneMonthTimeSeriesData();
+    } else if (graphTimespan == "3Month") {
+        data = currencyHL.getThreeMonthTimeSeriesData();
+    } else if (graphTimespan == "6Month") {
+        data = currencyHL.getSixMonthTimeSeriesData();
+    } else if (graphTimespan == "1Year") {
+        data = currencyHL.getOneYearTimeSeriesData();
+    }
+
+    graphChart = new Chart(ctx, {
         type: 'line',
         options: {
             scales: {
@@ -380,10 +480,9 @@ function updateGraphElements() {
             }]
             }
         },
-        data: currencyHL.getOneDayTimeSeriesData()
+        data: data
     });
 }
-
 
 /***************************************************
  * Search Bar Functions
