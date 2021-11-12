@@ -12,9 +12,10 @@ let currencyWL3;
 let currencyWL4;
 let currencyWL5;
 let currencies = [];
-let BASE_WATCH_LIST = ["AAPL", "AMZN", "TSLA", "TMUS", "TWTR"];
+const BASE_WATCH_LIST = ["AAPL", "AMZN", "TSLA", "TMUS", "TWTR"];
 let graphTimespan; // "1Day", "5Day", "1Month", "3Month", "6Month", "1Year"
 let graphChart;
+const CRYPTO_EXCHANGES = ["ZB","HUOBI","OKEX","POLONIEX","GEMINI","BITFINEX","BITMEX","BINANCE","BITTREX","FXPIG","COINBASE","KUCOIN","HITBTC","KRAKEN"];
 
 /***************************************************
  * Event Listener Functions
@@ -46,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("graph-list-status").addEventListener("click", (e) => handleToggleWatchListClick(e));
 
     // Currency Objects
-    BASE_WATCH_LIST.map(ticker => addToWatchList(ticker));
+    BASE_WATCH_LIST.map(ticker => addToWatchList(ticker)); // Adds each ticker to currencies and adds an li tag to the watchlist ul
     currencyHL = new Currency("AAPL");
     graphTimespan = "1Day";
     updateCurrencyHLElements();
