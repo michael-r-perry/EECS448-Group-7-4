@@ -45,14 +45,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Currency Objects
     currencyHL = new Currency("AAPL");
-    currencyWL1 = new Currency("AMZN");
-    currencyWL2 = new Currency("AAPL");
-    currencyWL3 = new Currency("TSLA");
-    currencyWL4 = new Currency("TMUS");
-    currencyWL5 = new Currency("TWTR");
     updateCurrencyHLElements();
     currencies = BASE_WATCH_LIST.map(ticker => new Currency(ticker));
-    //currencies.map((c,i) => addToWatchList(i));
+    currencies.map((c,i) => addToWatchList(i));
 
 });
 
@@ -152,7 +147,7 @@ function handleToggleWatchListClick(e) {
 function updateCurrencyHLElements() {
     updateGraphHeader();
     updateGraph();
-    updateWatchList();
+    //updateWatchList();
 }
 
 function updateColors() {
@@ -254,6 +249,13 @@ function addWatchListElement(index) {
     let changePercent = document.createTextNode(currencies[index].getDayPercentChange());
     spanChangePercent.className = "stock-change-percent";
     spanChangePercent.appendChild(changePercent);
+    if (currencies[index].getDayChange() < 0) { // RED
+        spanChangeUSD.style.color = "#FF0D2C";
+        spanChangePercent.style.color = "#FF0D2C";
+    } else {                                    // GREEN
+        spanChangeUSD.style.color = "#00CC3A";
+        spanChangePercent.style.color = "#00CC3A";
+    }
     let spanTimescale = document.createElement("span");
     let timescale = document.createTextNode("today");
     spanTimescale.className = "stock-timescale";
@@ -336,7 +338,7 @@ function updateWatchListElements() {
 
 // Update Graph Header Function
 function updateGraphHeader() {
-    APITodayBasicAPPLData( function(data) {
+    APITodayQuoteStockData(currencyHL.getTicker(), function(data) {
         currencyHL.setQuoteData(data);
         updateGraphHeaderElements();
     });
@@ -347,11 +349,18 @@ function updateGraphHeaderElements() {
     document.getElementById("graph-price").innerText = currencyHL.getCurrentQuote();
     document.getElementById("graph-change-usd").innerText = currencyHL.getDayChange();
     document.getElementById("graph-change-percent").innerText = currencyHL.getDayPercentChange();
+    if (currencyHL.getCurrentQuote() < 0) {
+        document.getElementById("graph-change-usd").style.color = "#FF0D2C";
+        document.getElementById("graph-change-percent").style.color = "#FF0D2C";
+    } else {
+        document.getElementById("graph-change-usd").style.color = "#00CC3A";
+        document.getElementById("graph-change-percent").style.color = "#00CC3A";
+    }
 }
 
 // Update Graph Function
 function updateGraph() {
-    APIIntradayAPPLData( function(data) {
+    APIIntradayStockData(currencyHL.getTicker(), function(data) {
         currencyHL.setOneDayTimeSeriesData(data);
         console.log("updateGraph function!");
         console.log(currencyHL.getOneDayTimeSeriesData());

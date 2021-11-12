@@ -1,13 +1,13 @@
 function getUNIXMidnightTonight() {
     let t = new Date();
     t.setHours(24,0,0,0);
-    return t.getTime(); // UNIX Format for Finnhub
+    return t.getTime() / 1000; // UNIX Format for Finnhub
 }
 
 function getUNIXMidnightMorning() {
     let t = new Date();
     t.setHours(0,0,0,0);
-    return t.getTime(); // UNIX Format for Finnhub
+    return t.getTime() / 1000; // UNIX Format for Finnhub
 }
 
 function getUNIXFiveDaysAgo() {
