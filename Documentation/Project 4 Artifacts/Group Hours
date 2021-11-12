@@ -3,3 +3,7 @@ Initial Estimate: 40 hours. Including documentation and finishing our existing w
 11/10:
 Michael: 1 hour: Setting up getting timestamps and API stock calls
 Michael: 0.5 hours: Setting up API crypto calls
+
+11/11:
+Michael: 1 hour: Got Quote data for crypto set up using candles to create custom response,
+                 added needed helper elements getIndexFromTicker, reformatted dynamic watchlist elements
