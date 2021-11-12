@@ -95,3 +95,11 @@ function getIndexOfTicker(currencies, ticker) {
     }
     return 0;
 }
+function isTickerInWatchList(currencies, ticker) {
+    for (let i = 0; i < currencies.length; i++) {
+        if (currencies[i].getTicker() == ticker) {
+            return true;
+        }
+    }
+    return false;
+}

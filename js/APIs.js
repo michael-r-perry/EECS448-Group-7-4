@@ -10,6 +10,7 @@ function APITodayQuoteStockData(ticker, callback) {
 }
 
 function APIIntradayStockData(ticker, callback) {
+    console.log("APIIntradayStockData");
     let tonight = getUNIXMidnightTonight();
     let morning = getUNIXMidnightMorning();
     axios.get('https://finnhub.io/api/v1/stock/candle?symbol=' + ticker + '&resolution=5&from=' + morning + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
@@ -21,6 +22,7 @@ function APIIntradayStockData(ticker, callback) {
 }
 
 function APIFiveDayStockData(ticker, callback) {
+    console.log("APIFiveDayStockData");
     let tonight = getUNIXMidnightTonight();
     let weekAgo = getUNIXFiveDaysAgo();
     axios.get('https://finnhub.io/api/v1/stock/candle?symbol=' + ticker + '&resolution=30&from=' + weekAgo + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
@@ -32,6 +34,7 @@ function APIFiveDayStockData(ticker, callback) {
 }
 
 function APIOneMonthStockData(ticker, callback) {
+    console.log("APIOneMonthStockData");
     let tonight = getUNIXMidnightTonight();
     let month = getUNIXOneMonthAgo();
     axios.get('https://finnhub.io/api/v1/stock/candle?symbol=' + ticker + '&resolution=D&from=' + month + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
@@ -43,6 +46,7 @@ function APIOneMonthStockData(ticker, callback) {
 }
 
 function APIThreeMonthStockData(ticker, callback) {
+    console.log("APIThreeMonthStockData");
     let tonight = getUNIXMidnightTonight();
     let months = getUNIXThreeMonthsAgo();
     axios.get('https://finnhub.io/api/v1/stock/candle?symbol=' + ticker + '&resolution=D&from=' + months + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
@@ -54,6 +58,7 @@ function APIThreeMonthStockData(ticker, callback) {
 }
 
 function APISixMonthStockData(ticker, callback) {
+    console.log("APISixMonthStockData");
     let tonight = getUNIXMidnightTonight();
     let months = getUNIXSixMonthsAgo();
     axios.get('https://finnhub.io/api/v1/stock/candle?symbol=' + ticker + '&resolution=D&from=' + months + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
@@ -65,6 +70,7 @@ function APISixMonthStockData(ticker, callback) {
 }
 
 function APIOneYearStockData(ticker, callback) {
+    console.log("APIOneYearStockData");
     let tonight = getUNIXMidnightTonight();
     let year = getUNIXOneYearAgo();
     axios.get('https://finnhub.io/api/v1/stock/candle?symbol=' + ticker + '&resolution=D&from=' + year + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
