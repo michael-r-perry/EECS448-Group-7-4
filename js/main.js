@@ -6,11 +6,11 @@
  ***************************************************/
 
 let currencyHL;
-let currencyWL1;
-let currencyWL2;
-let currencyWL3;
-let currencyWL4;
-let currencyWL5;
+let crypto1;
+let crypto2;
+let crypto3;
+let crypto4;
+let crypto5;
 let currencies = [];
 let news = [];
 const BASE_WATCH_LIST = ["AAPL", "AMZN", "TSLA", "TMUS", "TWTR"];
@@ -50,6 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Currency Objects
     BASE_WATCH_LIST.map(ticker => addToWatchList(ticker)); // Adds each ticker to currencies and adds an li tag to the watchlist ul
     currencyHL = new Currency("AAPL");
+    crypto1 = new Currency("BTC");
+    crypto2 = new Currency("ETH");
+    crypto3 = new Currency("LTC");
+    crypto4 = new Currency("BNB");
+    crypto5 = new Currency("XRP");
     graphTimespan = "1Day";
     updateCurrencyHLElements();
 });
@@ -180,7 +185,8 @@ function handleToggleWatchListClick(e) {
 function updateCurrencyHLElements() {
     updateGraphHeader();
     updateGraph();
-    //updateMarketNews();
+    updateMarketNews();
+    updateCryptoBar();
 }
 
 /***************************************************
@@ -505,21 +511,126 @@ function updateGraphElements() {
  * Market News Functions
  ***************************************************/
 function updateMarketNews(){
-    for(var i = 0; i < 5; i++){
-        news.push(new News());
-        APIGetMarketNews(i ,function(data) {
-            news[i].setNews(data);
-            addNewsElement(i);
-        });
+    news.push(new News());
+    news.push(new News());
+    news.push(new News());
+    news.push(new News());
+    news.push(new News());
+    APIGetMarketNews(0 ,function(data) {
+        news[0].setNews(data);
+        updateNewsElement(0);
+    });
+    APIGetMarketNews(1 ,function(data) {
+        news[1].setNews(data);
+        updateNewsElement(1);
+    });
+    APIGetMarketNews(2 ,function(data) {
+        news[2].setNews(data);
+        updateNewsElement(2);
+    });
+    APIGetMarketNews(3 ,function(data) {
+        news[3].setNews(data);
+        updateNewsElement(3);
+    });
+    APIGetMarketNews(4 ,function(data) {
+        news[4].setNews(data);
+        updateNewsElement(4);
+    });
+    console.log(news);
+}
+
+function updateNewsElement(index){
+    if (index == 0){
+        document.getElementById("news1-headline").innerText = news[index].getHeadline();
+        document.getElementById("news1-img").src = news[index].getImage();
+        //document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
+        document.getElementById("news1-summary").innerText = news[index].getSummary();
+        document.getElementById("news1-url").href = news[index].getUrl();
+    }
+    if (index == 1){
+        document.getElementById("news2-headline").innerText = news[index].getHeadline();
+        document.getElementById("news2-img").src = news[index].getImage();
+        //document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
+        document.getElementById("news2-summary").innerText = news[index].getSummary();
+        document.getElementById("news2-url").href = news[index].getUrl();
+    }
+    if (index == 2){
+        document.getElementById("news3-headline").innerText = news[index].getHeadline();
+        document.getElementById("news3-img").src = news[index].getImage();
+        //document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
+        document.getElementById("news3-summary").innerText = news[index].getSummary();
+        document.getElementById("news3-url").href = news[index].getUrl();
+    }
+    if (index == 3){
+        document.getElementById("news4-headline").innerText = news[index].getHeadline();
+        document.getElementById("news4-img").src = news[index].getImage();
+        //document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
+        document.getElementById("news4-summary").innerText = news[index].getSummary();
+        document.getElementById("news4-url").href = news[index].getUrl();
+    }
+    if (index == 4){
+        document.getElementById("news5-headline").innerText = news[index].getHeadline();
+        document.getElementById("news5-img").src = news[index].getImage();
+        //document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
+        document.getElementById("news5-summary").innerText = news[index].getSummary();
+        document.getElementById("news5-url").href = news[index].getUrl();
     }
 }
 
-function addNewsElement(index){
-    index = index+1;
-    var newsSelector = "news" + index;
-    document.getElementById(newsSelector + "-headline").innerText = news[index].getHeadline();
-    document.getElementById(newsSelector + "-image").innerText = news[index].getImage();
-    document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
-    document.getElementById(newsSelector + "-summary").innerText = news[index].getSummary();
-    document.getElementById(newsSelector + "-url").innerText = news[index].getUrl();
+/***************************************************
+ * Crypto Bar Functions
+ ***************************************************/
+function updateCryptoBar(){
+    APITodayQuoteCryptoData(crypto1.getTicker(), function(data) {
+        crypto1.setQuoteData(data);
+        updateWatchListElement(1);
+    });
+    APITodayQuoteCryptoData(crypto2.getTicker(), function(data) {
+        crypto2.setQuoteData(data);
+        updateWatchListElement(2);
+    });
+    APITodayQuoteCryptoData(crypto3.getTicker(), function(data) {
+        crypto3.setQuoteData(data);
+        updateWatchListElement(3);
+    });
+    APITodayQuoteCryptoData(crypto4.getTicker(), function(data) {
+        crypto4.setQuoteData(data);
+        updateWatchListElement(4);
+    });
+    APITodayQuoteCryptoData(crypto5.getTicker(), function(data) {
+        crypto5.setQuoteData(data);
+        updateWatchListElement(5);
+    });
+}
+
+function updateCryptoPrice(num){
+    var coinIndicator = "coin" + num;
+    var coinPrice = coinIndicator + "-price";
+    var coinPercent = coinIndicator + "-percent";
+    var newPrice;
+    var newPercent;
+    if(num == 1){
+        newPrice = crypto1.getCurrentQuote();
+        newPercent = crypto1.getDayPercentChange();
+    }
+    else if(num == 2){
+        newPrice = crypto2.getCurrentQuote();
+        newPercent = crypto2.getDayPercentChange();
+    }
+    else if(num == 3){
+        newPrice = crypto3.getCurrentQuote();
+        newPercent = crypto3.getDayPercentChange();
+    }
+    else if(num == 4){
+        newPrice = crypto4.getCurrentQuote();
+        newPercent = crypto4.getDayPercentChange();
+    }
+    else if(num == 5){
+        newPrice = crypto5.getCurrentQuote();
+        newPercent = crypto5.getDayPercentChange();
+    }
+    document.getElementById(coinPrice).innerText = newPrice;
+    console.log(coinPrice);
+    console.log(newPrice);
+    document.getElementById(coinPercent).innerText = newPercent;
 }

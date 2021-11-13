@@ -176,7 +176,7 @@ function APIOneYearCryptoData(ticker, callback) {
 
 // Market News Section START
 function APIGetMarketNews(index, callback) {
-    axios.get('https://finnhub.io/api/v1/news?category=general&minId=10'+ '&token=c5tho52ad3ifck7dg8fg')
+    axios.get('https://finnhub.io/api/v1/news?category=general&minId=7001876'+ '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
             console.log(response.data);
             let headline = response.data[index]["headline"];

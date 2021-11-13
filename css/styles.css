@@ -508,6 +508,23 @@ header .header-settings a:hover{
     user-select: none;
 }
 
+#market-news ul li .news-img{
+    position: relative;
+    height: 90%;
+    width: 300px;
+    border-radius: 6px;
+}
+
+#market-news ul li .news-headline{
+    font-weight: 600;
+    font-size: 24px;
+}
+
+#market-news ul li .news-summary{
+    font-weight: 500;
+    font-size: 18px;
+}
+
 #market-news ul li a:hover{
     background: #fff;
     color: #0B111F;
