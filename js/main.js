@@ -12,6 +12,7 @@ let currencyWL3;
 let currencyWL4;
 let currencyWL5;
 let currencies = [];
+let news = [];
 const BASE_WATCH_LIST = ["AAPL", "AMZN", "TSLA", "TMUS", "TWTR"];
 let graphTimespan; // "1Day", "5Day", "1Month", "3Month", "6Month", "1Year"
 let graphChart;
@@ -179,6 +180,7 @@ function handleToggleWatchListClick(e) {
 function updateCurrencyHLElements() {
     updateGraphHeader();
     updateGraph();
+    //updateMarketNews();
 }
 
 /***************************************************
@@ -498,3 +500,26 @@ function updateGraphElements() {
  ***************************************************/
 
 // SearchHandle Function
+
+/***************************************************
+ * Market News Functions
+ ***************************************************/
+function updateMarketNews(){
+    for(var i = 0; i < 5; i++){
+        news.push(new News());
+        APIGetMarketNews(i ,function(data) {
+            news[i].setNews(data);
+            addNewsElement(i);
+        });
+    }
+}
+
+function addNewsElement(index){
+    index = index+1;
+    var newsSelector = "news" + index;
+    document.getElementById(newsSelector + "-headline").innerText = news[index].getHeadline();
+    document.getElementById(newsSelector + "-image").innerText = news[index].getImage();
+    document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
+    document.getElementById(newsSelector + "-summary").innerText = news[index].getSummary();
+    document.getElementById(newsSelector + "-url").innerText = news[index].getUrl();
+}
