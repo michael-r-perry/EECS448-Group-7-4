@@ -199,10 +199,18 @@ function watchListToggle(ticker) {
 function addToWatchList(ticker) {
     currencies.push(new Currency(ticker));
     let index = getIndexOfTicker(currencies, ticker);
-    APITodayQuoteStockData(currencies[index].getTicker(), function(data) {
-        currencies[index].setQuoteData(data);
-        addWatchListElement(index);
-    });
+    if (isCrypto(currencies[index].getTicker())) {
+        APITodayQuoteCryptoData(currencies[index].getTicker(), function(data) {
+            currencies[index].setQuoteData(data);
+            addWatchListElement(index);
+        });
+    } else {
+        APITodayQuoteStockData(currencies[index].getTicker(), function(data) {
+            currencies[index].setQuoteData(data);
+            addWatchListElement(index);
+        });
+    }
+    
 }
 
 function addWatchListElement(index) {
@@ -287,10 +295,18 @@ function removeWatchListElement(ticker) {
 
 function updateWatchList() {
     for (let i = 0; i < currencies.length; i++) {
-        APITodayQuoteStockData(currencies[i].getTicker(), function(data) {
-            currencies[i].setQuoteData(data);
-            updateWatchListElement(i);
-        });
+        if (isCrypto(currencyHL.getTicker())) {
+            APITodayQuoteCryptoData(currencies[i].getTicker(), function(data) {
+                currencies[i].setQuoteData(data);
+                updateWatchListElement(i);
+            });
+        } else {
+            APITodayQuoteStockData(currencies[i].getTicker(), function(data) {
+                currencies[i].setQuoteData(data);
+                updateWatchListElement(i);
+            });
+        }
+        
     }
 }
 
@@ -307,10 +323,17 @@ function updateWatchListElement(index) {
 
 // Update Graph Header Function
 function updateGraphHeader() {
-    APITodayQuoteStockData(currencyHL.getTicker(), function(data) {
-        currencyHL.setQuoteData(data);
-        updateGraphHeaderElements();
-    });
+    if (isCrypto(currencyHL.getTicker())) {
+        APITodayQuoteCryptoData(currencyHL.getTicker(), function(data) {
+            currencyHL.setQuoteData(data);
+            updateGraphHeaderElements();
+        });
+    } else {
+        APITodayQuoteStockData(currencyHL.getTicker(), function(data) {
+            currencyHL.setQuoteData(data);
+            updateGraphHeaderElements();
+        });
+    }
 }
 
 function updateGraphHeaderElements() {
@@ -334,48 +357,103 @@ function updateGraphHeaderElements() {
 
 // Update Graph Function
 function updateGraph() {
+    // Has to check which timespan and whether cyprto or stock
     if (graphTimespan == "1Day") {
-        APIIntradayStockData(currencyHL.getTicker(), function(data) {
-            currencyHL.setOneDayTimeSeriesData(data);
-            console.log("updateGraph 1Day function!");
-            console.log(currencyHL.getOneDayTimeSeriesData());
-            updateGraphElements();
-        });
+        if (isCrypto(currencyHL.getTicker())) {
+            APIIntradayCryptoData(currencyHL.getTicker(), function(data) {
+                currencyHL.setOneDayTimeSeriesData(data);
+                console.log("updateGraph 1Day function!");
+                console.log(currencyHL.getOneDayTimeSeriesData());
+                updateGraphElements();
+            });
+        } else {
+            APIIntradayStockData(currencyHL.getTicker(), function(data) {
+                currencyHL.setOneDayTimeSeriesData(data);
+                console.log("updateGraph 1Day function!");
+                console.log(currencyHL.getOneDayTimeSeriesData());
+                updateGraphElements();
+            });
+        }
     } else if (graphTimespan == "5Day") {
-        APIFiveDayStockData(currencyHL.getTicker(), function(data) {
-            currencyHL.setFiveDayTimeSeriesData(data);
-            console.log("updateGraph 5Day function!");
-            console.log(currencyHL.getOneDayTimeSeriesData());
-            updateGraphElements();
-        });
+        if (isCrypto(currencyHL.getTicker())) {
+            APIFiveDayCryptoData(currencyHL.getTicker(), function(data) {
+                currencyHL.setFiveDayTimeSeriesData(data);
+                console.log("updateGraph 5Day function!");
+                console.log(currencyHL.getOneDayTimeSeriesData());
+                updateGraphElements();
+            });
+        } else {
+            APIFiveDayStockData(currencyHL.getTicker(), function(data) {
+                currencyHL.setFiveDayTimeSeriesData(data);
+                console.log("updateGraph 5Day function!");
+                console.log(currencyHL.getOneDayTimeSeriesData());
+                updateGraphElements();
+            });
+        }
     } else if (graphTimespan == "1Month") {
-        APIOneMonthStockData(currencyHL.getTicker(), function(data) {
-            currencyHL.setOneMonthTimeSeriesData(data);
-            console.log("updateGraph 1Month function!");
-            console.log(currencyHL.getOneDayTimeSeriesData());
-            updateGraphElements();
-        });
+        if (isCrypto(currencyHL.getTicker())) {
+            APIOneMonthCryptoData(currencyHL.getTicker(), function(data) {
+                currencyHL.setOneMonthTimeSeriesData(data);
+                console.log("updateGraph 1Month function!");
+                console.log(currencyHL.getOneDayTimeSeriesData());
+                updateGraphElements();
+            });
+        } else {
+            APIOneMonthStockData(currencyHL.getTicker(), function(data) {
+                currencyHL.setOneMonthTimeSeriesData(data);
+                console.log("updateGraph 1Month function!");
+                console.log(currencyHL.getOneDayTimeSeriesData());
+                updateGraphElements();
+            });
+        }
     } else if (graphTimespan == "3Month") {
-        APIThreeMonthStockData(currencyHL.getTicker(), function(data) {
-            currencyHL.setThreeMonthTimeSeriesData(data);
-            console.log("updateGraph 3Month function!");
-            console.log(currencyHL.getOneDayTimeSeriesData());
-            updateGraphElements();
-        });
+        if (isCrypto(currencyHL.getTicker())) {
+            APIThreeMonthCryptoData(currencyHL.getTicker(), function(data) {
+                currencyHL.setThreeMonthTimeSeriesData(data);
+                console.log("updateGraph 3Month function!");
+                console.log(currencyHL.getOneDayTimeSeriesData());
+                updateGraphElements();
+            });
+        } else {
+            APIThreeMonthStockData(currencyHL.getTicker(), function(data) {
+                currencyHL.setThreeMonthTimeSeriesData(data);
+                console.log("updateGraph 3Month function!");
+                console.log(currencyHL.getOneDayTimeSeriesData());
+                updateGraphElements();
+            });
+        }
     } else if (graphTimespan == "6Month") {
-        APISixMonthStockData(currencyHL.getTicker(), function(data) {
-            currencyHL.setSixMonthTimeSeriesData(data);
-            console.log("updateGraph 6Month function!");
-            console.log(currencyHL.getOneDayTimeSeriesData());
-            updateGraphElements();
-        });
+        if (isCrypto(currencyHL.getTicker())) {
+            APISixMonthCryptoData(currencyHL.getTicker(), function(data) {
+                currencyHL.setSixMonthTimeSeriesData(data);
+                console.log("updateGraph 6Month function!");
+                console.log(currencyHL.getOneDayTimeSeriesData());
+                updateGraphElements();
+            });
+        } else {
+            APISixMonthStockData(currencyHL.getTicker(), function(data) {
+                currencyHL.setSixMonthTimeSeriesData(data);
+                console.log("updateGraph 6Month function!");
+                console.log(currencyHL.getOneDayTimeSeriesData());
+                updateGraphElements();
+            });
+        }
     } else if (graphTimespan == "1Year") {
-        APIOneYearStockData(currencyHL.getTicker(), function(data) {
-            currencyHL.setOneYearTimeSeriesData(data);
-            console.log("updateGraph 1Year function!");
-            console.log(currencyHL.getOneDayTimeSeriesData());
-            updateGraphElements();
-        });
+        if (isCrypto(currencyHL.getTicker())) {
+            APIOneYearStockData(currencyHL.getTicker(), function(data) {
+                currencyHL.setOneYearTimeSeriesData(data);
+                console.log("updateGraph 1Year function!");
+                console.log(currencyHL.getOneDayTimeSeriesData());
+                updateGraphElements();
+            });
+        } else {
+            APIOneYearStockData(currencyHL.getTicker(), function(data) {
+                currencyHL.setOneYearTimeSeriesData(data);
+                console.log("updateGraph 1Year function!");
+                console.log(currencyHL.getOneDayTimeSeriesData());
+                updateGraphElements();
+            });
+        }
     }
 }
 

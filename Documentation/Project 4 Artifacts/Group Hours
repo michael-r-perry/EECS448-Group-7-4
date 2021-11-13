@@ -11,3 +11,7 @@ Michael: 1 hour: Got Quote data for crypto set up using candles to create custom
 11/12:
 Michael: 4 hours: Setup watchlist functionalities (switch curHL by watchlist, add/remove
                   watch list element, updating curHL tags and watch list tags) and graph buttons 
+
+11/13:
+Michael: 0.5 hours: Implemented pulling crypto information from API and differentiating between
+                    a stock and crypto ticker before calling.

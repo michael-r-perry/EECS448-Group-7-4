@@ -103,3 +103,7 @@ function isTickerInWatchList(currencies, ticker) {
     }
     return false;
 }
+
+function isCrypto(ticker) {
+    return ticker.includes(":");
+}
