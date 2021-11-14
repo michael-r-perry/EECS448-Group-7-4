@@ -260,6 +260,19 @@ function Gainers(index, callback){
 }
 // Gainers/Losers Section END
 
+// Search Section START
+function Search(input, callback){
+    axios.get('https://finnhub.io/api/v1/search?q=' + input +'&token=c5tho52ad3ifck7dg8fg')
+        .then(response => {
+            console.log(response.data);
+            let ticker = response.data["result"][0]["symbol"];
+            callback({
+                "ticker": ticker,
+            })
+        })
+        .catch(error => console.error(error));
+}
+/*
 function Browse(){
 
     console.log("searchBtn clicked or searchBar keydown == Enter!");
@@ -273,6 +286,7 @@ function Browse(){
     finnhubClient.symbolSearch(query, (data) => {console.log(data)});
     return data;
 }
+*/
 ///////////////////////////////////////////////////////////
 // EXTRA FUNCTIONS: NEED TO BE DELETED BEFORE SUBMITTING //
 ///////////////////////////////////////////////////////////

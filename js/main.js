@@ -37,9 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("year-btn").addEventListener("click", (e) => handle1YearBtnClick(e));
 
     // Event Listener for Search Bar Button
-    document.getElementById("searchBtn").addEventListener("click", (e) => (currencyHL = new Currency(Browse())));
+    document.getElementById("searchBtn").addEventListener("click", (e) => (handleSearchBtnClick()));
     document.getElementById("searchBar").addEventListener("keydown", (e) => {
-        if (e.key == "Enter") { currencyHL = new Currency(Browse()) }
+        if (e.key == "Enter") {handleSearchBtnClick()}
     });
 
     // Event Delegation for Watch List UL elements
@@ -143,10 +143,17 @@ function handle1YearBtnClick(e) {
  * Handles a click on the search bar.
  * @param {*} e
  */
-function handleSearchBtnClick(e) {
+function handleSearchBtnClick() {
     console.log("searchBtn clicked or searchBar keydown == Enter!");
-    var query = document.getElementById("searchBtn").value;
-    browse(query);
+    var query = document.getElementById("searchBar").value;
+    Search(query, function(data) {
+        if (currencyHL.getTicker() != data["ticker"]) {
+            currencyHL = new Currency(data["ticker"]);
+            updateCurrencyHLElements();
+        } else {
+            console.log("No change, same ticker");
+        }
+    })
 }
 
 // Event Delegation Handler Function for WatchList Currency Buttons
