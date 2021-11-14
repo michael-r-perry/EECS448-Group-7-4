@@ -144,7 +144,8 @@ function handle1YearBtnClick(e) {
  */
 function handleSearchBtnClick(e) {
     console.log("searchBtn clicked or searchBar keydown == Enter!");
-    browse(AAPL);
+    var query = document.getElementById("searchBtn").value;
+    browse(query);
 }
 
 // Event Delegation Handler Function for WatchList Currency Buttons

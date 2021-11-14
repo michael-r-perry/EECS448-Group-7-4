@@ -219,6 +219,19 @@ function Gainers(index, callback){
 }
 // Gainers/Losers Section END
 
+function Browse(){
+
+    console.log("searchBtn clicked or searchBar keydown == Enter!");
+    var query = document.getElementById("searchBtn").value;
+    const finnhub = require('finnhub');
+
+    const api_key = finnhub.ApiClient.instance.authentications['api_key'];
+    api_key.apiKey = "";
+    const finnhubClient = new finnhub.DefaultApi();
+
+    finnhubClient.symbolSearch(query, (data) => {console.log(data)});
+    return data;
+}
 ///////////////////////////////////////////////////////////
 // EXTRA FUNCTIONS: NEED TO BE DELETED BEFORE SUBMITTING //
 ///////////////////////////////////////////////////////////
