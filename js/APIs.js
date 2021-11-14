@@ -173,7 +173,25 @@ function APIOneYearCryptoData(ticker, callback) {
 // Market News Section END
 
 // Gainers/Losers Section START
-
+function Gainers(index, callback){
+    axios.get('https://financialmodelingprep.com/api/v3/stock/gainers?apikey=acfdeb7c7ae9b0f38163cbe9893f7673')
+        .then(response => {
+            console.log(response.data);
+            let ticker = response.data[index]["ticker"];
+            let changes = response.data[index]["changes"];
+            let price = response.data[index]["price"];
+            let changesPercentage = response.data[index]["changesPercentage"];
+            let companyName = response.data[index]["companyName"];
+            callback({
+                "ticker": ticker,
+                "changes": changes,
+                "price": price,
+                "changesPercentage": changesPercentage,
+                "companyName": companyName,
+            });
+        })
+        .catch(error => console.error(error));
+}
 // Gainers/Losers Section END
 
 ///////////////////////////////////////////////////////////
@@ -181,8 +199,8 @@ function APIOneYearCryptoData(ticker, callback) {
 ///////////////////////////////////////////////////////////
 
 /**
- * 
- * @param {*} callback 
+ *
+ * @param {*} callback
  */
  function APITodayBasicAPPLData(callback) {
     axios.get('https://finnhub.io/api/v1/quote?symbol=AAPL&token=c5tho52ad3ifck7dg8fg')
@@ -194,7 +212,7 @@ function APIOneYearCryptoData(ticker, callback) {
 }
 
 /**
- * 
+ *
  */
 function APIIntradayAPPLData(callback) {
     axios.get('https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=30&from=1631022248&to=1631627048&token=c5tho52ad3ifck7dg8fg')

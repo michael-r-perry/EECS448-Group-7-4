@@ -20,7 +20,7 @@ let BASE_WATCH_LIST = ["AAPL", "AMZN", "TSLA", "TMUS", "TWTR"];
 
 // DOMContentLoaded
 // Set up event listeners, then pull and initialize data for UI
-document.addEventListener("DOMContentLoaded", () => { 
+document.addEventListener("DOMContentLoaded", () => {
     console.log("DOMContentLoaded test")
 
     // Event Listener for Graph Buttons
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Event Listener Function for 1 Day Button
 /**
  * Handles a click on the 1 day button.
- * @param {*} e 
+ * @param {*} e
  */
 function handle1DayBtnClick(e) {
     console.log("1Day btn clicked!");
@@ -68,7 +68,7 @@ function handle1DayBtnClick(e) {
 // Event Listener Function for 5 Day Button
 /**
  * Handles a click on the 5 day button.
- * @param {*} e 
+ * @param {*} e
  */
 function handle5DayBtnClick(e) {
     console.log("5Day btn clicked!");
@@ -77,7 +77,7 @@ function handle5DayBtnClick(e) {
 // Event Listener Function for 1 Month Button
 /**
  * Handles a click on the 1 month button.
- * @param {*} e 
+ * @param {*} e
  */
 function handle1MonthBtnClick(e) {
     console.log("1Month btn clicked!");
@@ -86,7 +86,7 @@ function handle1MonthBtnClick(e) {
 // Event Listener Function for 3 Month Button
 /**
  * Handles a click on the 3 month button.
- * @param {*} e 
+ * @param {*} e
  */
 function handle3MonthBtnClick(e) {
     console.log("3Month btn clicked!");
@@ -95,7 +95,7 @@ function handle3MonthBtnClick(e) {
 // Event Listener Function for 6 Month Button
 /**
  * Handles a click on the 6 month button.
- * @param {*} e 
+ * @param {*} e
  */
 function handle6MonthBtnClick(e) {
     console.log("6Month btn clicked!");
@@ -104,7 +104,7 @@ function handle6MonthBtnClick(e) {
 // Event Listener Function for 1 Year Button
 /**
  * Handles a click on the 1 year button.
- * @param {*} e 
+ * @param {*} e
  */
 function handle1YearBtnClick(e) {
     console.log("1Year btn clicked!");
@@ -113,7 +113,7 @@ function handle1YearBtnClick(e) {
 // Event Listener Handler Function for Search Bar Button
 /**
  * Handles a click on the search bar.
- * @param {*} e 
+ * @param {*} e
  */
 function handleSearchBtnClick(e) {
     console.log("searchBtn clicked or searchBar keydown == Enter!");
@@ -123,7 +123,7 @@ function handleSearchBtnClick(e) {
 // Event Delegation Handler Function for WatchList Currency Buttons
 /**
  * Handles a click on the watch list.
- * @param {*} e 
+ * @param {*} e
  */
 function handleWatchListClick(e) {
     let id;
@@ -138,7 +138,7 @@ function handleWatchListClick(e) {
 // Event Listener Function for Add to WatchList Buttons
 /**
  * handles a click on one of the "add to watchlist" buttons
- * @param {*} e 
+ * @param {*} e
  */
 function handleToggleWatchListClick(e) {
     console.log("Clicked graph-list-status element");
@@ -374,8 +374,21 @@ function updateGraphElements() {
         data: currencyHL.getOneDayTimeSeriesData()
     });
 }
-
-
+let gainer = [];
+function updateGainers(){
+gainer.push(new marketData());
+gainer.push(new marketData());
+gainer.push(new marketData());
+Gainers(0,function(data) {
+    gainer[0].setMarketData(data);
+    updateGainerHTML(0)
+  });
+}
+function updateGainerHTML(index){
+   if(index == 0){
+     document.getElementById("stock-name1").innerText = gainer[index].getTicker();
+   }
+}
 /***************************************************
  * Search Bar Functions
  ***************************************************/
