@@ -185,9 +185,11 @@ function handleToggleWatchListClick(e) {
 
 function updateCurrencyHLElements() {
     updateGraphHeader();
+    updateGraphInfo();
     updateGraph();
     updateMarketNews();
-    updateCryptoBar();
+    //updateCryptoBar();
+    
 }
 
 /***************************************************
@@ -364,6 +366,21 @@ function updateGraphHeaderElements() {
     }
 }
 
+// Update Graph Info Section
+function updateGraphInfo() {
+    APIGetTickerInfo(currencyHL.getTicker(), function(data) {
+        currencyHL.setTickerInfo(data);
+        updateTickerInfo();
+    });
+}
+
+function updateTickerInfo() {
+    document.getElementById("graph-info-name").innerText = currencyHL.getName();
+    document.getElementById("graph-info-logo").src = currencyHL.getLogo();
+    document.getElementById("graph-info-industry").innerText = currencyHL.getIndustry();
+    document.getElementById("graph-info-url").href = currencyHL.getUrl();
+}
+
 // Update Graph Function
 function updateGraph() {
     // Has to check which timespan and whether cyprto or stock
@@ -501,32 +518,28 @@ function updateGraphElements() {
         data: data
     });
 }
-<<<<<<< HEAD
 let gainer = [];
 function updateGainers(){
-gainer.push(new marketData());
-gainer.push(new marketData());
-gainer.push(new marketData());
-Gainers(0,function(data) {
-    gainer[0].setMarketData(data);
-    updateGainerHTML(0)
-  });
+    gainer.push(new marketData());
+    gainer.push(new marketData());
+    gainer.push(new marketData());
+    Gainers(0,function(data) {
+        gainer[0].setMarketData(data);
+        updateGainerHTML(0)
+    });
 }
+
 function updateGainerHTML(index){
    if(index == 0){
      document.getElementById("stock-name1").innerText = gainer[index].getTicker();
    }
 }
-=======
 
->>>>>>> f2de4981a172818d97e51050dae4e7deda3ed216
 /***************************************************
  * Search Bar Functions
  ***************************************************/
 
 // SearchHandle Function
-<<<<<<< HEAD
-=======
 
 /***************************************************
  * Market News Functions
@@ -655,4 +668,3 @@ function updateCryptoPrice(num){
     console.log(newPrice);
     document.getElementById(coinPercent).innerText = newPercent;
 }
->>>>>>> f2de4981a172818d97e51050dae4e7deda3ed216

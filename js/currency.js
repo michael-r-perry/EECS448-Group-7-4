@@ -11,6 +11,10 @@ class Currency {
         this.ThreeMonthTimeSeries = [];
         this.SixMonthTimeSeries = [];
         this.OneYearTimeSeries = [];
+        this.industry = "";
+        this.logo = "";
+        this.name = "";
+        this.url = "";
     }
 
     /**
@@ -44,6 +48,26 @@ class Currency {
     getDayPercentChange() {
         let temp = "(" +this.DayPercentChange + "%)";
         return temp;
+    }
+
+    getUrl() {
+        return this.url;
+    }
+    getName() {
+        return this.name;
+    }
+    getLogo() {
+        return this.logo;
+    }
+    getIndustry() {
+        return this.industry;
+    }
+
+    setTickerInfo(data) {
+        this.industry = data["industry"];
+        this.url = data["url"];
+        this.name = data["name"];
+        this.logo = data["logo"];
     }
 
     /**

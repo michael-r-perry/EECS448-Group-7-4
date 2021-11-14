@@ -174,6 +174,27 @@ function APIOneYearCryptoData(ticker, callback) {
 
 // Crypto Section END
 
+// Company Info Section START
+function APIGetTickerInfo(ticker, callback) {
+    axios.get('https://finnhub.io/api/v1/stock/profile2?symbol=' + ticker + '&token=c5tho52ad3ifck7dg8fg')
+        .then(response => {
+            console.log(response.data);
+            let industry = response.data["finnhubIndustry"];
+            let url = response.data["weburl"];
+            let logo = response.data["logo"];
+            let name = response.data["name"];
+            callback({
+                "industry": industry,
+                "logo": logo,
+                "url": url,
+                "name": name,
+            });
+        })
+        .catch(error => console.error(error));
+}
+
+// Company Info Section END
+
 // Market News Section START
 function APIGetMarketNews(index, callback) {
     axios.get('https://finnhub.io/api/v1/news?category=general&minId=7001876'+ '&token=c5tho52ad3ifck7dg8fg')

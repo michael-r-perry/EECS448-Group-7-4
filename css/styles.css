@@ -343,6 +343,33 @@ header .header-settings a:hover{
     background: #fff;
 }
 
+#graph-viewer #graph-info-logo {
+    border-radius: 6px;
+    height: 100px;
+    width: 100px;
+    position: relative;
+    left: 2%;
+}
+
+#graph-viewer #graph-info-name {
+    position: relative;
+    left: 3%;
+    font-size: 36px;
+    font-weight: 600;
+    color: #0B111F;
+    top: -50px;
+}
+#graph-viewer #graph-info-industry {
+    position: relative;
+    left: 13%;
+    font-size: 20px;
+    font-weight: 600;
+    color: #F2F2F2;
+    background-color: #0B111F;
+    border-radius: 4px;
+    top: -45px;
+}
+
 #gain-lose-news{
     margin-top: 25px;
     margin-left: 5%;
