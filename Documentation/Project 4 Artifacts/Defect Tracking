@@ -1,1 +1,19 @@
+TEMPLATE DEFECT LAYOUT:
+Defect #
+-Date Reported:
+-Who Reported it:
+-Defect Description:
+-Date Fixed:
+-Who Fixed it:
+-Fix Description:
+
+DEFECTS:
+
+Defect 1
+-Date Reported: 11/12/2021 3:00 PM
+-Who Reported it: Michael Perry
+-Defect Description: Adding a new graph would add them on top of one another, switching between graphs depending on cursor placement
+-Date Fixed: 11/12/2021 4:00 PM
+-Who Fixed it: Michael Perry
+-Fix Description: Added graphChart global variable, and do graphChart.destroy() (deletes the previous graph info) before adding new graph.
 

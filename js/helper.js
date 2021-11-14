@@ -1,13 +1,13 @@
 function getUNIXMidnightTonight() {
     let t = new Date();
     t.setHours(24,0,0,0);
-    return t.getTime(); // UNIX Format for Finnhub
+    return t.getTime() / 1000; // UNIX Format for Finnhub
 }
 
 function getUNIXMidnightMorning() {
     let t = new Date();
     t.setHours(0,0,0,0);
-    return t.getTime(); // UNIX Format for Finnhub
+    return t.getTime() / 1000; // UNIX Format for Finnhub
 }
 
 function getUNIXFiveDaysAgo() {
@@ -94,4 +94,16 @@ function getIndexOfTicker(currencies, ticker) {
         }
     }
     return 0;
+}
+function isTickerInWatchList(currencies, ticker) {
+    for (let i = 0; i < currencies.length; i++) {
+        if (currencies[i].getTicker() == ticker) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function isCrypto(ticker) {
+    return ticker.includes(":");
 }

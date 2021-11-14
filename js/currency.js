@@ -83,6 +83,25 @@ class Currency {
         return this.OneDayTimeSeries;
     }
 
+    setFiveDayTimeSeriesData(data) {
+        let closes = data["c"];
+        let times = data["t"];
+        let isos = times.map(t => UNIXtoISOConversion(t));
+        let gData = closes.map((c, i) => {return {t:isos[i], y:c}});
+        let bgc = CreateBackgroundColors(gData.length);
+        let bc = CreateBorderColors(gData.length);
+        this.FiveDayTimeSeries = {
+            labels: isos,
+            datasets: [{
+            label: this.ticker,
+            data: gData,
+            backgroundColor: bgc,
+            borderColor: bc,
+            borderWidth: 1
+            }]
+        };
+    }
+
     /**
      * 
      * @returns 
@@ -91,6 +110,25 @@ class Currency {
         // Redo once APIs.js has been updated
         // this.FiveDayTimeSeries = APIs.getHistoricData()
         return this.FiveDayTimeSeries;
+    }
+
+    setOneMonthTimeSeriesData(data) {
+        let closes = data["c"];
+        let times = data["t"];
+        let isos = times.map(t => UNIXtoISOConversion(t));
+        let gData = closes.map((c, i) => {return {t:isos[i], y:c}});
+        let bgc = CreateBackgroundColors(gData.length);
+        let bc = CreateBorderColors(gData.length);
+        this.OneMonthTimeSeries = {
+            labels: isos,
+            datasets: [{
+            label: this.ticker,
+            data: gData,
+            backgroundColor: bgc,
+            borderColor: bc,
+            borderWidth: 1
+            }]
+        };
     }
 
     /**
@@ -103,6 +141,25 @@ class Currency {
         return this.OneMonthTimeSeries;
     }
 
+    setThreeMonthTimeSeriesData(data) {
+        let closes = data["c"];
+        let times = data["t"];
+        let isos = times.map(t => UNIXtoISOConversion(t));
+        let gData = closes.map((c, i) => {return {t:isos[i], y:c}});
+        let bgc = CreateBackgroundColors(gData.length);
+        let bc = CreateBorderColors(gData.length);
+        this.ThreeMonthTimeSeries = {
+            labels: isos,
+            datasets: [{
+            label: this.ticker,
+            data: gData,
+            backgroundColor: bgc,
+            borderColor: bc,
+            borderWidth: 1
+            }]
+        };
+    }
+
     /**
      * 
      * @returns 
@@ -113,6 +170,25 @@ class Currency {
         return this.ThreeMonthTimeSeries;
     }
 
+    setSixMonthTimeSeriesData(data) {
+        let closes = data["c"];
+        let times = data["t"];
+        let isos = times.map(t => UNIXtoISOConversion(t));
+        let gData = closes.map((c, i) => {return {t:isos[i], y:c}});
+        let bgc = CreateBackgroundColors(gData.length);
+        let bc = CreateBorderColors(gData.length);
+        this.SixMonthTimeSeries = {
+            labels: isos,
+            datasets: [{
+            label: this.ticker,
+            data: gData,
+            backgroundColor: bgc,
+            borderColor: bc,
+            borderWidth: 1
+            }]
+        };
+    }
+
     /**
      * 
      * @returns 
@@ -121,6 +197,25 @@ class Currency {
         // Redo once APIs.js has been updated
         // this.SixMonthTimeSeries = APIs.getHistoricData()
         return this.SixMonthTimeSeries;
+    }
+
+    setOneYearTimeSeriesData(data) {
+        let closes = data["c"];
+        let times = data["t"];
+        let isos = times.map(t => UNIXtoISOConversion(t));
+        let gData = closes.map((c, i) => {return {t:isos[i], y:c}});
+        let bgc = CreateBackgroundColors(gData.length);
+        let bc = CreateBorderColors(gData.length);
+        this.OneYearTimeSeries = {
+            labels: isos,
+            datasets: [{
+            label: this.ticker,
+            data: gData,
+            backgroundColor: bgc,
+            borderColor: bc,
+            borderWidth: 1
+            }]
+        };
     }
 
     /**

@@ -19,6 +19,7 @@
   <script src="js/helper.js"></script>
   <script src="js/APIs.js"></script>
   <script src="js/currency.js"></script>
+  <script src="js/news.js"></script>
   <script src="js/search.js"></script>
   <script src="js/main.js"></script>
   <header>
@@ -42,7 +43,7 @@
       <div id="watch-div">
           <h1 id="watch-header">Watch List</h1>
           <ul id="watch-list">
-            <li>
+            <!-- <li>
                 <a id="AMZN" href="#">
                     <span>&ensp;</span>
                     <span class="stock-name" id="watch1-name">AMZN</span><span>&emsp;</span>
@@ -51,47 +52,7 @@
                     <span class="stock-change-percent" id="watch1-change-percent">(0.46%)</span><span>&ensp;</span>
                     <span class="stock-timescale" id="watch1-timescale">today</span>
                 </a>
-            </li>
-            <li>
-                <a id="APPL" href="#">
-                    <span>&ensp;</span>
-                    <span class="stock-name" id="watch2-name">AMZN</span><span>&emsp;</span>
-                    <span class="stock-price" id="watch2-price">3,320.37</span><span>&emsp;</span>
-                    <span class="stock-change-usd" id="watch2-change-usd">-15.18</span><span>&ensp;</span>
-                    <span class="stock-change-percent" id="watch2-change-percent">(0.46%)</span><span>&ensp;</span>
-                    <span class="stock-timescale" id="watch2-timescale">today</span>
-                </a>
-            </li>
-            <li>
-                <a id="TSLA" href="#">
-                    <span>&ensp;</span>
-                    <span class="stock-name" id="watch3-name">AMZN</span><span>&emsp;</span>
-                    <span class="stock-price" id="watch3-price">3,320.37</span><span>&emsp;</span>
-                    <span class="stock-change-usd" id="watch3-change-usd">-15.18</span><span>&ensp;</span>
-                    <span class="stock-change-percent" id="watch3-change-percent">(0.46%)</span><span>&ensp;</span>
-                    <span class="stock-timescale" id="watch3-timescale">today</span>
-                </a>
-            </li>
-            <li>
-                <a id="TMUS" href="#">
-                    <span>&ensp;</span>
-                    <span class="stock-name" id="watch4-name">AMZN</span><span>&emsp;</span>
-                    <span class="stock-price" id="watch4-price">3,320.37</span><span>&emsp;</span>
-                    <span class="stock-change-usd" id="watch4-change-usd">-15.18</span><span>&ensp;</span>
-                    <span class="stock-change-percent" id="watch4-change-percent">(0.46%)</span><span>&ensp;</span>
-                    <span class="stock-timescale" id="watch4-timescale">today</span>
-                </a>
-            </li>
-            <li>
-                <a id="TWTR" href="#">
-                    <span>&ensp;</span>
-                    <span class="stock-name" id="watch5-name">AMZN</span><span>&emsp;</span>
-                    <span class="stock-price" id="watch5-price">3,320.37</span><span>&emsp;</span>
-                    <span class="stock-change-usd" id="watch5-change-usd">-15.18</span><span>&ensp;</span>
-                    <span class="stock-change-percent" id="watch5-change-percent">(0.46%)</span><span>&ensp;</span>
-                    <span class="stock-timescale" id="watch5-timescale">today</span>
-                </a>
-            </li>
+            </li> -->
           </ul>
       </div>
       <div id="graph-viewer">
@@ -106,7 +67,9 @@
             <span id="graph-timescale">today</span>
         </div>
         <div id="graph-body">
-          <canvas id="graph-canvas"></canvas>
+          <div id="graph-container">
+            <canvas id="graph-canvas"></canvas>
+          </div>
           <div id="graph-buttons">
             <ul>
                 <li id="day-btn">
@@ -143,6 +106,39 @@
         </div>
         </div>
       </div>
+    </section>
+    <section id="crypto-section">
+        <div id="crypto-bar">
+            <a href="#" id="coin-one">
+                <span id="coin1-name" class="coin-name">BTC</span>
+                <span id="coin1-percent" class="coin-change-percent">-1.83%</span><br>
+                <span id="coin1-price" class="coin-price">$63,818.25</span>
+            </a>
+            <i class='bx bx-dots-vertical-rounded'></i>
+            <a href="#" id="coin-two">
+                <span id="coin2-name" class="coin-name">ETH</span>
+                <span id="coin2-percent" class="coin-change-percent">-3.25%</span><br>
+                <span id="coin2-price" class="coin-price">$4,630.40</span>
+            </a>
+            <i class='bx bx-dots-vertical-rounded'></i>
+            <a href="#" id="coin-three">
+                <span id="coin3-name" class="coin-name">LTC</span>
+                <span id="coin3-percent" class="coin-change-percent">-9.97%</span><br>
+                <span id="coin3-price" class="coin-price">$247.92</span>
+            </a>
+            <i class='bx bx-dots-vertical-rounded'></i>
+            <a href="#" id="coin-four">
+                <span id="coin4-name" class="coin-name">BNB</span>
+                <span id="coin4-percent" class="coin-change-percent">-1.42%</span><br>
+                <span id="coin4-price" class="coin-price">$624.27</span>
+            </a>
+            <i class='bx bx-dots-vertical-rounded'></i>
+            <a href="#" id="coin-five">
+                <span id="coin5-name" class="coin-name">XRP</span>
+                <span id="coin5-percent" class="coin-change-percent">-3.57%</span><br>
+                <span id="coin5-price" class="coin-price">$1.18</span>
+            </a>
+        </div>
     </section>
     <section id="gain-lose-news">
         <div id="gain-lose">
@@ -255,7 +251,53 @@
                 <h1>Market News</h1>
             </div>
             <div id="market-news-content">
-
+                <ul id="market-news-list">
+                    <li>
+                        <a id="news1-url" href="#" target="_blank">
+                            <span>&ensp;</span>
+                            <img id="news1-img" class="news-img" src="" alt="">
+                            <span>&ensp;</span>
+                            <span id="news1-headline" class="news-headline"></span>
+                            <span id="news1-summary" class="news-summary"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="news2-url" href="#" target="_blank">
+                            <span>&ensp;</span>
+                            <img id="news2-img" class="news-img" src="" alt="">
+                            <span>&ensp;</span>
+                            <span id="news2-headline" class="news-headline"></span>
+                            <span id="news2-summary" class="news-summary"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="news3-url" href="#" target="_blank">
+                            <span>&ensp;</span>
+                            <img id="news3-img" class="news-img" src="" alt="">
+                            <span>&ensp;</span>
+                            <span id="news3-headline" class="news-headline"></span>
+                            <span id="news3-summary" class="news-summary"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="news4-url" href="#" target="_blank">
+                            <span>&ensp;</span>
+                            <img id="news4-img" class="news-img" src="" alt="">
+                            <span>&ensp;</span>
+                            <span id="news4-headline" class="news-headline"></span>
+                            <span id="news4-summary" class="news-summary"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="news5-url" href="#" target="_blank">
+                            <span>&ensp;</span>
+                            <img id="news5-img" class="news-img" src="" alt="">
+                            <span>&ensp;</span>
+                            <span id="news5-headline" class="news-headline"></span>
+                            <span id="news5-summary" class="news-summary"></span>
+                        </a>
+                    </li>
+                  </ul>
             </div>
         </div>
     </section>
