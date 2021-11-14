@@ -13,6 +13,7 @@ let crypto4;
 let crypto5;
 let currencies = [];
 let news = [];
+let graphNews = new News();
 const BASE_WATCH_LIST = ["AAPL", "AMZN", "TSLA", "TMUS", "TWTR"];
 let graphTimespan; // "1Day", "5Day", "1Month", "3Month", "6Month", "1Year"
 let graphChart;
@@ -187,9 +188,9 @@ function updateCurrencyHLElements() {
     updateGraphHeader();
     updateGraphInfo();
     updateGraph();
+    updateCompanyNews();
     updateMarketNews();
     //updateCryptoBar();
-    
 }
 
 /***************************************************
@@ -520,15 +521,14 @@ function updateGraphElements() {
 }
 let gainer = [];
 function updateGainers(){
-    gainer.push(new marketData());
-    gainer.push(new marketData());
-    gainer.push(new marketData());
-    Gainers(0,function(data) {
-        gainer[0].setMarketData(data);
-        updateGainerHTML(0)
-    });
+gainer.push(new marketData());
+gainer.push(new marketData());
+gainer.push(new marketData());
+Gainers(0,function(data) {
+    gainer[0].setMarketData(data);
+    updateGainerHTML(0)
+  });
 }
-
 function updateGainerHTML(index){
    if(index == 0){
      document.getElementById("stock-name1").innerText = gainer[index].getTicker();
@@ -544,6 +544,21 @@ function updateGainerHTML(index){
 /***************************************************
  * Market News Functions
  ***************************************************/
+function updateCompanyNews(){
+    APIGetTickerNews(currencyHL.getTicker() ,function(data) {
+        graphNews.setNews(data);
+        updateCompanyNewsElement();
+    });
+}
+
+function updateCompanyNewsElement(){
+    document.getElementById("graph-news-headline").innerText = graphNews.getHeadline();
+    document.getElementById("graph-news-img").src = graphNews.getImage();
+    //document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
+    document.getElementById("graph-news-summary").innerText = graphNews.getSummary();
+    document.getElementById("graph-news-link").href = graphNews.getUrl();
+}
+
 function updateMarketNews(){
     news.push(new News());
     news.push(new News());

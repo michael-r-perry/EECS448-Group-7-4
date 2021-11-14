@@ -268,6 +268,8 @@ header .header-settings a:hover{
     color: #fff;
     border-radius: 6px;
     user-select: none;
+    position: relative;
+    top: -5px;
 }
 
 #graph-viewer #graph-header #graph-change-usd{
@@ -357,8 +359,13 @@ header .header-settings a:hover{
     font-size: 36px;
     font-weight: 600;
     color: #0B111F;
-    top: -50px;
+    top: -55px;
 }
+
+#graph-viewer a {
+    text-decoration: none;
+}
+
 #graph-viewer #graph-info-industry {
     position: relative;
     left: 13%;
@@ -367,7 +374,40 @@ header .header-settings a:hover{
     color: #F2F2F2;
     background-color: #0B111F;
     border-radius: 4px;
-    top: -45px;
+    top: -50px;
+}
+
+#graph-news-header {
+    position: relative;
+    color: #0B111F;
+    font-size: 28px;
+    font-weight: 600;
+    top: -150px;
+    left: 50%;
+}
+
+#graph-news-link {
+    position: relative;
+}
+
+#graph-news-img {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    left: 50%;
+    top: -135px;
+}
+
+#graph-news-headline {
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    top: -155px;
+    color: #0B111F;
+    font-size: 20px;
+    font-weight: 600;
+    width: 300px;
+    height: 100%;
 }
 
 #gain-lose-news{

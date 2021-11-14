@@ -216,6 +216,26 @@ function APIGetMarketNews(index, callback) {
         .catch(error => console.error(error));
 }
 
+function APIGetTickerNews(ticker, callback) {
+    axios.get('https://finnhub.io/api/v1/company-news?symbol='+ ticker +'&from=2021-11-10&to=2021-11-14&token=c5tho52ad3ifck7dg8fg')
+        .then(response => {
+            console.log(response.data);
+            let headline = response.data[0]["headline"];
+            let image = response.data[0]["image"];
+            let source = response.data[0]["source"];
+            let summary = response.data[0]["summary"];
+            let url = response.data[0]["url"];
+            callback({
+                "headline": headline,
+                "image": image,
+                "summary": summary,
+                "source": source,
+                "url": url,
+            });
+        })
+        .catch(error => console.error(error));
+}
+
 // Market News Section END
 
 // Gainers/Losers Section START
