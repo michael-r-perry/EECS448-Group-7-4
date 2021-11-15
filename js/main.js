@@ -6,11 +6,11 @@
  ***************************************************/
 
 let currencyHL;
-let crypto1;
-let crypto2;
-let crypto3;
-let crypto4;
-let crypto5;
+let crypto1 = new Currency("BTC");
+let crypto2 = new Currency("ETH");
+let crypto3 = new Currency("LTC");
+let crypto4 = new Currency("BNB");
+let crypto5 = new Currency("XRP");
 let currencies = [];
 let news = [];
 let graphNews = new News();
@@ -197,7 +197,7 @@ function updateCurrencyHLElements() {
     updateGraph();
     updateCompanyNews();
     updateMarketNews();
-    //updateCryptoBar();
+    updateCryptoBar();
 }
 
 /***************************************************
@@ -637,25 +637,25 @@ function updateNewsElement(index){
  * Crypto Bar Functions
  ***************************************************/
 function updateCryptoBar(){
-    APITodayQuoteCryptoData(crypto1.getTicker(), function(data) {
+    APITodayQuoteCryptoData("BINANCE:BTCUSDT", function(data) {
         crypto1.setQuoteData(data);
-        updateWatchListElement(1);
+        updateCryptoPrice(1);
     });
-    APITodayQuoteCryptoData(crypto2.getTicker(), function(data) {
+    APITodayQuoteCryptoData("BINANCE:ETHUSDT", function(data) {
         crypto2.setQuoteData(data);
-        updateWatchListElement(2);
+        updateCryptoPrice(2);
     });
-    APITodayQuoteCryptoData(crypto3.getTicker(), function(data) {
+    APITodayQuoteCryptoData("BINANCE:LTCUSDT", function(data) {
         crypto3.setQuoteData(data);
-        updateWatchListElement(3);
+        updateCryptoPrice(3);
     });
-    APITodayQuoteCryptoData(crypto4.getTicker(), function(data) {
+    APITodayQuoteCryptoData("BINANCE:BNBBUSD", function(data) {
         crypto4.setQuoteData(data);
-        updateWatchListElement(4);
+        updateCryptoPrice(4);
     });
-    APITodayQuoteCryptoData(crypto5.getTicker(), function(data) {
+    APITodayQuoteCryptoData("BINANCE:XRPUSDT", function(data) {
         crypto5.setQuoteData(data);
-        updateWatchListElement(5);
+        updateCryptoPrice(5);
     });
 }
 
@@ -668,25 +668,53 @@ function updateCryptoPrice(num){
     if(num == 1){
         newPrice = crypto1.getCurrentQuote();
         newPercent = crypto1.getDayPercentChange();
+        if(crypto1.getDayPercentValue() > 0){
+            document.getElementById("coin1-percent").style.color = "#00CC3A";
+        }
+        else {
+            document.getElementById("coin1-percent").style.color = "#FF0D2C";
+        }
     }
     else if(num == 2){
         newPrice = crypto2.getCurrentQuote();
         newPercent = crypto2.getDayPercentChange();
+        if(crypto2.getDayPercentValue() > 0){
+            document.getElementById("coin2-percent").style.color = "#00CC3A";
+        }
+        else {
+            document.getElementById("coin2-percent").style.color = "#FF0D2C";
+        }
     }
     else if(num == 3){
         newPrice = crypto3.getCurrentQuote();
         newPercent = crypto3.getDayPercentChange();
+        if(crypto3.getDayPercentValue() > 0){
+            document.getElementById("coin3-percent").style.color = "#00CC3A";
+        }
+        else {
+            document.getElementById("coin3-percent").style.color = "#FF0D2C";
+        }
     }
     else if(num == 4){
         newPrice = crypto4.getCurrentQuote();
         newPercent = crypto4.getDayPercentChange();
+        if(crypto4.getDayPercentValue() > 0){
+            document.getElementById("coin4-percent").style.color = "#00CC3A";
+        }
+        else {
+            document.getElementById("coin4-percent").style.color = "#FF0D2C";
+        }
     }
     else if(num == 5){
         newPrice = crypto5.getCurrentQuote();
         newPercent = crypto5.getDayPercentChange();
+        if(crypto5.getDayPercentValue() > 0){
+            document.getElementById("coin5-percent").style.color = "#00CC3A";
+        }
+        else {
+            document.getElementById("coin5-percent").style.color = "#FF0D2C";
+        }
     }
     document.getElementById(coinPrice).innerText = newPrice;
-    console.log(coinPrice);
-    console.log(newPrice);
     document.getElementById(coinPercent).innerText = newPercent;
 }

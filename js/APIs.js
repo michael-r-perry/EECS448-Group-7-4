@@ -86,16 +86,17 @@ function APIOneYearStockData(ticker, callback) {
 // Crypto Section START
 
 function APITodayQuoteCryptoData(ticker, callback) {
-    let now = new Date.now();
+    let now = Date.now();
     let morning = getUNIXMidnightMorning();
     axios.get('https://finnhub.io/api/v1/crypto/candle?symbol=' + ticker + '&resolution=1&from=' + morning + '&to=' + now + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
             console.log(response.data);
             // Current "c", DayChange "d", Percent Change "dp", open "o"
-            let current = response.data["c"].at(-1); // Last entry for closes
+            let current = response.data["c"][0]; // Last entry for closes
             let open = response.data["o"][0]; // First entry for opens
             let dayChange = current - open;
-            let percentChange = (dayChange / open) * 100;
+            let percentChange = Math.round((dayChange / open) * 10000);
+            percentChange = percentChange / 100;
             callback({
                 "c": current,
                 "d": dayChange,
@@ -272,21 +273,7 @@ function Search(input, callback){
         })
         .catch(error => console.error(error));
 }
-/*
-function Browse(){
 
-    console.log("searchBtn clicked or searchBar keydown == Enter!");
-    var query = document.getElementById("searchBtn").value;
-    const finnhub = require('finnhub');
-
-    const api_key = finnhub.ApiClient.instance.authentications['api_key'];
-    api_key.apiKey = "";
-    const finnhubClient = new finnhub.DefaultApi();
-
-    finnhubClient.symbolSearch(query, (data) => {console.log(data)});
-    return data;
-}
-*/
 ///////////////////////////////////////////////////////////
 // EXTRA FUNCTIONS: NEED TO BE DELETED BEFORE SUBMITTING //
 ///////////////////////////////////////////////////////////

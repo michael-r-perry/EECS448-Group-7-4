@@ -45,6 +45,10 @@ class Currency {
         return this.DayChange;
     }
 
+    getDayPercentValue() {
+        return this.DayPercentChange;
+    }
+
     getDayPercentChange() {
         let temp = "(" +this.DayPercentChange + "%)";
         return temp;
