@@ -71,6 +71,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //
+function setEmail(){
+    let tempEmail = prompt("Please enter your email:", "johndoe@aol.com");
+    if (tempEmail != null && tempEmail != "") {
+        email = tempEmail;
+        console.log(email);
+    }
+}
+
+//
 function handleGainerClick(index){
     if(index == 1){
         currencyHL = new Currency(gainer.getTicker(1));
