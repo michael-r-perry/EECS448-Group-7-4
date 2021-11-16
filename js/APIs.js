@@ -263,7 +263,7 @@ function Gainers(index, callback){
 
 // Search Section START
 
-const CRYPTO_EXCHANGES = ["ZB","HUOBI","OKEX","POLONIEX","GEMINI","BITFINEX","BITMEX","BINANCE","BITTREX","FXPIG","COINBASE","KUCOIN","HITBTC","KRAKEN"];
+const CRYPTO_EXCHANGES = ["ZB","HUOBI","OKEX","POLONIEX","GEMINI","BITFINEX","BITMEX","BINANCE","BITTREX","FXPIG","KUCOIN","HITBTC","KRAKEN"];
 
 function Search(input, callback) {
     if (isCrypto(input)) {
