@@ -1,3 +1,26 @@
+let oldDate = new Date();
+oldDate.setDate(oldDate.getDate() - 7);
+
+let newDate = new Date();
+oldDate.toISOString().split('T')[0];
+newDate.toISOString().split('T')[0];
+
+function formatDate(date) {
+    var fixDate = new Date(date),
+        month = '' + (fixDate.getMonth() + 1),
+        day = '' + fixDate.getDate(),
+        year = fixDate.getFullYear();
+    if(month.length < 2){
+        month = '0' + month;
+    }
+    if(day.length < 2){
+        day = '0' + day;
+    }
+    return [year, month, day].join('-');
+}
+console.log(formatDate(oldDate));
+console.log(formatDate(newDate));
+
 // Stocks Section START
 
 function APITodayQuoteStockData(ticker, callback) {
@@ -218,7 +241,7 @@ function APIGetMarketNews(index, callback) {
 }
 
 function APIGetTickerNews(ticker, callback) {
-    axios.get('https://finnhub.io/api/v1/company-news?symbol='+ ticker +'&from=2021-11-10&to=2021-11-14&token=c5tho52ad3ifck7dg8fg')
+    axios.get('https://finnhub.io/api/v1/company-news?symbol='+ ticker +'&from=' + formatDate(oldDate) + '&to=' + formatDate(newDate) + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
             console.log(response.data);
             let headline = response.data[0]["headline"];
