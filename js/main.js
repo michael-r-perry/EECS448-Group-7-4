@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCurrencyHLElements();
 
     // Email Notfication Check Interval
-    let emailCheckTimer = setInterval(function() { handleEmailNotification(); }, 60 * 1000);
+    //let emailCheckTimer = setInterval(function() { handleEmailNotification(); }, 60 * 1000);
 });
 
 //
@@ -843,7 +843,7 @@ function handleEmailNotification() {
     console.log("handleEmailNotfication function");
     let t = new Date();
     if (t.getHours() >= 15 && !isEmailSent) {
-        sendWatchListEmail(currencies, "michaelp018@gmail.com");
+        sendWatchListEmail(currencies, email);
         isEmailSent = true;
     }
     if (t.getHours() < 15 && isEmailSent) {
