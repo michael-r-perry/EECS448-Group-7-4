@@ -94,7 +94,7 @@ function APITodayQuoteCryptoData(ticker, callback) {
             // Current "c", DayChange "d", Percent Change "dp", open "o"
             let current = response.data["c"][0]; // Last entry for closes
             let open = response.data["o"][0]; // First entry for opens
-            let dayChange = current - open;
+            let dayChange = Math.round((current - open) * 10000) / 10000;
             let percentChange = Math.round((dayChange / open) * 10000);
             percentChange = percentChange / 100;
             callback({
@@ -262,17 +262,49 @@ function Gainers(index, callback){
 // Gainers/Losers Section END
 
 // Search Section START
-function Search(input, callback){
-    axios.get('https://finnhub.io/api/v1/search?q=' + input +'&token=c5tho52ad3ifck7dg8fg')
-        .then(response => {
-            console.log(response.data);
-            let ticker = response.data["result"][0]["symbol"];
-            callback({
-                "ticker": ticker,
+
+const CRYPTO_EXCHANGES = ["ZB","HUOBI","OKEX","POLONIEX","GEMINI","BITFINEX","BITMEX","BINANCE","BITTREX","FXPIG","COINBASE","KUCOIN","HITBTC","KRAKEN"];
+
+function Search(input, callback) {
+    if (isCrypto(input)) {
+        let exchange = input.split(":")[0];
+        if (CRYPTO_EXCHANGES.includes(exchange)) {
+            axios.get('https://finnhub.io/api/v1/crypto/symbol?exchange=' + exchange + '&token=c5tho52ad3ifck7dg8fg')
+                .then(response => {
+                    console.log(response.data);
+                    let found = false;
+                    for (let i = 0; i < response.data.length; i++) {
+                        if (response.data[i]["symbol"] == input) {
+                            found = true;
+                            callback({
+                                "ticker": input
+                            });
+                        }
+                    }
+                    if (!found) {
+                        alert("Not a valid crypto ticker for exchange: ", exchange);
+                        callback();
+                    }
+                })
+                .catch(error => console.error(error));
+        } else {
+            alert("Not a valid crypto exchange! Please you from the list provided: " + CRYPTO_EXCHANGES.toString());
+            callback();
+        }
+    } else {
+        axios.get('https://finnhub.io/api/v1/search?q=' + input +'&token=c5tho52ad3ifck7dg8fg')
+            .then(response => {
+                console.log(response.data);
+                let ticker = response.data["result"][0]["symbol"];
+                callback({
+                    "ticker": ticker,
+                })
             })
-        })
-        .catch(error => console.error(error));
+            .catch(error => console.error(error));
+    }
 }
+
+// Search Section END
 
 ///////////////////////////////////////////////////////////
 // EXTRA FUNCTIONS: NEED TO BE DELETED BEFORE SUBMITTING //

@@ -17,7 +17,6 @@ let graphNews = new News();
 const BASE_WATCH_LIST = ["AAPL", "AMZN", "TSLA", "TMUS", "TWTR"];
 let graphTimespan; // "1Day", "5Day", "1Month", "3Month", "6Month", "1Year"
 let graphChart;
-const CRYPTO_EXCHANGES = ["ZB","HUOBI","OKEX","POLONIEX","GEMINI","BITFINEX","BITMEX","BINANCE","BITTREX","FXPIG","COINBASE","KUCOIN","HITBTC","KRAKEN"];
 
 /***************************************************
  * Event Listener Functions
@@ -145,13 +144,20 @@ function handle1YearBtnClick(e) {
  */
 function handleSearchBtnClick() {
     console.log("searchBtn clicked or searchBar keydown == Enter!");
-    var query = document.getElementById("searchBar").value;
+    let query = document.getElementById("searchBar").value;
+    console.log(query);
     Search(query, function(data) {
-        if (currencyHL.getTicker() != data["ticker"]) {
-            currencyHL = new Currency(data["ticker"]);
-            updateCurrencyHLElements();
-        } else {
-            console.log("No change, same ticker");
+        console.log("IN Search Callback");
+        if (data)
+        {
+            if (currencyHL.getTicker() != data["ticker"]) {
+                currencyHL = new Currency(data["ticker"]);
+                updateCurrencyHLElements();
+                document.getElementById("searchBar").value = "";
+            } else {
+                console.log("No change, same ticker");
+                document.getElementById("searchBar").value = "";
+            }
         }
     })
 }
@@ -163,7 +169,7 @@ function handleSearchBtnClick() {
  */
 function handleWatchListClick(e) {
     let id;
-    if(e.target && e.target.nodeName == "A")          { id = e.target.id; }
+    if (e.target && e.target.nodeName == "A")         { id = e.target.id; }
     else if (e.target && e.target.nodeName == "SPAN") { id = e.target.parentElement.id; }
 
     if (id) {
@@ -376,10 +382,12 @@ function updateGraphHeaderElements() {
 
 // Update Graph Info Section
 function updateGraphInfo() {
-    APIGetTickerInfo(currencyHL.getTicker(), function(data) {
-        currencyHL.setTickerInfo(data);
-        updateTickerInfo();
-    });
+    if (!isCrypto(currencyHL.getTicker())) {
+        APIGetTickerInfo(currencyHL.getTicker(), function(data) {
+            currencyHL.setTickerInfo(data);
+            updateTickerInfo();
+        });
+    }
 }
 
 function updateTickerInfo() {
