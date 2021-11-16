@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     crypto4 = new Currency("BNB");
     crypto5 = new Currency("XRP");
     graphTimespan = "1Day";
-    updateGainers();
+    //updateGainers();
     updateMarketNews();
     updateCryptoBar();
     updateCurrencyHLElements();
