@@ -1,6 +1,6 @@
 function sendWatchListEmail(currencies, email) {
-    let curMessages = currencies.map(cur => "--" + cur.getTicker() + ":\n----Close: " + cur.getCurrentQuote() + "\n----Day Change: " + cur.getDayChange() + "\n----Day Percent Change: " + cur.getDayPercentChange() + "\n");
-    let message = curMessage.join("");
+    let curMessages = currencies.map(cur => "<p>--" + cur.getTicker() + ":<br>----Close: $" + cur.getCurrentQuote() + "<br>----Day Change: " + cur.getDayChange() + "<br>----Day Percent Change: " + cur.getDayPercentChange() + "<br><p>");
+    let message = curMessages.join("");
     let templateParams = {
         email_to: email,
         message: message
