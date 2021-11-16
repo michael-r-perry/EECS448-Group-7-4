@@ -92,7 +92,7 @@ function APITodayQuoteCryptoData(ticker, callback) {
         .then(response => {
             console.log(response.data);
             // Current "c", DayChange "d", Percent Change "dp", open "o"
-            let current = response.data["c"][0]; // Last entry for closes
+            let current = response.data["c"].at(-1); // Last entry for closes
             let open = response.data["o"][0]; // First entry for opens
             let dayChange = Math.round((current - open) * 10000) / 10000;
             let percentChange = Math.round((dayChange / open) * 10000);
