@@ -57,6 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
     crypto5 = new Currency("XRP");
     graphTimespan = "1Day";
     updateGainers();
+    updateMarketNews();
+    updateCryptoBar();
     updateCurrencyHLElements();
 });
 
@@ -203,8 +205,6 @@ function updateCurrencyHLElements() {
     updateGraphInfo();
     updateGraph();
     updateCompanyNews();
-    updateMarketNews();
-    updateCryptoBar();
 }
 
 /***************************************************
@@ -537,14 +537,15 @@ function updateGraphElements() {
 }
 let gainer = [];
 function updateGainers(){
-gainer.push(new marketData());
-gainer.push(new marketData());
-gainer.push(new marketData());
-Gainers(0,function(data) {
-    gainer[0].setMarketData(data);
-    updateGainerHTML(0)
-  });
+    gainer.push(new marketData());
+    gainer.push(new marketData());
+    gainer.push(new marketData());
+    Gainers(0,function(data) {
+        gainer[0].setMarketData(data);
+        updateGainerHTML(0)
+    });
 }
+
 function updateGainerHTML(index){
    if(index == 0){
      document.getElementById("stock-name1").innerText = gainer[index].getTicker();
