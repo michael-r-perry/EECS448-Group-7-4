@@ -17,7 +17,7 @@ body{
     min-height: 100vh;
     width: 100%;
     overflow: hidden;
-    background: #F2F2F2;
+    background: #030303;
 }
 
 header {
@@ -26,13 +26,13 @@ header {
     align-items: center;
     padding: 30px 10%;
     border-radius: 27px;
-    background: #0B111F;
+    background: #0A0A0A;
     height: 7%;
     width: 90%;
     top: 1%;
     left: 5%;
     position: fixed;
-    box-shadow: 0px 4px 8px grey;
+    box-shadow: 0px 4px 8px black;
     z-index: 99;
 }
 
@@ -71,7 +71,7 @@ header .header-search input{
     padding-left: 14%;
     font-size: 34px;
     font-weight: 500;
-    color: #0B111F;
+    color: #0A0A0A;
     display: inline-block;
 }
 
@@ -82,7 +82,7 @@ header .header-search .bx-search{
     padding-left: 3%;
     padding-top: 1%;
     z-index: 99;
-    color: #0B111F;
+    color: #0A0A0A;
     font-size: 36px;
     font-weight: 500;
     align-items: center;
@@ -125,7 +125,7 @@ header .header-settings a{
 
 header .header-settings a:hover{
     background: #fff;
-    color: #0B111F;
+    color: #030303;
 }
 
 #watch-highlight{
@@ -147,7 +147,7 @@ header .header-settings a:hover{
 
 #watch-div #watch-header{
     width: 100%;
-    color: #0B111F;
+    color: #fff;
     position: relative;
     align-items: center;
     vertical-align: middle;
@@ -159,9 +159,9 @@ header .header-settings a:hover{
 #watch-div ul{
     position: relative;
     height: 100%;
-    background: #C9D3DC;
+    background: #fff;
     border-radius: 15px;
-    box-shadow: 0px 4px 8px grey;
+    box-shadow: 0px 4px 8px black;
 }
 
 #watch-div ul li{
@@ -177,7 +177,7 @@ header .header-settings a:hover{
 
 #watch-div ul li a{
     font-weight: 600;
-    color: #0B111F;
+    color: #030303;
     display: flex;
     position: relative;
     align-items: center;
@@ -189,8 +189,8 @@ header .header-settings a:hover{
 }
 
 #watch-div ul li a:hover{
-    background: #fff;
-    color: #0B111F;
+    background: #E8E8E8;
+    color: #030303;
 }
 
 #watch-div ul{
@@ -201,7 +201,7 @@ header .header-settings a:hover{
 #watch-div ul li .bxs-plus-square{
     position: relative;
     z-index: 99;
-    color: #0B111F;
+    color: #030303;
     font-size: 32px;
     height: 50px;
     min-width: 95%;
@@ -242,7 +242,7 @@ header .header-settings a:hover{
 #graph-viewer #graph-header{
     font-size: 36px;
     font-weight: 600;
-    color: #0B111F;
+    color: #fff;
     user-select: none;
     align-items: center;
 }
@@ -259,13 +259,13 @@ header .header-settings a:hover{
 
 #graph-viewer #graph-header a:hover{
     background: #fff;
-    color: #0B111F;
+    color: #030303;
 }
 
 #graph-viewer #graph-header #graph-list-status{
     font-size: 18px;
-    background: #0B111F;
-    color: #fff;
+    background: #fff;
+    color: #030303;
     border-radius: 6px;
     user-select: none;
     position: relative;
@@ -282,19 +282,19 @@ header .header-settings a:hover{
 
 #graph-viewer #graph-body{
     margin-top: 5px;
-    background: #C9D3DC;
+    background: #fff;
     width: 100%;
     height: 100%;
     border-radius: 15px;
-    box-shadow: 0px 4px 8px grey;
+    box-shadow: 0px 4px 8px black;
 }
 
 #graph-viewer #graph-canvas{
     position: relative;
     display: inline-block;
-    width: 100%;
+    width: 95%;
     height: 500px;
-    background: #0B111F;
+    background: #E8E8E8;
     border-radius: 15px;
 }
 
@@ -320,7 +320,7 @@ header .header-settings a:hover{
     text-decoration: none;
     list-style: none;
     border-radius: 15px;
-    background: #0B111F;
+    background: #0A0A0A;
     vertical-align: top;
     align-content: center;
 }
@@ -341,7 +341,7 @@ header .header-settings a:hover{
 }
 
 #graph-viewer #graph-buttons ul li a:hover{
-    color: #0B111F;
+    color: #0A0A0A;
     background: #fff;
 }
 
@@ -358,7 +358,7 @@ header .header-settings a:hover{
     left: 3%;
     font-size: 36px;
     font-weight: 600;
-    color: #0B111F;
+    color: #030303;
     top: -55px;
 }
 
@@ -372,14 +372,14 @@ header .header-settings a:hover{
     font-size: 20px;
     font-weight: 600;
     color: #F2F2F2;
-    background-color: #0B111F;
+    background-color: #030303;
     border-radius: 4px;
     top: -50px;
 }
 
 #graph-news-header {
     position: relative;
-    color: #0B111F;
+    color: #030303;
     font-size: 28px;
     font-weight: 600;
     top: -150px;
@@ -403,7 +403,7 @@ header .header-settings a:hover{
     display: inline-block;
     left: 50%;
     top: -155px;
-    color: #0B111F;
+    color: #030303;
     font-size: 20px;
     font-weight: 600;
     width: 300px;
@@ -430,7 +430,7 @@ header .header-settings a:hover{
 
 #gain-lose #gain-lose-header{
     width: 100%;
-    color: #0B111F;
+    color: #fff;
     position: relative;
     align-items: center;
     vertical-align: middle;
@@ -442,9 +442,9 @@ header .header-settings a:hover{
 #gain-lose ul{
     position: relative;
     height: 100%;
-    background: #C9D3DC;
+    background: #fff;
     border-radius: 15px;
-    box-shadow: 0px 4px 8px grey;
+    box-shadow: 0px 4px 8px black;
 }
 
 #gain-lose ul li{
@@ -460,7 +460,7 @@ header .header-settings a:hover{
 
 #gain-lose ul li a{
     font-weight: 600;
-    color: #0B111F;
+    color: #030303;
     display: flex;
     position: relative;
     align-items: center;
@@ -472,13 +472,25 @@ header .header-settings a:hover{
 }
 
 #gain-lose ul li a:hover{
-    background: #fff;
-    color: #0B111F;
+    background: #E8E8E8;
+    color: #030303;
 }
 
 #gain-lose ul{
     position: relative;
     margin-top: 5px;
+}
+
+#gain-lose .gainer {
+    background-color:rgba(0, 204, 58, 0.5);
+    border-radius: 6px;
+    top: 5px;
+}
+
+#gain-lose .loser {
+    background-color: rgba(255, 13, 44, 0.5);
+    border-radius: 6px;
+    top: 5px;
 }
 
 #gain-lose ul li .stock-name{
@@ -512,7 +524,7 @@ header .header-settings a:hover{
 #market-news #market-news-header h1{
     font-size: 36px;
     font-weight: 600;
-    color: #0B111F;
+    color: #030303;
     user-select: none;
     align-items: center;
 }
@@ -528,25 +540,25 @@ header .header-settings a:hover{
 }
 
 #market-news #market-news-header a:hover{
-    background: #fff;
-    color: #0B111F;
+    background: #E8E8E8;
+    color: #030303;
 }
 
 #market-news #market-news-content{
     margin-top: 5px;
-    background: #C9D3DC;
+    background: #fff;
     width: 100%;
     height: 100%;
     border-radius: 15px;
-    box-shadow: 0px 4px 8px grey;
+    box-shadow: 0px 4px 8px black;
 }
 
 #market-news ul{
     position: relative;
     height: 100%;
-    background: #C9D3DC;
+    background: #fff;
     border-radius: 15px;
-    box-shadow: 0px 4px 8px grey;
+    box-shadow: 0px 4px 8px black;
 }
 
 #market-news ul li{
@@ -564,7 +576,7 @@ header .header-settings a:hover{
 
 #market-news ul li a{
     font-weight: 600;
-    color: #0B111F;
+    color: #030303;
     display: flex;
     position: relative;
     align-items: center;
@@ -595,8 +607,8 @@ header .header-settings a:hover{
 }
 
 #market-news ul li a:hover{
-    background: #fff;
-    color: #0B111F;
+    background: #E8E8E8;
+    color: #030303;
 }
 
 #market-news ul{
@@ -612,13 +624,13 @@ header .header-settings a:hover{
     align-items: center;
     padding: 30px 10%;
     border-radius: 27px;
-    background: #0B111F;
+    background: #0A0A0A;
     height: 125px;
     width: 90%;
     top: 1%;
     left: 5%;
     right: 5%;
-    box-shadow: 0px 4px 8px grey;
+    box-shadow: 0px 4px 8px black;
 }
 
 #crypto-bar a {

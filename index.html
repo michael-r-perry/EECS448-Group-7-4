@@ -27,6 +27,7 @@
   <script src="js/currency.js"></script>
   <script src="js/email.js"></script>
   <script src="js/news.js"></script>
+  <script src="js/marketData.js"></script>
   <script src="js/main.js"></script>
   <header>
     <div class="header-logo">
@@ -126,7 +127,6 @@
                         <img id="graph-news-img" class="graph-news-img" src="" alt="">
                         <span>&ensp;</span>
                         <span id="graph-news-headline" class="graph-news-headline"></span>
-                        <span id="graph-news-summary" class="graph-news-summary"></span>
                     </a>
                 </li>
             </ul>
@@ -171,103 +171,93 @@
         <div id="gain-lose">
           <h1 id="gain-lose-header">Top Gainers & Losers</h1>
           <ul id="gain-lose-list">
-            <li>
-                <a id="gainer1" href="#">
+            <li class="gainer">
+                <a id="gainer1" href="#" onclick="handleGainerClick(1)">
                     <span>&ensp;</span>
-                    <span class="stock-name1">AMZN</span><span>&emsp;</span>
-                    <span class="stock-price1">3,320.37</span><span>&emsp;</span>
-                    <span class="stock-change-usd1">-15.18</span><span>&ensp;</span>
-                    <span class="stock-change-percent1">(0.46%)</span><span>&ensp;</span>
-                    <span class="stock-timescale1">today</span>
-                </a>
-            </li>
-            <li>
-                <a id="APPL" href="#">
-                    <span>&ensp;</span>
-                    <span class="stock-name">APPL</span><span>&emsp;</span>
-                    <span class="stock-price">3,320.37</span><span>&emsp;</span>
-                    <span class="stock-change-usd">-15.18</span><span>&ensp;</span>
-                    <span class="stock-change-percent">(0.46%)</span><span>&ensp;</span>
+                    <span class="stock-name" id="stock-name1">LOADING...</span><span>&emsp;</span>
+                    <span class="stock-price" id="stock-price1"></span><span>&emsp;</span>
+                    <span class="stock-change-percent" id="stock-percent1"></span><span>&ensp;</span>
                     <span class="stock-timescale">today</span>
                 </a>
             </li>
-            <li>
-                <a id="TSLA" href="#">
+            <li class="gainer">
+                <a id="APPL" href="#" onclick="handleGainerClick(2)">
                     <span>&ensp;</span>
-                    <span class="stock-name">TSLA</span><span>&emsp;</span>
-                    <span class="stock-price">3,320.37</span><span>&emsp;</span>
-                    <span class="stock-change-usd">-15.18</span><span>&ensp;</span>
-                    <span class="stock-change-percent">(0.46%)</span><span>&ensp;</span>
+                    <span class="stock-name" id="stock-name2">LOADING...</span><span>&emsp;</span>
+                    <span class="stock-price" id="stock-price2"></span><span>&emsp;</span>
+                    <span class="stock-change-percent" id="stock-percent2"></span><span>&ensp;</span>
                     <span class="stock-timescale">today</span>
                 </a>
             </li>
-            <li>
-                <a id="TMUS" href="#">
+            <li class="gainer">
+                <a id="TSLA" href="#" onclick="handleGainerClick(3)">
                     <span>&ensp;</span>
-                    <span class="stock-name">TMUS</span><span>&emsp;</span>
-                    <span class="stock-price">3,320.37</span><span>&emsp;</span>
-                    <span class="stock-change-usd">-15.18</span><span>&ensp;</span>
-                    <span class="stock-change-percent">(0.46%)</span><span>&ensp;</span>
+                    <span class="stock-name" id="stock-name3">LOADING...</span><span>&emsp;</span>
+                    <span class="stock-price" id="stock-price3"></span><span>&emsp;</span>
+                    <span class="stock-change-percent" id="stock-percent3"></span><span>&ensp;</span>
                     <span class="stock-timescale">today</span>
                 </a>
             </li>
-            <li>
+            <li class="gainer">
+                <a id="TMUS" href="#" onclick="handleGainerClick(4)">
+                    <span>&ensp;</span>
+                    <span class="stock-name" id="stock-name4">LOADING...</span><span>&emsp;</span>
+                    <span class="stock-price" id="stock-price4"></span><span>&emsp;</span>
+                    <span class="stock-change-percent" id="stock-percent4"></span><span>&ensp;</span>
+                    <span class="stock-timescale">today</span>
+                </a>
+            </li>
+            <li class="gainer" onclick="handleGainerClick(5)">
                 <a id="TWTR" href="#">
                     <span>&ensp;</span>
-                    <span class="stock-name">TWTR</span><span>&emsp;</span>
-                    <span class="stock-price">3,320.37</span><span>&emsp;</span>
-                    <span class="stock-change-usd">-15.18</span><span>&ensp;</span>
-                    <span class="stock-change-percent">(0.46%)</span><span>&ensp;</span>
+                    <span class="stock-name" id="stock-name5">LOADING...</span><span>&emsp;</span>
+                    <span class="stock-price" id="stock-price5"></span><span>&emsp;</span>
+                    <span class="stock-change-percent" id="stock-percent5"></span><span>&ensp;</span>
                     <span class="stock-timescale">today</span>
                 </a>
             </li>
-            <li>
+            <li class="loser" onclick="handleLoserClick(1)">
                 <a href="#">
                     <span>&ensp;</span>
-                    <span class="stock-name">TWTR</span><span>&emsp;</span>
-                    <span class="stock-price">3,320.37</span><span>&emsp;</span>
-                    <span class="stock-change-usd">-15.18</span><span>&ensp;</span>
-                    <span class="stock-change-percent">(0.46%)</span><span>&ensp;</span>
+                    <span class="stock-name" id="stock-name6">LOADING...</span><span>&emsp;</span>
+                    <span class="stock-price" id="stock-price6"></span><span>&emsp;</span>
+                    <span class="stock-change-percent" id="stock-percent6"></span><span>&ensp;</span>
                     <span class="stock-timescale">today</span>
                 </a>
             </li>
-            <li>
+            <li class="loser" onclick="handleLoserClick(2)">
                 <a href="#">
                     <span>&ensp;</span>
-                    <span class="stock-name">TWTR</span><span>&emsp;</span>
-                    <span class="stock-price">3,320.37</span><span>&emsp;</span>
-                    <span class="stock-change-usd">-15.18</span><span>&ensp;</span>
-                    <span class="stock-change-percent">(0.46%)</span><span>&ensp;</span>
+                    <span class="stock-name" id="stock-name7">LOADING...</span><span>&emsp;</span>
+                    <span class="stock-price" id="stock-price7"></span><span>&emsp;</span>
+                    <span class="stock-change-percent" id="stock-percent7"></span><span>&ensp;</span>
                     <span class="stock-timescale">today</span>
                 </a>
             </li>
-            <li>
+            <li class="loser" onclick="handleLoserClick(3)">
                 <a href="#">
                     <span>&ensp;</span>
-                    <span class="stock-name">TWTR</span><span>&emsp;</span>
-                    <span class="stock-price">3,320.37</span><span>&emsp;</span>
-                    <span class="stock-change-usd">-15.18</span><span>&ensp;</span>
-                    <span class="stock-change-percent">(0.46%)</span><span>&ensp;</span>
+                    <span class="stock-name" id="stock-name8">LOADING...</span><span>&emsp;</span>
+                    <span class="stock-price" id="stock-price8"></span><span>&emsp;</span>
+                    <span class="stock-change-percent" id="stock-percent8"></span><span>&ensp;</span>
                     <span class="stock-timescale">today</span>
                 </a>
             </li>
-            <li>
+            <li class="loser" onclick="handleLoserClick(4)">
                 <a href="#">
                     <span>&ensp;</span>
-                    <span class="stock-name">TWTR</span><span>&emsp;</span>
-                    <span class="stock-price">3,320.37</span><span>&emsp;</span>
-                    <span class="stock-change-usd">-15.18</span><span>&ensp;</span>
-                    <span class="stock-change-percent">(0.46%)</span><span>&ensp;</span>
+                    <span class="stock-name" id="stock-name9">LOADING...</span><span>&emsp;</span>
+                    <span class="stock-price" id="stock-price9"></span><span>&emsp;</span>
+                    <span class="stock-change-percent" id="stock-percent9"></span><span>&ensp;</span>
                     <span class="stock-timescale">today</span>
                 </a>
             </li>
-            <li>
+            <li class="loser" onclick="handleLoserClick(5)">
                 <a href="#">
                     <span>&ensp;</span>
-                    <span class="stock-name">TWTR</span><span>&emsp;</span>
-                    <span class="stock-price">3,320.37</span><span>&emsp;</span>
-                    <span class="stock-change-usd">-15.18</span><span>&ensp;</span>
-                    <span class="stock-change-percent">(0.46%)</span><span>&ensp;</span>
+                    <span class="stock-name" id="stock-name10">LOADING...</span><span>&emsp;</span>
+                    <span class="stock-price" id="stock-price10"></span><span>&emsp;</span>
+                    <span class="stock-change-percent" id="stock-percent10"></span><span>&ensp;</span>
                     <span class="stock-timescale">today</span>
                 </a>
             </li>
