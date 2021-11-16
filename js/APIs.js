@@ -263,21 +263,121 @@ function APIGetTickerNews(ticker, callback) {
 // Market News Section END
 
 // Gainers/Losers Section START
-function Gainers(index, callback){
+function Gainers(callback){
     axios.get('https://financialmodelingprep.com/api/v3/stock/gainers?apikey=acfdeb7c7ae9b0f38163cbe9893f7673')
         .then(response => {
             console.log(response.data);
-            let ticker = response.data[index]["ticker"];
-            let changes = response.data[index]["changes"];
-            let price = response.data[index]["price"];
-            let changesPercentage = response.data[index]["changesPercentage"];
-            let companyName = response.data[index]["companyName"];
+            let ticker1 = response.data["mostGainerStock"][0]["ticker"];
+            let changes1 = response.data["mostGainerStock"][0]["changes"];
+            let price1 = response.data["mostGainerStock"][0]["price"];
+            let changesPercentage1 = response.data["mostGainerStock"][0]["changesPercentage"];
+            let companyName1 = response.data["mostGainerStock"][0]["companyName"];
+            let ticker2 = response.data["mostGainerStock"][1]["ticker"];
+            let changes2 = response.data["mostGainerStock"][1]["changes"];
+            let price2 = response.data["mostGainerStock"][1]["price"];
+            let changesPercentage2 = response.data["mostGainerStock"][1]["changesPercentage"];
+            let companyName2 = response.data["mostGainerStock"][1]["companyName"];
+            let ticker3 = response.data["mostGainerStock"][2]["ticker"];
+            let changes3 = response.data["mostGainerStock"][2]["changes"];
+            let price3 = response.data["mostGainerStock"][2]["price"];
+            let changesPercentage3 = response.data["mostGainerStock"][2]["changesPercentage"];
+            let companyName3 = response.data["mostGainerStock"][2]["companyName"];
+            let ticker4 = response.data["mostGainerStock"][3]["ticker"];
+            let changes4 = response.data["mostGainerStock"][3]["changes"];
+            let price4 = response.data["mostGainerStock"][3]["price"];
+            let changesPercentage4 = response.data["mostGainerStock"][3]["changesPercentage"];
+            let companyName4 = response.data["mostGainerStock"][3]["companyName"];
+            let ticker5 = response.data["mostGainerStock"][4]["ticker"];
+            let changes5 = response.data["mostGainerStock"][4]["changes"];
+            let price5 = response.data["mostGainerStock"][4]["price"];
+            let changesPercentage5 = response.data["mostGainerStock"][4]["changesPercentage"];
+            let companyName5 = response.data["mostGainerStock"][4]["companyName"];
             callback({
-                "ticker": ticker,
-                "changes": changes,
-                "price": price,
-                "changesPercentage": changesPercentage,
-                "companyName": companyName,
+                "ticker1": ticker1,
+                "changes1": changes1,
+                "price1": price1,
+                "changesPercentage1": changesPercentage1,
+                "companyName1": companyName1,
+                "ticker2": ticker2,
+                "changes2": changes2,
+                "price2": price2,
+                "changesPercentage2": changesPercentage2,
+                "companyName2": companyName2,
+                "ticker3": ticker3,
+                "changes3": changes3,
+                "price3": price3,
+                "changesPercentage3": changesPercentage3,
+                "companyName3": companyName3,
+                "ticker4": ticker4,
+                "changes4": changes4,
+                "price4": price4,
+                "changesPercentage4": changesPercentage4,
+                "companyName4": companyName4,
+                "ticker5": ticker5,
+                "changes5": changes5,
+                "price5": price5,
+                "changesPercentage5": changesPercentage5,
+                "companyName5": companyName5,
+            });
+        })
+        .catch(error => console.error(error));
+}
+
+function Losers(callback){
+    axios.get('https://financialmodelingprep.com/api/v3/stock/losers?apikey=acfdeb7c7ae9b0f38163cbe9893f7673')
+        .then(response => {
+            console.log(response.data);
+            let ticker6 = response.data["mostLoserStock"][0]["ticker"];
+            let changes6 = response.data["mostLoserStock"][0]["changes"];
+            let price6 = response.data["mostLoserStock"][0]["price"];
+            let changesPercentage6 = response.data["mostLoserStock"][0]["changesPercentage"];
+            let companyName6 = response.data["mostLoserStock"][0]["companyName"];
+            let ticker7 = response.data["mostLoserStock"][1]["ticker"];
+            let changes7 = response.data["mostLoserStock"][1]["changes"];
+            let price7 = response.data["mostLoserStock"][1]["price"];
+            let changesPercentage7 = response.data["mostLoserStock"][1]["changesPercentage"];
+            let companyName7 = response.data["mostLoserStock"][1]["companyName"];
+            let ticker8 = response.data["mostLoserStock"][2]["ticker"];
+            let changes8 = response.data["mostLoserStock"][2]["changes"];
+            let price8 = response.data["mostLoserStock"][2]["price"];
+            let changesPercentage8 = response.data["mostLoserStock"][2]["changesPercentage"];
+            let companyName8 = response.data["mostLoserStock"][2]["companyName"];
+            let ticker9 = response.data["mostLoserStock"][3]["ticker"];
+            let changes9 = response.data["mostLoserStock"][3]["changes"];
+            let price9 = response.data["mostLoserStock"][3]["price"];
+            let changesPercentage9 = response.data["mostLoserStock"][3]["changesPercentage"];
+            let companyName9 = response.data["mostLoserStock"][3]["companyName"];
+            let ticker10 = response.data["mostLoserStock"][4]["ticker"];
+            let changes10 = response.data["mostLoserStock"][4]["changes"];
+            let price10 = response.data["mostLoserStock"][4]["price"];
+            let changesPercentage10 = response.data["mostLoserStock"][4]["changesPercentage"];
+            let companyName10 = response.data["mostLoserStock"][4]["companyName"];
+            callback({
+                "ticker1": ticker6,
+                "changes1": changes6,
+                "price1": price6,
+                "changesPercentage1": changesPercentage6,
+                "companyName1": companyName6,
+                "ticker2": ticker7,
+                "changes2": changes7,
+                "price2": price7,
+                "changesPercentage2": changesPercentage7,
+                "companyName2": companyName7,
+                "ticker3": ticker8,
+                "changes3": changes8,
+                "price3": price8,
+                "changesPercentage3": changesPercentage8,
+                "companyName3": companyName8,
+                "ticker4": ticker9,
+                "changes4": changes9,
+                "price4": price9,
+                "changesPercentage4": changesPercentage9,
+                "companyName4": companyName9,
+                "ticker5": ticker10,
+                "changes5": changes10,
+                "price5": price10,
+                "changesPercentage5": changesPercentage10,
+                "companyName5": companyName10,
             });
         })
         .catch(error => console.error(error));

@@ -47,6 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Event Listener for Add/Remove from Watch List Button
     document.getElementById("graph-list-status").addEventListener("click", (e) => handleToggleWatchListClick(e));
 
+    // Event Listener for Gainer/Loser List
+
+
     // Currency Objects
     BASE_WATCH_LIST.map(ticker => addToWatchList(ticker)); // Adds each ticker to currencies and adds an li tag to the watchlist ul
     currencyHL = new Currency("AAPL");
@@ -56,14 +59,58 @@ document.addEventListener("DOMContentLoaded", () => {
     crypto4 = new Currency("BNB");
     crypto5 = new Currency("XRP");
     graphTimespan = "1Day";
-<<<<<<< HEAD
-=======
-    //updateGainers();
     updateMarketNews();
     updateCryptoBar();
->>>>>>> cb700771e48996a57385c66c5562c290e9952869
+    updateGainersLosers();
     updateCurrencyHLElements();
 });
+
+//
+function handleGainerClick(index){
+    if(index == 1){
+        currencyHL = new Currency(gainer.getTicker(1));
+        updateCurrencyHLElements();
+    }
+    if(index == 2){
+        currencyHL = new Currency(gainer.getTicker(2));
+        updateCurrencyHLElements();
+    }
+    if(index == 3){
+        currencyHL = new Currency(gainer.getTicker(3));
+        updateCurrencyHLElements();
+    }
+    if(index == 4){
+        currencyHL = new Currency(gainer.getTicker(4));
+        updateCurrencyHLElements();
+    }
+    if(index == 5){
+        currencyHL = new Currency(gainer.getTicker(5));
+        updateCurrencyHLElements();
+    }
+}
+
+function handleLoserClick(index){
+    if(index == 1){
+        currencyHL = new Currency(loser.getTicker(1));
+        updateCurrencyHLElements();
+    }
+    if(index == 2){
+        currencyHL = new Currency(loser.getTicker(2));
+        updateCurrencyHLElements();
+    }
+    if(index == 3){
+        currencyHL = new Currency(loser.getTicker(3));
+        updateCurrencyHLElements();
+    }
+    if(index == 4){
+        currencyHL = new Currency(loser.getTicker(4));
+        updateCurrencyHLElements();
+    }
+    if(index == 5){
+        currencyHL = new Currency(loser.getTicker(5));
+        updateCurrencyHLElements();
+    }
+}
 
 // Event Listener Function for 1 Day Button
 /**
@@ -208,12 +255,6 @@ function updateCurrencyHLElements() {
     updateGraphInfo();
     updateGraph();
     updateCompanyNews();
-<<<<<<< HEAD
-    updateMarketNews();
-    updateCryptoBar();
-    updateGainers();
-=======
->>>>>>> cb700771e48996a57385c66c5562c290e9952869
 }
 
 /***************************************************
@@ -272,7 +313,7 @@ function addWatchListElement(index) {
     spanName.className = "stock-name";
     spanName.appendChild(name);
     let spanPrice = document.createElement("span");
-    let price = document.createTextNode(currencies[index].getCurrentQuote());
+    let price = document.createTextNode("$" + currencies[index].getCurrentQuote());
     spanPrice.className = "stock-price";
     spanPrice.id = ticker + "-price";
     spanPrice.appendChild(price);
@@ -373,7 +414,7 @@ function updateGraphHeader() {
 
 function updateGraphHeaderElements() {
     document.getElementById("graph-stock-name").innerText = currencyHL.getTicker();
-    document.getElementById("graph-price").innerText = currencyHL.getCurrentQuote();
+    document.getElementById("graph-price").innerText = "$" + currencyHL.getCurrentQuote();
     document.getElementById("graph-change-usd").innerText = currencyHL.getDayChange();
     document.getElementById("graph-change-percent").innerText = currencyHL.getDayPercentChange();
     if (currencyHL.getDayChange() < 0) {
@@ -544,21 +585,63 @@ function updateGraphElements() {
         data: data
     });
 }
-let gainer = [];
+
+let gainer = new marketData();
+let loser = new marketData();
+
 function updateGainers(){
-    gainer.push(new marketData());
-    gainer.push(new marketData());
-    gainer.push(new marketData());
-    Gainers(0,function(data) {
-        gainer[0].setMarketData(data);
-        updateGainerHTML(0)
+    Gainers(function(data) {
+        console.log(data);
+        gainer.setMarketData(data);
     });
 }
 
-function updateGainerHTML(index){
-   if(index == 0){
-     document.getElementById("stock-name1").innerText = gainer[index].getTicker();
-   }
+function updateLosers(){
+    Losers(function(data) {
+        console.log(data);
+        loser.setMarketData(data);
+    });
+}
+
+function updateGainersLosers(){
+    updateGainers();
+    updateLosers();
+    setTimeout(() => {
+        updateGainerLoserHTML()
+    }, 4000);
+}
+
+function updateGainerLoserHTML(){
+    document.getElementById("stock-name1").innerText = gainer.getTicker(1);
+    document.getElementById("stock-price1").innerText = "$" + gainer.getPrice(1);
+    document.getElementById("stock-percent1").innerText = "(" +  gainer.getChangesPercentage(1) + ")";
+    document.getElementById("stock-name2").innerText = gainer.getTicker(2);
+    document.getElementById("stock-price2").innerText = "$" + gainer.getPrice(2);
+    document.getElementById("stock-percent2").innerText = "(" +  gainer.getChangesPercentage(2) + ")";
+    document.getElementById("stock-name3").innerText = gainer.getTicker(3);
+    document.getElementById("stock-price3").innerText = "$" + gainer.getPrice(3);
+    document.getElementById("stock-percent3").innerText = "(" +  gainer.getChangesPercentage(3) + ")";
+    document.getElementById("stock-name4").innerText = gainer.getTicker(4);
+    document.getElementById("stock-price4").innerText = "$" + gainer.getPrice(4);
+    document.getElementById("stock-percent4").innerText = "(" +  gainer.getChangesPercentage(4) + ")";
+    document.getElementById("stock-name5").innerText = gainer.getTicker(5);
+    document.getElementById("stock-price5").innerText = "$" + gainer.getPrice(5);
+    document.getElementById("stock-percent5").innerText = "(" + gainer.getChangesPercentage(5) + ")";
+    document.getElementById("stock-name6").innerText = loser.getTicker(1);
+    document.getElementById("stock-price6").innerText = "$" + loser.getPrice(1);
+    document.getElementById("stock-percent6").innerText = "(" + loser.getChangesPercentage(1) + ")";
+    document.getElementById("stock-name7").innerText = loser.getTicker(2);
+    document.getElementById("stock-price7").innerText = "$" + loser.getPrice(2);
+    document.getElementById("stock-percent7").innerText = "(" +  loser.getChangesPercentage(2) + ")";
+    document.getElementById("stock-name8").innerText = loser.getTicker(3);
+    document.getElementById("stock-price8").innerText = "$" + loser.getPrice(3);
+    document.getElementById("stock-percent8").innerText = "(" +  loser.getChangesPercentage(3) + ")";
+    document.getElementById("stock-name9").innerText = loser.getTicker(4);
+    document.getElementById("stock-price9").innerText = "$" + loser.getPrice(4);
+    document.getElementById("stock-percent9").innerText = "(" +  loser.getChangesPercentage(4) + ")";
+    document.getElementById("stock-name10").innerText = loser.getTicker(5);
+    document.getElementById("stock-price10").innerText = "$" + loser.getPrice(5);
+    document.getElementById("stock-percent10").innerText = "(" +  loser.getChangesPercentage(5) + ")";
 }
 
 /***************************************************
@@ -581,7 +664,7 @@ function updateCompanyNewsElement(){
     document.getElementById("graph-news-headline").innerText = graphNews.getHeadline();
     document.getElementById("graph-news-img").src = graphNews.getImage();
     //document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
-    document.getElementById("graph-news-summary").innerText = graphNews.getSummary();
+    //document.getElementById("graph-news-summary").innerText = graphNews.getSummary();
     document.getElementById("graph-news-link").href = graphNews.getUrl();
 }
 
@@ -734,6 +817,6 @@ function updateCryptoPrice(num){
             document.getElementById("coin5-percent").style.color = "#FF0D2C";
         }
     }
-    document.getElementById(coinPrice).innerText = newPrice;
+    document.getElementById(coinPrice).innerText = "$" + newPrice;
     document.getElementById(coinPercent).innerText = newPercent;
 }
