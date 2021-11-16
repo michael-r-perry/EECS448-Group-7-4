@@ -17,6 +17,8 @@ let graphNews = new News();
 const BASE_WATCH_LIST = ["AAPL", "AMZN", "TSLA", "TMUS", "TWTR"];
 let graphTimespan; // "1Day", "5Day", "1Month", "3Month", "6Month", "1Year"
 let graphChart;
+let email = "michaelp018@gmail.com";
+let isEmailSent = false;
 
 /***************************************************
  * Event Listener Functions
@@ -819,4 +821,20 @@ function updateCryptoPrice(num){
     }
     document.getElementById(coinPrice).innerText = "$" + newPrice;
     document.getElementById(coinPercent).innerText = newPercent;
+}
+
+/***************************************************
+ * Email Notification Functions
+ ***************************************************/
+
+function handleEmailNotification() {
+    console.log("handleEmailNotfication function");
+    let t = new Date();
+    if (t.getHours() >= 15 && !isEmailSent) {
+        sendWatchListEmail(currencies, "michaelp018@gmail.com");
+        isEmailSent = true;
+    }
+    if (t.getHours() < 15 && isEmailSent) {
+        isEmailSent = false;
+    }
 }
