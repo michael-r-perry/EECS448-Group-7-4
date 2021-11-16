@@ -5,19 +5,7 @@ let newDate = new Date();
 oldDate.toISOString().split('T')[0];
 newDate.toISOString().split('T')[0];
 
-function formatDate(date) {
-    var fixDate = new Date(date),
-        month = '' + (fixDate.getMonth() + 1),
-        day = '' + fixDate.getDate(),
-        year = fixDate.getFullYear();
-    if(month.length < 2){
-        month = '0' + month;
-    }
-    if(day.length < 2){
-        day = '0' + day;
-    }
-    return [year, month, day].join('-');
-}
+
 console.log(formatDate(oldDate));
 console.log(formatDate(newDate));
 

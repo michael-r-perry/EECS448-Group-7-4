@@ -49,6 +49,20 @@ function UNIXtoISOConversion(unix) {
     return new Date(unix * 1000).toISOString();
 }
 
+function formatDate(date) {
+    var fixDate = new Date(date),
+        month = '' + (fixDate.getMonth() + 1),
+        day = '' + fixDate.getDate(),
+        year = fixDate.getFullYear();
+    if(month.length < 2){
+        month = '0' + month;
+    }
+    if(day.length < 2){
+        day = '0' + day;
+    }
+    return [year, month, day].join('-');
+}
+
 function CreateBackgroundColors(num) {
     let x = 0;
     let colors = [ 

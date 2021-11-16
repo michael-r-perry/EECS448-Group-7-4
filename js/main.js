@@ -65,6 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCryptoBar();
     updateGainersLosers();
     updateCurrencyHLElements();
+
+    // Email Notfication Check Interval
+    let emailCheckTimer = setInterval(function() { handleEmailNotification(); }, 60 * 1000);
 });
 
 //
