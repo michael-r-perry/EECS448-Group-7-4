@@ -626,36 +626,36 @@ function updateGainersLosers(){
 }
 
 function updateGainerLoserHTML(){
-    document.getElementById("stock-name1").innerText = gainer.getTicker(1);
+    document.getElementById("stock-name1").innerText = "1: " + gainer.getTicker(1);
     document.getElementById("stock-price1").innerText = "$" + gainer.getPrice(1);
-    document.getElementById("stock-percent1").innerText = "(" +  gainer.getChangesPercentage(1) + ")";
-    document.getElementById("stock-name2").innerText = gainer.getTicker(2);
+    document.getElementById("stock-percent1").innerText = "(" +  gainer.getChangesPercentage(1) + "%)";
+    document.getElementById("stock-name2").innerText = "2: " + gainer.getTicker(2);
     document.getElementById("stock-price2").innerText = "$" + gainer.getPrice(2);
-    document.getElementById("stock-percent2").innerText = "(" +  gainer.getChangesPercentage(2) + ")";
-    document.getElementById("stock-name3").innerText = gainer.getTicker(3);
+    document.getElementById("stock-percent2").innerText = "(" +  gainer.getChangesPercentage(2) + "%)";
+    document.getElementById("stock-name3").innerText = "3: " + gainer.getTicker(3);
     document.getElementById("stock-price3").innerText = "$" + gainer.getPrice(3);
-    document.getElementById("stock-percent3").innerText = "(" +  gainer.getChangesPercentage(3) + ")";
-    document.getElementById("stock-name4").innerText = gainer.getTicker(4);
+    document.getElementById("stock-percent3").innerText = "(" +  gainer.getChangesPercentage(3) + "%)";
+    document.getElementById("stock-name4").innerText = "4: " + gainer.getTicker(4);
     document.getElementById("stock-price4").innerText = "$" + gainer.getPrice(4);
-    document.getElementById("stock-percent4").innerText = "(" +  gainer.getChangesPercentage(4) + ")";
-    document.getElementById("stock-name5").innerText = gainer.getTicker(5);
+    document.getElementById("stock-percent4").innerText = "(" +  gainer.getChangesPercentage(4) + "%)";
+    document.getElementById("stock-name5").innerText = "5: " + gainer.getTicker(5);
     document.getElementById("stock-price5").innerText = "$" + gainer.getPrice(5);
-    document.getElementById("stock-percent5").innerText = "(" + gainer.getChangesPercentage(5) + ")";
-    document.getElementById("stock-name6").innerText = loser.getTicker(1);
+    document.getElementById("stock-percent5").innerText = "(" + gainer.getChangesPercentage(5) + "%)";
+    document.getElementById("stock-name6").innerText = "1: " + loser.getTicker(1);
     document.getElementById("stock-price6").innerText = "$" + loser.getPrice(1);
-    document.getElementById("stock-percent6").innerText = "(" + loser.getChangesPercentage(1) + ")";
-    document.getElementById("stock-name7").innerText = loser.getTicker(2);
+    document.getElementById("stock-percent6").innerText = "(" + loser.getChangesPercentage(1) + "%)";
+    document.getElementById("stock-name7").innerText = "2: " + loser.getTicker(2);
     document.getElementById("stock-price7").innerText = "$" + loser.getPrice(2);
-    document.getElementById("stock-percent7").innerText = "(" +  loser.getChangesPercentage(2) + ")";
-    document.getElementById("stock-name8").innerText = loser.getTicker(3);
+    document.getElementById("stock-percent7").innerText = "(" +  loser.getChangesPercentage(2) + "%)";
+    document.getElementById("stock-name8").innerText = "3: " + loser.getTicker(3);
     document.getElementById("stock-price8").innerText = "$" + loser.getPrice(3);
-    document.getElementById("stock-percent8").innerText = "(" +  loser.getChangesPercentage(3) + ")";
-    document.getElementById("stock-name9").innerText = loser.getTicker(4);
+    document.getElementById("stock-percent8").innerText = "(" +  loser.getChangesPercentage(3) + "%)";
+    document.getElementById("stock-name9").innerText = "4: " + loser.getTicker(4);
     document.getElementById("stock-price9").innerText = "$" + loser.getPrice(4);
-    document.getElementById("stock-percent9").innerText = "(" +  loser.getChangesPercentage(4) + ")";
-    document.getElementById("stock-name10").innerText = loser.getTicker(5);
+    document.getElementById("stock-percent9").innerText = "(" +  loser.getChangesPercentage(4) + "%)";
+    document.getElementById("stock-name10").innerText = "5: " + loser.getTicker(5);
     document.getElementById("stock-price10").innerText = "$" + loser.getPrice(5);
-    document.getElementById("stock-percent10").innerText = "(" +  loser.getChangesPercentage(5) + ")";
+    document.getElementById("stock-percent10").innerText = "(" +  loser.getChangesPercentage(5) + "%)";
 }
 
 /***************************************************

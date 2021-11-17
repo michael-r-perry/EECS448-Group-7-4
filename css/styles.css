@@ -460,14 +460,15 @@ header .header-settings a:hover{
 
 #gain-lose ul li a{
     font-weight: 600;
+    top: -5px;
     color: #030303;
     display: flex;
     position: relative;
     align-items: center;
     text-decoration: none;
     transition: all 0.4s ease;
-    border-radius: 15px;
-    height: 100%;
+    border-radius: 6px;
+    height: 60px;
     user-select: none;
 }
 
