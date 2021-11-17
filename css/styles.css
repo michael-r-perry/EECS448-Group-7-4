@@ -255,6 +255,7 @@ header .header-settings a:hover{
     border-radius: 6px;
     user-select: none;
     align-items: center;
+
 }
 
 #graph-viewer #graph-header a:hover{
