@@ -107,8 +107,9 @@ function getIndexOfTicker(currencies, ticker) {
             return i;
         }
     }
-    return 0;
+    return -1;
 }
+
 function isTickerInWatchList(currencies, ticker) {
     for (let i = 0; i < currencies.length; i++) {
         if (currencies[i].getTicker() == ticker) {
