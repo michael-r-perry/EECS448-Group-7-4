@@ -27,8 +27,6 @@ let isEmailSent = false;
 // DOMContentLoaded
 // Set up event listeners, then pull and initialize data for UI
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOMContentLoaded test")
-
     // Event Listener for Graph Buttons
     document.getElementById("day-btn").addEventListener("click", (e) => handle1DayBtnClick(e));
     document.getElementById("five-day-btn").addEventListener("click", (e) => handle5DayBtnClick(e));
@@ -75,7 +73,6 @@ function setEmail(){
     let tempEmail = prompt("Please enter your email:", "johndoe@aol.com");
     if (tempEmail != null && tempEmail != "") {
         email = tempEmail;
-        console.log(email);
     }
 }
 
@@ -132,7 +129,6 @@ function handleLoserClick(index){
  * @param {*} e
  */
 function handle1DayBtnClick(e) {
-    console.log("1Day btn clicked!");
     if (graphTimespan != "1Day") {
         graphTimespan = "1Day";
         updateGraph();
@@ -145,7 +141,6 @@ function handle1DayBtnClick(e) {
  * @param {*} e
  */
 function handle5DayBtnClick(e) {
-    console.log("5Day btn clicked!");
     if (graphTimespan != "5Day") {
         graphTimespan = "5Day";
         updateGraph();
@@ -158,7 +153,6 @@ function handle5DayBtnClick(e) {
  * @param {*} e
  */
 function handle1MonthBtnClick(e) {
-    console.log("1Month btn clicked!");
     if (graphTimespan != "1Month") {
         graphTimespan = "1Month";
         updateGraph();
@@ -171,7 +165,6 @@ function handle1MonthBtnClick(e) {
  * @param {*} e
  */
 function handle3MonthBtnClick(e) {
-    console.log("3Month btn clicked!");
     if (graphTimespan != "3Month") {
         graphTimespan = "3Month";
         updateGraph();
@@ -184,7 +177,6 @@ function handle3MonthBtnClick(e) {
  * @param {*} e
  */
 function handle6MonthBtnClick(e) {
-    console.log("6Month btn clicked!");
     if (graphTimespan != "6Month") {
         graphTimespan = "6Month";
         updateGraph();
@@ -197,7 +189,6 @@ function handle6MonthBtnClick(e) {
  * @param {*} e
  */
 function handle1YearBtnClick(e) {
-    console.log("1Year btn clicked!");
     if (graphTimespan != "1Year") {
         graphTimespan = "1Year";
         updateGraph();
@@ -210,19 +201,13 @@ function handle1YearBtnClick(e) {
  * @param {*} e
  */
 function handleSearchBtnClick() {
-    console.log("searchBtn clicked or searchBar keydown == Enter!");
     let query = document.getElementById("searchBar").value;
-    console.log(query);
     Search(query, function(data) {
-        console.log("IN Search Callback");
         if (data)
         {
             if (currencyHL.getTicker() != data["ticker"]) {
                 currencyHL = new Currency(data["ticker"]);
                 updateCurrencyHLElements();
-                document.getElementById("searchBar").value = "";
-            } else {
-                console.log("No change, same ticker");
                 document.getElementById("searchBar").value = "";
             }
         }
@@ -240,12 +225,9 @@ function handleWatchListClick(e) {
     else if (e.target && e.target.nodeName == "SPAN") { id = e.target.parentElement.id; }
 
     if (id) {
-        console.log("Clicked " + id + " element");
         if (currencyHL.getTicker() != id) {
             currencyHL = new Currency(id);
             updateCurrencyHLElements();
-        } else {
-            console.log("No change, same ticker");
         }
     }
 }
@@ -256,7 +238,6 @@ function handleWatchListClick(e) {
  * @param {*} e
  */
 function handleToggleWatchListClick(e) {
-    console.log("Clicked graph-list-status element");
     watchListToggle(currencyHL.getTicker());
 }
 
@@ -278,7 +259,6 @@ function updateCurrencyHLElements() {
 // WatchListToggle Function
 function watchListToggle(ticker) {
     if (isTickerInWatchList(currencies, currencyHL.getTicker())) {
-        console.log("This will remove ticker from watchlist");
         removeFromWatchList(ticker);
     } else {
         addToWatchList(ticker);
@@ -469,15 +449,11 @@ function updateGraph() {
         if (isCrypto(currencyHL.getTicker())) {
             APIIntradayCryptoData(currencyHL.getTicker(), function(data) {
                 currencyHL.setOneDayTimeSeriesData(data);
-                console.log("updateGraph 1Day function!");
-                console.log(currencyHL.getOneDayTimeSeriesData());
                 updateGraphElements();
             });
         } else {
             APIIntradayStockData(currencyHL.getTicker(), function(data) {
                 currencyHL.setOneDayTimeSeriesData(data);
-                console.log("updateGraph 1Day function!");
-                console.log(currencyHL.getOneDayTimeSeriesData());
                 updateGraphElements();
             });
         }
@@ -485,15 +461,11 @@ function updateGraph() {
         if (isCrypto(currencyHL.getTicker())) {
             APIFiveDayCryptoData(currencyHL.getTicker(), function(data) {
                 currencyHL.setFiveDayTimeSeriesData(data);
-                console.log("updateGraph 5Day function!");
-                console.log(currencyHL.getOneDayTimeSeriesData());
                 updateGraphElements();
             });
         } else {
             APIFiveDayStockData(currencyHL.getTicker(), function(data) {
                 currencyHL.setFiveDayTimeSeriesData(data);
-                console.log("updateGraph 5Day function!");
-                console.log(currencyHL.getOneDayTimeSeriesData());
                 updateGraphElements();
             });
         }
@@ -501,15 +473,11 @@ function updateGraph() {
         if (isCrypto(currencyHL.getTicker())) {
             APIOneMonthCryptoData(currencyHL.getTicker(), function(data) {
                 currencyHL.setOneMonthTimeSeriesData(data);
-                console.log("updateGraph 1Month function!");
-                console.log(currencyHL.getOneDayTimeSeriesData());
                 updateGraphElements();
             });
         } else {
             APIOneMonthStockData(currencyHL.getTicker(), function(data) {
                 currencyHL.setOneMonthTimeSeriesData(data);
-                console.log("updateGraph 1Month function!");
-                console.log(currencyHL.getOneDayTimeSeriesData());
                 updateGraphElements();
             });
         }
@@ -517,15 +485,11 @@ function updateGraph() {
         if (isCrypto(currencyHL.getTicker())) {
             APIThreeMonthCryptoData(currencyHL.getTicker(), function(data) {
                 currencyHL.setThreeMonthTimeSeriesData(data);
-                console.log("updateGraph 3Month function!");
-                console.log(currencyHL.getOneDayTimeSeriesData());
                 updateGraphElements();
             });
         } else {
             APIThreeMonthStockData(currencyHL.getTicker(), function(data) {
                 currencyHL.setThreeMonthTimeSeriesData(data);
-                console.log("updateGraph 3Month function!");
-                console.log(currencyHL.getOneDayTimeSeriesData());
                 updateGraphElements();
             });
         }
@@ -533,15 +497,11 @@ function updateGraph() {
         if (isCrypto(currencyHL.getTicker())) {
             APISixMonthCryptoData(currencyHL.getTicker(), function(data) {
                 currencyHL.setSixMonthTimeSeriesData(data);
-                console.log("updateGraph 6Month function!");
-                console.log(currencyHL.getOneDayTimeSeriesData());
                 updateGraphElements();
             });
         } else {
             APISixMonthStockData(currencyHL.getTicker(), function(data) {
                 currencyHL.setSixMonthTimeSeriesData(data);
-                console.log("updateGraph 6Month function!");
-                console.log(currencyHL.getOneDayTimeSeriesData());
                 updateGraphElements();
             });
         }
@@ -549,15 +509,11 @@ function updateGraph() {
         if (isCrypto(currencyHL.getTicker())) {
             APIOneYearStockData(currencyHL.getTicker(), function(data) {
                 currencyHL.setOneYearTimeSeriesData(data);
-                console.log("updateGraph 1Year function!");
-                console.log(currencyHL.getOneDayTimeSeriesData());
                 updateGraphElements();
             });
         } else {
             APIOneYearStockData(currencyHL.getTicker(), function(data) {
                 currencyHL.setOneYearTimeSeriesData(data);
-                console.log("updateGraph 1Year function!");
-                console.log(currencyHL.getOneDayTimeSeriesData());
                 updateGraphElements();
             });
         }
@@ -605,14 +561,12 @@ let loser = new marketData();
 
 function updateGainers(){
     Gainers(function(data) {
-        console.log(data);
         gainer.setMarketData(data);
     });
 }
 
 function updateLosers(){
     Losers(function(data) {
-        console.log(data);
         loser.setMarketData(data);
     });
 }
@@ -708,7 +662,6 @@ function updateMarketNews(){
         news[4].setNews(data);
         updateNewsElement(4);
     });
-    console.log(news);
 }
 
 function updateNewsElement(index){
@@ -840,7 +793,6 @@ function updateCryptoPrice(num){
  ***************************************************/
 
 function handleEmailNotification() {
-    console.log("handleEmailNotfication function");
     let t = new Date();
     if (t.getHours() >= 15 && !isEmailSent) {
         sendWatchListEmail(currencies, email);

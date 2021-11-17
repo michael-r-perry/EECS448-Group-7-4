@@ -1,92 +1,68 @@
-let oldDate = new Date();
-oldDate.setDate(oldDate.getDate() - 7);
-
-let newDate = new Date();
-oldDate.toISOString().split('T')[0];
-newDate.toISOString().split('T')[0];
-
-
-console.log(formatDate(oldDate));
-console.log(formatDate(newDate));
-
 // Stocks Section START
 
 function APITodayQuoteStockData(ticker, callback) {
     axios.get('https://finnhub.io/api/v1/quote?symbol=' + ticker + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
-            console.log(response.data);
             callback(response.data);
         })
         .catch(error => console.error(error));
 }
 
 function APIIntradayStockData(ticker, callback) {
-    console.log("APIIntradayStockData");
     let tonight = getUNIXMidnightTonight();
     let morning = getUNIXMidnightMorning();
     axios.get('https://finnhub.io/api/v1/stock/candle?symbol=' + ticker + '&resolution=5&from=' + morning + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
-            console.log(response.data);
             callback(response.data);
         })
         .catch(error => console.error(error));
 }
 
 function APIFiveDayStockData(ticker, callback) {
-    console.log("APIFiveDayStockData");
     let tonight = getUNIXMidnightTonight();
     let weekAgo = getUNIXFiveDaysAgo();
     axios.get('https://finnhub.io/api/v1/stock/candle?symbol=' + ticker + '&resolution=30&from=' + weekAgo + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
-            console.log(response.data);
             callback(response.data);
         })
         .catch(error => console.error(error));
 }
 
 function APIOneMonthStockData(ticker, callback) {
-    console.log("APIOneMonthStockData");
     let tonight = getUNIXMidnightTonight();
     let month = getUNIXOneMonthAgo();
     axios.get('https://finnhub.io/api/v1/stock/candle?symbol=' + ticker + '&resolution=D&from=' + month + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
-            console.log(response.data);
             callback(response.data);
         })
         .catch(error => console.error(error));
 }
 
 function APIThreeMonthStockData(ticker, callback) {
-    console.log("APIThreeMonthStockData");
     let tonight = getUNIXMidnightTonight();
     let months = getUNIXThreeMonthsAgo();
     axios.get('https://finnhub.io/api/v1/stock/candle?symbol=' + ticker + '&resolution=D&from=' + months + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
-            console.log(response.data);
             callback(response.data);
         })
         .catch(error => console.error(error));
 }
 
 function APISixMonthStockData(ticker, callback) {
-    console.log("APISixMonthStockData");
     let tonight = getUNIXMidnightTonight();
     let months = getUNIXSixMonthsAgo();
     axios.get('https://finnhub.io/api/v1/stock/candle?symbol=' + ticker + '&resolution=D&from=' + months + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
-            console.log(response.data);
             callback(response.data);
         })
         .catch(error => console.error(error));
 }
 
 function APIOneYearStockData(ticker, callback) {
-    console.log("APIOneYearStockData");
     let tonight = getUNIXMidnightTonight();
     let year = getUNIXOneYearAgo();
     axios.get('https://finnhub.io/api/v1/stock/candle?symbol=' + ticker + '&resolution=D&from=' + year + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
-            console.log(response.data);
             callback(response.data);
         })
         .catch(error => console.error(error));
@@ -101,7 +77,6 @@ function APITodayQuoteCryptoData(ticker, callback) {
     let morning = getUNIXMidnightMorning();
     axios.get('https://finnhub.io/api/v1/crypto/candle?symbol=' + ticker + '&resolution=1&from=' + morning + '&to=' + now + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
-            console.log(response.data);
             // Current "c", DayChange "d", Percent Change "dp", open "o"
             let current = response.data["c"].at(-1); // Last entry for closes
             let open = response.data["o"][0]; // First entry for opens
@@ -123,7 +98,6 @@ function APIIntradayCryptoData(ticker, callback) {
     let morning = getUNIXMidnightMorning();
     axios.get('https://finnhub.io/api/v1/crypto/candle?symbol=' + ticker + '&resolution=5&from=' + morning + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
-            console.log(response.data);
             callback(response.data);
         })
         .catch(error => console.error(error));
@@ -134,7 +108,6 @@ function APIFiveDayCryptoData(ticker, callback) {
     let weekAgo = getUNIXFiveDaysAgo();
     axios.get('https://finnhub.io/api/v1/crypto/candle?symbol=' + ticker + '&resolution=30&from=' + weekAgo + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
-            console.log(response.data);
             callback(response.data);
         })
         .catch(error => console.error(error));
@@ -145,7 +118,6 @@ function APIOneMonthCryptoData(ticker, callback) {
     let month = getUNIXOneMonthAgo();
     axios.get('https://finnhub.io/api/v1/crypto/candle?symbol=' + ticker + '&resolution=D&from=' + month + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
-            console.log(response.data);
             callback(response.data);
         })
         .catch(error => console.error(error));
@@ -156,7 +128,6 @@ function APIThreeMonthCryptoData(ticker, callback) {
     let months = getUNIXThreeMonthsAgo();
     axios.get('https://finnhub.io/api/v1/crypto/candle?symbol=' + ticker + '&resolution=D&from=' + months + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
-            console.log(response.data);
             callback(response.data);
         })
         .catch(error => console.error(error));
@@ -167,7 +138,6 @@ function APISixMonthCryptoData(ticker, callback) {
     let months = getUNIXSixMonthsAgo();
     axios.get('https://finnhub.io/api/v1/crypto/candle?symbol=' + ticker + '&resolution=D&from=' + months + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
-            console.log(response.data);
             callback(response.data);
         })
         .catch(error => console.error(error));
@@ -178,7 +148,6 @@ function APIOneYearCryptoData(ticker, callback) {
     let year = getUNIXOneYearAgo();
     axios.get('https://finnhub.io/api/v1/crypto/candle?symbol=' + ticker + '&resolution=D&from=' + year + '&to=' + tonight + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
-            console.log(response.data);
             callback(response.data);
         })
         .catch(error => console.error(error));
@@ -190,7 +159,6 @@ function APIOneYearCryptoData(ticker, callback) {
 function APIGetTickerInfo(ticker, callback) {
     axios.get('https://finnhub.io/api/v1/stock/profile2?symbol=' + ticker + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
-            console.log(response.data);
             let industry = response.data["finnhubIndustry"];
             let url = response.data["weburl"];
             let logo = response.data["logo"];
@@ -211,7 +179,6 @@ function APIGetTickerInfo(ticker, callback) {
 function APIGetMarketNews(index, callback) {
     axios.get('https://finnhub.io/api/v1/news?category=general&minId=7001876'+ '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
-            console.log(response.data);
             let headline = response.data[index]["headline"];
             let image = response.data[index]["image"];
             let source = response.data[index]["source"];
@@ -229,9 +196,11 @@ function APIGetMarketNews(index, callback) {
 }
 
 function APIGetTickerNews(ticker, callback) {
+    let oldDate = new Date();
+    oldDate.setDate(oldDate.getDate() - 7);
+    let newDate = new Date();
     axios.get('https://finnhub.io/api/v1/company-news?symbol='+ ticker +'&from=' + formatDate(oldDate) + '&to=' + formatDate(newDate) + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
-            console.log(response.data);
             let headline = response.data[0]["headline"];
             let image = response.data[0]["image"];
             let source = response.data[0]["source"];
@@ -254,7 +223,6 @@ function APIGetTickerNews(ticker, callback) {
 function Gainers(callback){
     axios.get('https://financialmodelingprep.com/api/v3/stock/gainers?apikey=acfdeb7c7ae9b0f38163cbe9893f7673')
         .then(response => {
-            console.log(response.data);
             let ticker1 = response.data["mostGainerStock"][0]["ticker"];
             let changes1 = response.data["mostGainerStock"][0]["changes"];
             let price1 = response.data["mostGainerStock"][0]["price"];
@@ -314,7 +282,6 @@ function Gainers(callback){
 function Losers(callback){
     axios.get('https://financialmodelingprep.com/api/v3/stock/losers?apikey=acfdeb7c7ae9b0f38163cbe9893f7673')
         .then(response => {
-            console.log(response.data);
             let ticker6 = response.data["mostLoserStock"][0]["ticker"];
             let changes6 = response.data["mostLoserStock"][0]["changes"];
             let price6 = response.data["mostLoserStock"][0]["price"];
@@ -382,7 +349,6 @@ function Search(input, callback) {
         if (CRYPTO_EXCHANGES.includes(exchange)) {
             axios.get('https://finnhub.io/api/v1/crypto/symbol?exchange=' + exchange + '&token=c5tho52ad3ifck7dg8fg')
                 .then(response => {
-                    console.log(response.data);
                     let found = false;
                     for (let i = 0; i < response.data.length; i++) {
                         if (response.data[i]["symbol"] == input) {
@@ -405,7 +371,6 @@ function Search(input, callback) {
     } else {
         axios.get('https://finnhub.io/api/v1/search?q=' + input +'&token=c5tho52ad3ifck7dg8fg')
             .then(response => {
-                console.log(response.data);
                 let ticker = response.data["result"][0]["symbol"];
                 callback({
                     "ticker": ticker,
@@ -416,68 +381,3 @@ function Search(input, callback) {
 }
 
 // Search Section END
-
-///////////////////////////////////////////////////////////
-// EXTRA FUNCTIONS: NEED TO BE DELETED BEFORE SUBMITTING //
-///////////////////////////////////////////////////////////
-
-/**
- *
- * @param {*} callback
- */
- function APITodayBasicAPPLData(callback) {
-    axios.get('https://finnhub.io/api/v1/quote?symbol=AAPL&token=c5tho52ad3ifck7dg8fg')
-        .then(response => {
-            console.log(response.data);
-            callback(response.data);
-        })
-        .catch(error => console.error(error));
-}
-
-/**
- *
- */
-function APIIntradayAPPLData(callback) {
-    axios.get('https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=30&from=1631022248&to=1631627048&token=c5tho52ad3ifck7dg8fg')
-        .then(response => {
-            console.log(response.data);
-            callback(response.data);
-        })
-        .catch(error => console.error(error));
-}
-
-function APITodayBasicAMZNData(callback) {
-    axios.get('https://finnhub.io/api/v1/quote?symbol=AMZN&token=c5tho52ad3ifck7dg8fg')
-        .then(response => {
-            console.log(response.data);
-            callback(response.data);
-        })
-        .catch(error => console.error(error));
-}
-
-function APITodayBasicTSLAData(callback) {
-    axios.get('https://finnhub.io/api/v1/quote?symbol=TSLA&token=c5tho52ad3ifck7dg8fg')
-        .then(response => {
-            console.log(response.data);
-            callback(response.data);
-        })
-        .catch(error => console.error(error));
-}
-
-function APITodayBasicTMUSData(callback) {
-    axios.get('https://finnhub.io/api/v1/quote?symbol=TMUS&token=c5tho52ad3ifck7dg8fg')
-        .then(response => {
-            console.log(response.data);
-            callback(response.data);
-        })
-        .catch(error => console.error(error));
-}
-
-function APITodayBasicTWTRData(callback) {
-    axios.get('https://finnhub.io/api/v1/quote?symbol=TWTR&token=c5tho52ad3ifck7dg8fg')
-        .then(response => {
-            console.log(response.data);
-            callback(response.data);
-        })
-        .catch(error => console.error(error));
-}
