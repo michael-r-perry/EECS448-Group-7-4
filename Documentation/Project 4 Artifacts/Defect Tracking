@@ -17,3 +17,18 @@ Defect 1
 -Who Fixed it: Michael Perry
 -Fix Description: Added graphChart global variable, and do graphChart.destroy() (deletes the previous graph info) before adding new graph.
 
+Defect 2
+-Date Reported: 11/13/2021 6:00 PM
+-Who Reported it: Curtis Braxdale
+-Defect Description: Crytpo bar would not correctly pull data from the finnhub API.
+-Date Fixed: 11/13/2021 7:00 PM
+-Who Fixed it: Curtis braxdale
+-Fix Description: Using the coinbase exchange would cause an error to occur so I avoided using coinbase.
+
+Defect 3
+-Date Reported: 11/13/2021 7:00 PM
+-Who Reported it: Curtis Braxdale
+-Defect Description: Crytpo bar percentage values had too many figures.
+-Date Fixed: 11/13/2021 7:30 PM
+-Who Fixed it: Curtis braxdale
+-Fix Description: Built a function that rounds the percentage values to the hundreths place.

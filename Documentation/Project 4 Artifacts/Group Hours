@@ -16,3 +16,7 @@ Michael: 4 hours: Setup watchlist functionalities (switch curHL by watchlist, ad
 Michael: 0.5 hours: Implemented pulling crypto information from API and differentiating between
                     a stock and crypto ticker before calling.
 Davis: 1 hour trying to figure out the search function.
+Curtis: 5 hours implementing market news, crypto bar, and company news sections.
+
+11/15:
+Curtis: 4 hours finishing up remaining requirements.
