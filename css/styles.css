@@ -314,13 +314,14 @@ header .header-settings a:hover{
 }
 
 #graph-viewer #graph-buttons ul li{
+    top: 5px;
     position: relative;
     width: 140px;
     height: 50px;
     display: inline-block;
     text-decoration: none;
     list-style: none;
-    border-radius: 15px;
+    border-radius: 8px;
     background: #0A0A0A;
     vertical-align: top;
     align-content: center;
@@ -334,7 +335,7 @@ header .header-settings a:hover{
     display: inline-block;
     text-decoration: none;
     list-style: none;
-    border-radius: 15px;
+    border-radius: 8px;
     font-size: 28px;
     font-weight: 600;
     transition: all 0.4s ease;
@@ -526,7 +527,7 @@ header .header-settings a:hover{
 #market-news #market-news-header h1{
     font-size: 36px;
     font-weight: 600;
-    color: #030303;
+    color: #fff;
     user-select: none;
     align-items: center;
 }

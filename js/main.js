@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCurrencyHLElements();
 
     // Email Notfication Check Interval
-    //let emailCheckTimer = setInterval(function() { handleEmailNotification(); }, 60 * 1000);
+    let emailCheckTimer = setInterval(function() { handleEmailNotification(); }, 240 * 1000);
 });
 
 //
@@ -427,6 +427,12 @@ function updateGraphHeaderElements() {
 
 // Update Graph Info Section
 function updateGraphInfo() {
+    if(isCrypto(currencyHL.getTicker())){
+        document.getElementById("graph-info-name").style.visibility = "hidden";
+        document.getElementById("graph-info-logo").style.visibility = "hidden";
+        document.getElementById("graph-info-industry").style.visibility = "hidden";
+        document.getElementById("graph-info-url").style.visibility = "hidden";
+    }
     if (!isCrypto(currencyHL.getTicker())) {
         APIGetTickerInfo(currencyHL.getTicker(), function(data) {
             currencyHL.setTickerInfo(data);
@@ -436,10 +442,15 @@ function updateGraphInfo() {
 }
 
 function updateTickerInfo() {
+    
     document.getElementById("graph-info-name").innerText = currencyHL.getName();
     document.getElementById("graph-info-logo").src = currencyHL.getLogo();
     document.getElementById("graph-info-industry").innerText = currencyHL.getIndustry();
     document.getElementById("graph-info-url").href = currencyHL.getUrl();
+    document.getElementById("graph-info-name").style.visibility = "visible";
+    document.getElementById("graph-info-logo").style.visibility = "visible";
+    document.getElementById("graph-info-industry").style.visibility = "visible";
+    document.getElementById("graph-info-url").style.visibility = "visible";
 }
 
 // Update Graph Function
@@ -622,6 +633,12 @@ function updateGainerLoserHTML(){
  * Market News Functions
  ***************************************************/
 function updateCompanyNews(){
+    if(isCrypto(currencyHL.getTicker())){
+        document.getElementById("graph-news-header").style.visibility = "hidden";
+        document.getElementById("graph-news-headline").style.visibility = "hidden";
+        document.getElementById("graph-news-img").style.visibility = "hidden";
+        document.getElementById("graph-news-link").style.visibility = "hidden";
+    }
     APIGetTickerNews(currencyHL.getTicker() ,function(data) {
         graphNews.setNews(data);
         updateCompanyNewsElement();
@@ -629,6 +646,10 @@ function updateCompanyNews(){
 }
 
 function updateCompanyNewsElement(){
+    document.getElementById("graph-news-header").style.visibility = "visible";
+    document.getElementById("graph-news-headline").style.visibility = "visible";
+    document.getElementById("graph-news-img").style.visibility = "visible";
+    document.getElementById("graph-news-link").style.visibility = "visible";
     document.getElementById("graph-news-headline").innerText = graphNews.getHeadline();
     document.getElementById("graph-news-img").src = graphNews.getImage();
     //document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
