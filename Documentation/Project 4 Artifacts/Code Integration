@@ -1,1 +1,20 @@
+When it comes to code integration, our team highly favors validation. Our approach is usually
+to get a working skeleton of the code up and running, refine it, and then work through and fix
+all the bugs through white/black-box testing. Usually, Michael has been the one getting the
+structure up and running, Curtis follows up with refinements to the skeleton, and Davis/Musau
+work on miscellaneous fixes and checking for specifications.
 
+For this project, the integration strategy we used seems to be a sandwich, being a bit closer
+to top down than bottom up. We started with a main class (the top) that sends signals calling other
+classes, as well as the API class (The bottom) that's at the very bottom and used by everything else.
+This way, all the major functionality and the bulk of the code was online and being tested early.
+All that was left was to link everything up.
+
+This was done by individually working through all the elements in-between the top and bottom to make
+sure that they're working properly in isolation, and then hooking them up the appropriate interfaces
+to enable us to test them in the UI. If a problem arose, it's pretty easy to separate the object again
+and work on fixing it without breaking something else.
+
+Once every element was done, we did a few overviews of the code the make sure everything was satisfactory
+and as we intended it, and then made a few fixes to how it's laid out. We repeated this process until we
+had a final project we're satisfied with.
