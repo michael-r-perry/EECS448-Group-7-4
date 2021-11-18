@@ -1,1 +1,28 @@
+The first order of business would be to work more on the application itself. A proper settings menu
+that does more than just the email notifications would be a great help, and so would making the
+sections and what to do with them more readable. The search bar should also provide a drop-down
+menu or other way of viewing different options rather than selecting the first result.
 
+Next would be getting a database, having it hosted on a server, and getting the paid tier of the
+Stock API to allow for as many calls as we need. This would be followed by advertising, posting it on
+an app store, or getting an independent website for users to download it from. After that it's mainly
+maintenance, which is being covered in another document.
+
+The target audience for the app are people with an interest in crypto or stocks, but don't have the time
+to invest keeping up to date on all the specifics. The app offers a quick and easy to use system that
+displays relevant, customizable information. It probably wouldn't be as popular with veterans of the stock
+market or people with no interest in it, but this kind of app is useful for casual users or ones trying to
+get into the stck market.
+
+As far as costs go, the first priority is a Stock API membership, which costs $75 per month.
+
+Next is hosting a website. Shared or VPS hosting would probably work best for our application, since as a new
+player in the industry you can't expect much traffic yet. This would cost somewhere in the range of $20-$80
+per month. This could later be upgraded to dedicated hosting, which is a topic for the maintenance plan.
+
+For advertising at conventions, the costs for the average 10x10 convention floorspace is around $15,000, which
+isn't cheap. This kind of cost might be a bit outside the price range of a small project like this one starting
+out.
+
+For app store costs, the google play store is a meager $25 one-time fee for the ability to post as many apps as
+you want. This is very manageable cost and probably the most cost-efficient way to get word out to users.
