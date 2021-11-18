@@ -12,7 +12,7 @@ let crypto3 = new Currency("LTC");
 let crypto4 = new Currency("BNB");
 let crypto5 = new Currency("XRP");
 let currencies = [];
-let news = [];
+let news;
 let graphNews = new News();
 const BASE_WATCH_LIST = ["AAPL", "AMZN", "TSLA", "TMUS", "TWTR"];
 let graphTimespan; // "1Day", "5Day", "1Month", "3Month", "6Month", "1Year"
@@ -658,69 +658,45 @@ function updateCompanyNewsElement(){
 }
 
 function updateMarketNews(){
-    news.push(new News());
-    news.push(new News());
-    news.push(new News());
-    news.push(new News());
-    news.push(new News());
-    APIGetMarketNews(0 ,function(data) {
-        news[0].setNews(data);
-        updateNewsElement(0);
-    });
-    APIGetMarketNews(1 ,function(data) {
-        news[1].setNews(data);
-        updateNewsElement(1);
-    });
-    APIGetMarketNews(2 ,function(data) {
-        news[2].setNews(data);
-        updateNewsElement(2);
-    });
-    APIGetMarketNews(3 ,function(data) {
-        news[3].setNews(data);
-        updateNewsElement(3);
-    });
-    APIGetMarketNews(4 ,function(data) {
-        news[4].setNews(data);
-        updateNewsElement(4);
+    news = new News();
+    APIGetMarketNews(function(data) {
+        news.setNews(data);
+        updateNewsElement();
     });
 }
 
-function updateNewsElement(index){
-    if (index == 0){
-        document.getElementById("news1-headline").innerText = news[index].getHeadline();
-        document.getElementById("news1-img").src = news[index].getImage();
-        //document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
-        document.getElementById("news1-summary").innerText = news[index].getSummary();
-        document.getElementById("news1-url").href = news[index].getUrl();
-    }
-    if (index == 1){
-        document.getElementById("news2-headline").innerText = news[index].getHeadline();
-        document.getElementById("news2-img").src = news[index].getImage();
-        //document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
-        document.getElementById("news2-summary").innerText = news[index].getSummary();
-        document.getElementById("news2-url").href = news[index].getUrl();
-    }
-    if (index == 2){
-        document.getElementById("news3-headline").innerText = news[index].getHeadline();
-        document.getElementById("news3-img").src = news[index].getImage();
-        //document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
-        document.getElementById("news3-summary").innerText = news[index].getSummary();
-        document.getElementById("news3-url").href = news[index].getUrl();
-    }
-    if (index == 3){
-        document.getElementById("news4-headline").innerText = news[index].getHeadline();
-        document.getElementById("news4-img").src = news[index].getImage();
-        //document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
-        document.getElementById("news4-summary").innerText = news[index].getSummary();
-        document.getElementById("news4-url").href = news[index].getUrl();
-    }
-    if (index == 4){
-        document.getElementById("news5-headline").innerText = news[index].getHeadline();
-        document.getElementById("news5-img").src = news[index].getImage();
-        //document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
-        document.getElementById("news5-summary").innerText = news[index].getSummary();
-        document.getElementById("news5-url").href = news[index].getUrl();
-    }
+function updateNewsElement(){
+    document.getElementById("news1-headline").innerText = news.getHeadline(1);
+    document.getElementById("news1-img").src = news.getImage(1);
+    //document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
+    document.getElementById("news1-summary").innerText = news.getSummary(1);
+    document.getElementById("news1-url").href = news.getUrl(1);
+
+
+    document.getElementById("news2-headline").innerText = news.getHeadline(2);
+    document.getElementById("news2-img").src = news.getImage(2);
+    //document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
+    document.getElementById("news2-summary").innerText = news.getSummary(2);
+    document.getElementById("news2-url").href = news.getUrl(2);
+
+
+    document.getElementById("news3-headline").innerText = news.getHeadline(3);
+    document.getElementById("news3-img").src = news.getImage(3);
+    //document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
+    document.getElementById("news3-summary").innerText = news.getSummary(3);
+    document.getElementById("news3-url").href = news.getUrl(3);
+
+    document.getElementById("news4-headline").innerText = news.getHeadline(4);
+    document.getElementById("news4-img").src = news.getImage(4);
+    //document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
+    document.getElementById("news4-summary").innerText = news.getSummary(4);
+    document.getElementById("news4-url").href = news.getUrl(4);
+
+    document.getElementById("news5-headline").innerText = news.getHeadline(5);
+    document.getElementById("news5-img").src = news.getImage(5);
+    //document.getElementById(newsSelector + "-source").innerText = news[index].getSource();
+    document.getElementById("news5-summary").innerText = news.getSummary(5);
+    document.getElementById("news5-url").href = news.getUrl(5);
 }
 
 /***************************************************

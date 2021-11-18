@@ -176,20 +176,60 @@ function APIGetTickerInfo(ticker, callback) {
 // Company Info Section END
 
 // Market News Section START
-function APIGetMarketNews(index, callback) {
+function APIGetMarketNews(callback) {
     axios.get('https://finnhub.io/api/v1/news?category=general&minId=7001876'+ '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
-            let headline = response.data[index]["headline"];
-            let image = response.data[index]["image"];
-            let source = response.data[index]["source"];
-            let summary = response.data[index]["summary"];
-            let url = response.data[index]["url"];
+            let headline1 = response.data[0]["headline"];
+            let image1 = response.data[0]["image"];
+            let source1 = response.data[0]["source"];
+            let summary1 = response.data[0]["summary"];
+            let url1 = response.data[0]["url"];
+            let headline2 = response.data[1]["headline"];
+            let image2 = response.data[1]["image"];
+            let source2 = response.data[1]["source"];
+            let summary2 = response.data[1]["summary"];
+            let url2 = response.data[1]["url"];
+            let headline3 = response.data[2]["headline"];
+            let image3 = response.data[2]["image"];
+            let source3 = response.data[2]["source"];
+            let summary3 = response.data[2]["summary"];
+            let url3 = response.data[2]["url"];
+            let headline4 = response.data[3]["headline"];
+            let image4 = response.data[3]["image"];
+            let source4 = response.data[3]["source"];
+            let summary4 = response.data[3]["summary"];
+            let url4 = response.data[3]["url"];
+            let headline5 = response.data[4]["headline"];
+            let image5 = response.data[4]["image"];
+            let source5 = response.data[4]["source"];
+            let summary5 = response.data[4]["summary"];
+            let url5 = response.data[4]["url"];
             callback({
-                "headline": headline,
-                "image": image,
-                "summary": summary,
-                "source": source,
-                "url": url,
+                "headline1": headline1,
+                "image1": image1,
+                "summary1": summary1,
+                "source1": source1,
+                "url1": url1,
+                "headline2": headline2,
+                "image2": image2,
+                "summary2": summary2,
+                "source2": source2,
+                "url2": url2,
+                "headline3": headline3,
+                "image3": image3,
+                "summary3": summary3,
+                "source3": source3,
+                "url3": url3,
+                "headline4": headline4,
+                "image4": image4,
+                "summary4": summary4,
+                "source4": source4,
+                "url4": url4,
+                "headline5": headline5,
+                "image5": image5,
+                "summary5": summary5,
+                "source5": source5,
+                "url5": url5,
             });
         })
         .catch(error => console.error(error));

@@ -1,1 +1,27 @@
+Our team did a code review of the market news section of main.js. In particular the updateMarketNews function. Currently our market news section of the site
+is functional, but it could be further optimized. A large crutch of our project is the API call limits. Because we are utilizing finnhub's API and we opted 
+to use the free version, we have a limited number of API calls per minute. This means that as a project in total we are not only limited in our abilites
+but also are incentivized to optimize our site as much as possible to only call the API when absolutely needed.
+
+As of now our market news section's function is the pulls the top 5 news stories from the finnhub market news endpoint. When calling the API with the market news endpoint
+the JSON we recieve contains an array of up to 100 "news" objects. Within each object there are these properties:
+category, datetime, headline, id, image, related, source, summary, url
+Our APIgetMarketNews function is the function that takes in an index, calls the API and then assigns the values accordingly. This is the function that is called
+inside of the updateMarketNews function in main. Because we have a fixed number of stories to be dislayed on the page (5), inside of updateMarketNews we call
+APIgetMarketNews 5 times. In the essence of further optimizing our site and minimizing the number of API calls we have decided to review this function. There 
+should be a way for us to get the same ammount of data with only a single API call. This is the only defect that was found while reviewing the updateMarketNews
+function. Reducing the number of API calls from 5 to 1 is the goal of this code review.
+
+The way to do this would be similar to how we achieved this in the gainers and losers section. Although the gainers and losers uses a different API, ultimatley 
+the method is the same. Instead of our APIgetMarketNews function taking in an index and then getting the data for that piece of news, we will remove the index
+and just pull all of the data at once. This also will require some changes to the news object and its setMarketNews function to make things work.
+
+After discussing the method to optimize the previously mentioned functions, Curtis has decided to be the one applying the fix. Curtis volunteered because he is the one
+who originally worked on the market and company news sections. He also applied a similar fix to the gainers and losers API calls that reduced the number of API calls
+as well. He is farmiliar with the methods and the plan to remedy this problem in an efficient manner.
+
+Curtis accomplished the fix by removing the news array and replacing it with a newly adapted single news object. The news object now has room for all the data for
+5 pieces of news instead of one. When the API is called the newly expanded news object will get and store the date for all 5 pieces of news. When changing the html
+to reflect the news data, each element will be referencing the expanded single news object instead of an index in an array of news objects.
+Now the API will only need to be called once.
 
