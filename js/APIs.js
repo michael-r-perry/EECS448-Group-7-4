@@ -1,5 +1,10 @@
 // Stocks Section START
 
+/**
+ * Calls Finnhub API to get quote data from ticker
+ * @params {string} ticker
+ * @returns {Object} response.data
+ */
 function APITodayQuoteStockData(ticker, callback) {
     axios.get('https://finnhub.io/api/v1/quote?symbol=' + ticker + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
@@ -8,6 +13,11 @@ function APITodayQuoteStockData(ticker, callback) {
         .catch(error => console.error(error));
 }
 
+/**
+ * Calls Finnhub API to get intraday data of every minute for ticker
+ * @params {string} ticker
+ * @returns {Object} response.data
+ */
 function APIIntradayStockData(ticker, callback) {
     let tonight = getUNIXMidnightTonight();
     let morning = getUNIXMidnightMorning();
@@ -18,6 +28,12 @@ function APIIntradayStockData(ticker, callback) {
         .catch(error => console.error(error));
 }
 
+/**
+ * Calls Finnhub API to get historic five day data 
+ * of every 30 minutes from ticker
+ * @params {string} ticker
+ * @returns {Object} response.data
+ */
 function APIFiveDayStockData(ticker, callback) {
     let tonight = getUNIXMidnightTonight();
     let weekAgo = getUNIXFiveDaysAgo();
@@ -28,6 +44,12 @@ function APIFiveDayStockData(ticker, callback) {
         .catch(error => console.error(error));
 }
 
+/**
+ * Calls Finnhub API to get historic one month data
+ * of every 1 day from ticker
+ * @params {string} ticker
+ * @returns {Object} response.data
+ */
 function APIOneMonthStockData(ticker, callback) {
     let tonight = getUNIXMidnightTonight();
     let month = getUNIXOneMonthAgo();
@@ -38,6 +60,12 @@ function APIOneMonthStockData(ticker, callback) {
         .catch(error => console.error(error));
 }
 
+/**
+ * Calls Finnhub API to get historic three month data
+ * of every 1 day from ticker
+ * @params {string} ticker
+ * @returns {Object} response.data
+ */
 function APIThreeMonthStockData(ticker, callback) {
     let tonight = getUNIXMidnightTonight();
     let months = getUNIXThreeMonthsAgo();
@@ -48,6 +76,12 @@ function APIThreeMonthStockData(ticker, callback) {
         .catch(error => console.error(error));
 }
 
+/**
+ * Calls Finnhub API to get historic six month data
+ * of every 1 day from ticker
+ * @params {string} ticker
+ * @returns {Object} response.data
+ */
 function APISixMonthStockData(ticker, callback) {
     let tonight = getUNIXMidnightTonight();
     let months = getUNIXSixMonthsAgo();
@@ -58,6 +92,12 @@ function APISixMonthStockData(ticker, callback) {
         .catch(error => console.error(error));
 }
 
+/**
+ * Calls Finnhub API to get historic one year data
+ * of every 1 day from ticker
+ * @params {string} ticker
+ * @returns {Object} response.data
+ */
 function APIOneYearStockData(ticker, callback) {
     let tonight = getUNIXMidnightTonight();
     let year = getUNIXOneYearAgo();
@@ -72,6 +112,11 @@ function APIOneYearStockData(ticker, callback) {
 
 // Crypto Section START
 
+/**
+ * Calls Finnhub API to get quote data from crypto ticker
+ * @params {string} ticker
+ * @returns {Object} response.data
+ */
 function APITodayQuoteCryptoData(ticker, callback) {
     let now = Date.now();
     let morning = getUNIXMidnightMorning();
@@ -93,6 +138,12 @@ function APITodayQuoteCryptoData(ticker, callback) {
         .catch(error => console.error(error));
 }
 
+/**
+ * Calls Finnhub API to get intraday data
+ * of every 1 minute from crypto ticker
+ * @params {string} ticker
+ * @returns {Object} response.data
+ */
 function APIIntradayCryptoData(ticker, callback) {
     let tonight = getUNIXMidnightTonight();
     let morning = getUNIXMidnightMorning();
@@ -103,6 +154,12 @@ function APIIntradayCryptoData(ticker, callback) {
         .catch(error => console.error(error));
 }
 
+/**
+ * Calls Finnhub API to get historic five day data
+ * of every 30 minutes from crypto ticker
+ * @params {string} ticker
+ * @returns {Object} response.data
+ */
 function APIFiveDayCryptoData(ticker, callback) {
     let tonight = getUNIXMidnightTonight();
     let weekAgo = getUNIXFiveDaysAgo();
@@ -113,6 +170,12 @@ function APIFiveDayCryptoData(ticker, callback) {
         .catch(error => console.error(error));
 }
 
+/**
+ * Calls Finnhub API to get historic one month data
+ * of every one day from crypto ticker
+ * @params {string} ticker
+ * @returns {Object} response.data
+ */
 function APIOneMonthCryptoData(ticker, callback) {
     let tonight = getUNIXMidnightTonight();
     let month = getUNIXOneMonthAgo();
@@ -123,6 +186,12 @@ function APIOneMonthCryptoData(ticker, callback) {
         .catch(error => console.error(error));
 }
 
+/**
+ * Calls Finnhub API to get historic three month data
+ * of every one day from crypto ticker
+ * @params {string} ticker
+ * @returns {Object} response.data
+ */
 function APIThreeMonthCryptoData(ticker, callback) {
     let tonight = getUNIXMidnightTonight();
     let months = getUNIXThreeMonthsAgo();
@@ -133,6 +202,12 @@ function APIThreeMonthCryptoData(ticker, callback) {
         .catch(error => console.error(error));
 }
 
+/**
+ * Calls Finnhub API to get historic six month data
+ * of every one day from crypto ticker
+ * @params {string} ticker
+ * @returns {Object} response.data
+ */
 function APISixMonthCryptoData(ticker, callback) {
     let tonight = getUNIXMidnightTonight();
     let months = getUNIXSixMonthsAgo();
@@ -143,6 +218,12 @@ function APISixMonthCryptoData(ticker, callback) {
         .catch(error => console.error(error));
 }
 
+/**
+ * Calls Finnhub API to get historic six month data
+ * of every one day from crypto ticker
+ * @params {string} ticker
+ * @returns {Object} response.data
+ */
 function APIOneYearCryptoData(ticker, callback) {
     let tonight = getUNIXMidnightTonight();
     let year = getUNIXOneYearAgo();
@@ -156,6 +237,12 @@ function APIOneYearCryptoData(ticker, callback) {
 // Crypto Section END
 
 // Company Info Section START
+
+/**
+ * Calls Finnhub API to get company data from ticker
+ * @params {string} ticker
+ * @returns {Object} response.data
+ */
 function APIGetTickerInfo(ticker, callback) {
     axios.get('https://finnhub.io/api/v1/stock/profile2?symbol=' + ticker + '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
@@ -176,6 +263,11 @@ function APIGetTickerInfo(ticker, callback) {
 // Company Info Section END
 
 // Market News Section START
+
+/**
+ * Calls Finnhub API to get todays hot market news
+ * @returns {Object} response.data
+ */
 function APIGetMarketNews(callback) {
     axios.get('https://finnhub.io/api/v1/news?category=general&minId=7001876'+ '&token=c5tho52ad3ifck7dg8fg')
         .then(response => {
@@ -235,6 +327,11 @@ function APIGetMarketNews(callback) {
         .catch(error => console.error(error));
 }
 
+/**
+ * Calls Finnhub API to get company news from ticker
+ * @params {string} ticker
+ * @returns {Object} response.data
+ */
 function APIGetTickerNews(ticker, callback) {
     let oldDate = new Date();
     oldDate.setDate(oldDate.getDate() - 7);
@@ -260,6 +357,11 @@ function APIGetTickerNews(ticker, callback) {
 // Market News Section END
 
 // Gainers/Losers Section START
+
+/**
+ * Calls FinacialModelingPrep API to today's top gainers and their info
+ * @returns {Object} response.data
+ */
 function Gainers(callback){
     axios.get('https://financialmodelingprep.com/api/v3/stock/gainers?apikey=acfdeb7c7ae9b0f38163cbe9893f7673')
         .then(response => {
@@ -319,6 +421,10 @@ function Gainers(callback){
         .catch(error => console.error(error));
 }
 
+/**
+ * Calls FinacialModelingPrep API to today's top losers and their info
+ * @returns {Object} response.data
+ */
 function Losers(callback){
     axios.get('https://financialmodelingprep.com/api/v3/stock/losers?apikey=acfdeb7c7ae9b0f38163cbe9893f7673')
         .then(response => {
@@ -383,6 +489,13 @@ function Losers(callback){
 
 const CRYPTO_EXCHANGES = ["ZB","HUOBI","OKEX","POLONIEX","GEMINI","BITFINEX","BITMEX","BINANCE","BITTREX","FXPIG","KUCOIN","HITBTC","KRAKEN"];
 
+/**
+ * Checks if ticker is a crypto or not:
+ *      if crypto: makes sure its a valid exchange and calls Finnhub API for all symbols to see if a match occurs
+ *      else stock: calls Finnhub search API and returns the first instance's ticker
+ * @params {string} input - input from search bar
+ * @returns {Object} response.data
+ */
 function Search(input, callback) {
     if (isCrypto(input)) {
         let exchange = input.split(":")[0];

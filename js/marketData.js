@@ -1,5 +1,9 @@
 // For the Gainers/Loosers Top 10 and Market Data from polygon.io
 class marketData{
+    /**
+     * Initializes members
+     * @returns none
+     */
     constructor(){
         this.ticker1 = "";
         this.changes1 = "";
@@ -27,6 +31,12 @@ class marketData{
         this.changesPercentage5 = "";
         this.companyName5 = "";
     }
+
+    /**
+     * set's market news data from Finnhub API to members
+     * @params {Object} marketData - market news data from Finnhub API
+     * @returns none
+     */
     setMarketData(marketData){
         this.ticker1 = marketData["ticker1"];
         this.changes1 = marketData["changes1"];
@@ -54,6 +64,12 @@ class marketData{
         this.changesPercentage5 = marketData["changesPercentage5"];
         this.companyName5 = marketData["companyName5"];
     }
+
+    /**
+     * Finds which ticker and returns this.ticker#
+     * @params {number} index - index of ticker to get
+     * @returns {string} this.ticker#
+     */
     getTicker(index){
         if(index == 1){
             return this.ticker1;
@@ -71,6 +87,12 @@ class marketData{
             return this.ticker5;
         }
     }
+
+    /**
+     * Finds which changes and returns this.changes#
+     * @params {number} index - index of changes to get
+     * @returns {string} this.changes#
+     */
     getChanges(index){
         if(index == 1){
             return this.changes1;
@@ -88,6 +110,12 @@ class marketData{
             return this.changes5;
         }
     }
+
+    /**
+     * Finds which price and returns this.price#
+     * @params {number} index - index of price to get
+     * @returns {string} this.price#
+     */
     getPrice(index){
         if(index == 1){
             return this.price1;
@@ -105,6 +133,11 @@ class marketData{
             return this.price5;
         }
     }
+    /**
+     * Finds which change percentage and returns this.changePercentage#
+     * @params {number} index - index of change percentage to get
+     * @returns {string} this.changePercentage#
+     */
     getChangesPercentage(index){
         if(index == 1){
             return this.changesPercentage1;

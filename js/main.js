@@ -1,6 +1,3 @@
-
-
-
 /***************************************************
  * Properties
  ***************************************************/
@@ -17,6 +14,8 @@ let graphNews = new News();
 const BASE_WATCH_LIST = ["AAPL", "AMZN", "TSLA", "TMUS", "TWTR"];
 let graphTimespan; // "1Day", "5Day", "1Month", "3Month", "6Month", "1Year"
 let graphChart;
+let gainer = new marketData();
+let loser = new marketData();
 let email = "michaelp018@gmail.com";
 let isEmailSent = false;
 
@@ -68,7 +67,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let emailCheckTimer = setInterval(function() { handleEmailNotification(); }, 240 * 1000);
 });
 
-//
+/**
+ * Prompts user with pop up to set new email address
+ * @returns none
+ */
 function setEmail(){
     let tempEmail = prompt("Please enter your email:", "johndoe@aol.com");
     if (tempEmail != null && tempEmail != "") {
@@ -76,7 +78,11 @@ function setEmail(){
     }
 }
 
-//
+/**
+ * given index of gainer array set highlighted currency to that ticker and update highlighted currency UI elements
+ * @params {number} index - index of gainer array clicked
+ * @returns none
+ */
 function handleGainerClick(index){
     if(index == 1){
         currencyHL = new Currency(gainer.getTicker(1));
@@ -100,6 +106,11 @@ function handleGainerClick(index){
     }
 }
 
+/**
+ * given index of loser array set highlighted currency to that ticker and update highlighted currency UI elements
+ * @params {number} index - index of loser array clicked
+ * @returns none
+ */
 function handleLoserClick(index){
     if(index == 1){
         currencyHL = new Currency(loser.getTicker(1));
@@ -245,6 +256,10 @@ function handleToggleWatchListClick(e) {
  * Highlighted Currency Functions
  ***************************************************/
 
+/**
+ * Calls to update graph header, graph info, graph, and company news 
+ * @returns none
+ */
 function updateCurrencyHLElements() {
     updateGraphHeader();
     updateGraphInfo();
@@ -256,7 +271,12 @@ function updateCurrencyHLElements() {
  * Watch List Functions
  ***************************************************/
 
-// WatchListToggle Function
+/**
+ * if the given ticker is currenctly in the wathclist: call removeFromWatchlist(ticker)
+ * else: call addToWatchList(ticker)
+ * @params {string} ticker - ticker to toggle on watch list
+ * @returns none
+ */
 function watchListToggle(ticker) {
     if (isTickerInWatchList(currencies, currencyHL.getTicker())) {
         removeFromWatchList(ticker);
@@ -265,7 +285,13 @@ function watchListToggle(ticker) {
     }
 }
 
-// AddToWatchList Function
+/**
+ * Pushes new Currency with ticker to watchlist
+ * checks if crypto and calls either crypto/stock quote data API call
+ * then calls addWatchListElements with index of new ticker in watchlist
+ * @param {string} ticker 
+ * @returns none
+ */
 function addToWatchList(ticker) {
     currencies.push(new Currency(ticker));
     let index = getIndexOfTicker(currencies, ticker);
@@ -283,6 +309,11 @@ function addToWatchList(ticker) {
 
 }
 
+/**
+ * Creates new li tag to add to watchlist ul based off of the index of Currency in currencies
+ * @params {number} index - index of currencies array to pull data from
+ * @returns none
+ */
 function addWatchListElement(index) {
     // Create HTML tag to add to watchList UL tag
     let ticker = currencies[index].getTicker();
@@ -349,13 +380,22 @@ function addWatchListElement(index) {
     document.getElementById("graph-list-status").innerText = "\u2002REMOVE FROM LIST\u2002";
 }
 
-// RemoveWatchListElement Function
+/**
+ * Gets index of ticker in currencies, removes it from array, and calls removeWatchListElement
+ * @params {string} ticker - ticker of currencies array to remove
+ * @returns none
+ */
 function removeFromWatchList(ticker) {
     let index = getIndexOfTicker(currencies, ticker);
     currencies.splice(index, 1);
     removeWatchListElement(ticker);
 }
 
+/**
+ * Removes the watchlist element of the given ticker
+ * @params {string} ticker - ticker of currencies array to remove
+ * @returns none
+ */
 function removeWatchListElement(ticker) {
     // Remove Watch List tag from HTML
     document.getElementById(ticker).parentElement.remove();
@@ -363,6 +403,10 @@ function removeWatchListElement(ticker) {
     document.getElementById("graph-list-status").innerText = "\u2002ADD TO LIST\u2002";
 }
 
+/**
+ * Loops through currencies array and calls either crypto/stock Quote API call to updateWatchListElement
+ * @returns none
+ */
 function updateWatchList() {
     for (let i = 0; i < currencies.length; i++) {
         if (isCrypto(currencyHL.getTicker())) {
@@ -380,6 +424,11 @@ function updateWatchList() {
     }
 }
 
+/**
+ * updates the UI elements in watchlist of that index's ticker with new data
+ * @param {number} index - index of ticker on watchlist to update UI elements
+ * @returns none
+ */
 function updateWatchListElement(index) {
     let ticker = currencies[index].getTicker();
     document.getElementById(ticker + "-price").innerText = currencies[index].getCurrentQuote();
@@ -391,7 +440,11 @@ function updateWatchListElement(index) {
  * Graph Section Functions
  ***************************************************/
 
-// Update Graph Header Function
+/**
+ * if currencyHL is crypto: get API crypto quote, update data, calls to updateGraphHeaderElements
+ * else: get API stock quote, update data, calls to updateGraphHeaderElements
+ * @return none
+ */
 function updateGraphHeader() {
     if (isCrypto(currencyHL.getTicker())) {
         APITodayQuoteCryptoData(currencyHL.getTicker(), function(data) {
@@ -406,6 +459,10 @@ function updateGraphHeader() {
     }
 }
 
+/**
+ * Update Graph Header elements to new data in currencyHL
+ * @returns none
+ */
 function updateGraphHeaderElements() {
     document.getElementById("graph-stock-name").innerText = currencyHL.getTicker();
     document.getElementById("graph-price").innerText = "$" + currencyHL.getCurrentQuote();
@@ -425,7 +482,10 @@ function updateGraphHeaderElements() {
     }
 }
 
-// Update Graph Info Section
+/**
+ * Update Graph Info elements to new data in currencyHL
+ * @returns none
+ */
 function updateGraphInfo() {
     if(isCrypto(currencyHL.getTicker())){
         document.getElementById("graph-info-name").style.visibility = "hidden";
@@ -441,6 +501,10 @@ function updateGraphInfo() {
     }
 }
 
+/**
+ * Update Graph Info elements to new data in currencyHL
+ * @returns none
+ */
 function updateTickerInfo() {
     
     document.getElementById("graph-info-name").innerText = currencyHL.getName();
@@ -453,7 +517,11 @@ function updateTickerInfo() {
     document.getElementById("graph-info-url").style.visibility = "visible";
 }
 
-// Update Graph Function
+/**
+ * Checks which timespan has been chosen and then sees if currencyHL is crypto or stock to call historic data of timespan,
+ * then sets response data to currencyHL and calls updateGraphElements
+ * @returns none
+ */
 function updateGraph() {
     // Has to check which timespan and whether cyprto or stock
     if (graphTimespan == "1Day") {
@@ -531,6 +599,10 @@ function updateGraph() {
     }
 }
 
+/**
+ * Updates ChartJS graph with new data in currencyHL dependent on set graphTimespan
+ * @returns none
+ */
 function updateGraphElements() {
     let ctx = document.getElementById("graph-canvas").getContext("2d");
 
@@ -567,21 +639,32 @@ function updateGraphElements() {
     });
 }
 
-let gainer = new marketData();
-let loser = new marketData();
 
+
+/**
+ * Calls Gainers API call and sets new Market Data to gainer
+ * @returns none
+ */
 function updateGainers(){
     Gainers(function(data) {
         gainer.setMarketData(data);
     });
 }
 
+/**
+ * Calls Losers API call and sets new Market Data to loser
+ * @returns none
+ */
 function updateLosers(){
     Losers(function(data) {
         loser.setMarketData(data);
     });
 }
 
+/**
+ * Calls updateGainers & updateLosers and sets timeout before updating gainers/losers UI elements
+ * @returns none
+ */
 function updateGainersLosers(){
     updateGainers();
     updateLosers();
@@ -590,6 +673,10 @@ function updateGainersLosers(){
     }, 4000);
 }
 
+/**
+ * Updates Gainers/Losers UI elements with new data
+ * @returns none
+ */
 function updateGainerLoserHTML(){
     document.getElementById("stock-name1").innerText = "1: " + gainer.getTicker(1);
     document.getElementById("stock-price1").innerText = "$" + gainer.getPrice(1);
@@ -624,14 +711,15 @@ function updateGainerLoserHTML(){
 }
 
 /***************************************************
- * Search Bar Functions
- ***************************************************/
-
-// SearchHandle Function
-
-/***************************************************
  * Market News Functions
  ***************************************************/
+
+/**
+ * Checks if currencyHL is crypto
+ * if so: hide company and news info
+ * else: Calls API for ticker news, sets news to graphNews, and update graph company/news elements
+ * @returns none
+ */
 function updateCompanyNews(){
     if(isCrypto(currencyHL.getTicker())){
         document.getElementById("graph-news-header").style.visibility = "hidden";
@@ -645,6 +733,10 @@ function updateCompanyNews(){
     });
 }
 
+/**
+ * Updates graph company/news elements with new data
+ * @returns None
+ */
 function updateCompanyNewsElement(){
     document.getElementById("graph-news-header").style.visibility = "visible";
     document.getElementById("graph-news-headline").style.visibility = "visible";
@@ -657,6 +749,10 @@ function updateCompanyNewsElement(){
     document.getElementById("graph-news-link").href = graphNews.getUrl();
 }
 
+/**
+ * Calls API to get market news and then calls to update Market News UI elements
+ * @returns none
+ */
 function updateMarketNews(){
     news = new News();
     APIGetMarketNews(function(data) {
@@ -665,6 +761,10 @@ function updateMarketNews(){
     });
 }
 
+/**
+ * Updates Market News UI elements with new data
+ * @returns none
+ */
 function updateNewsElement(){
     document.getElementById("news1-headline").innerText = news.getHeadline(1);
     document.getElementById("news1-img").src = news.getImage(1);
@@ -702,6 +802,11 @@ function updateNewsElement(){
 /***************************************************
  * Crypto Bar Functions
  ***************************************************/
+
+/**
+ * Calls API get crypto quote, sets response data, and calls to update the UI elements for each crypto in Crypto Bar
+ * @returns none
+ */
 function updateCryptoBar(){
     APITodayQuoteCryptoData("BINANCE:BTCUSDT", function(data) {
         crypto1.setQuoteData(data);
@@ -725,6 +830,11 @@ function updateCryptoBar(){
     });
 }
 
+/**
+ * Updates the UI elements of given crypto index in crypto bar
+ * @param {num} num - index of crypto bar
+ * @returns none
+ */
 function updateCryptoPrice(num){
     var coinIndicator = "coin" + num;
     var coinPrice = coinIndicator + "-price";
@@ -789,6 +899,11 @@ function updateCryptoPrice(num){
  * Email Notification Functions
  ***************************************************/
 
+/**
+ * if current time is after market close: calls sendWatchListEmail and sets isEmailSent to true
+ * else: sets isEmailSent to false 
+ * @returns none
+ */
 function handleEmailNotification() {
     let t = new Date();
     if (t.getHours() >= 15 && !isEmailSent) {

@@ -1,4 +1,8 @@
 class News {
+    /**
+     * Initializes members
+     * @returns none
+     */
     constructor(){
         this.headline1 = "";
         this.image1 = "";
@@ -27,6 +31,11 @@ class News {
         this.url5 = "";
     }
 
+    /**
+     * set's market news data from Finnhub API to members
+     * @params {Object} marketData - market news data from Finnhub API
+     * @returns none
+     */
     setNews(newsData){
         this.headline1 = newsData["headline1"];
         this.image1 = newsData["image1"];
@@ -55,6 +64,11 @@ class News {
         this.url5 = newsData["url5"];
     }
 
+    /**
+     * Finds which headline and returns this.headline#
+     * @params {number} index - index of headline to get
+     * @returns {string} this.headline#
+     */
     getHeadline(index){
         if(index == 1){
             return this.headline1;
@@ -73,6 +87,11 @@ class News {
         }
     }
 
+    /**
+     * Finds which image and returns this.image#
+     * @params {number} index - index of image to get
+     * @returns {string} this.image#
+     */
     getImage(index){
         if(index == 1){
             return this.image1;
@@ -91,6 +110,11 @@ class News {
         }
     }
 
+    /**
+     * Finds which source and returns this.source#
+     * @params {number} index - index of source to get
+     * @returns {string} this.source#
+     */
     getSource(index){
         if(index == 1){
             return this.source1;
@@ -109,6 +133,11 @@ class News {
         }
     }
 
+    /**
+     * Finds which summary and returns this.summary#
+     * @params {number} index - index of summary to get
+     * @returns {string} this.summary#
+     */
     getSummary(index){
         if(index == 1){
             return this.summary1;
@@ -127,6 +156,11 @@ class News {
         }
     }
 
+    /**
+     * Finds which url and returns this.url#
+     * @params {number} index - index of url to get
+     * @returns {string} this.url#
+     */
     getUrl(index){
         if(index == 1){
             return this.url1;

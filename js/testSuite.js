@@ -1,3 +1,7 @@
+/**
+ * Runs 19 different tests of functions from helper.js and prints results to the console
+ * @returns none
+ */
 function runTest() {
     // Test 1 getUNIXMidnightTonight
     let t1 = getUNIXMidnightTonight();
